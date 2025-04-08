@@ -1,0 +1,1245 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Extropy - A Neo-Modern Blog</title>
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.2/dist/gsap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/marked@9.0.3/marked.min.js"></script>
+    <style>
+        :root {
+            --bg-light: #ffffff;
+            --text-light: #000000;
+            --bg-dark: #0f0f0f;
+            --text-dark: #f0f0f0;
+            --accent-light: #666666;
+            --accent-dark: #999999;
+            --transition-speed: 0.4s;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            transition: background-color var(--transition-speed), color var(--transition-speed);
+            cursor: none;
+            overflow-x: hidden;
+        }
+
+        body.light-mode {
+            background-color: var(--bg-light);
+            color: var(--text-light);
+        }
+
+        body.dark-mode {
+            background-color: var(--bg-dark);
+            color: var(--text-dark);
+        }
+
+        .heading-font {
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        .custom-cursor {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            pointer-events: none;
+            z-index: 9999;
+            transform: translate(-50%, -50%);
+            transition: transform 0.2s ease;
+            background-image: url('https://cdn.jsdelivr.net/npm/@phosphor-icons/core@2.1.1/assets/regular/circle-notch.svg');
+            background-size: contain;
+            background-repeat: no-repeat;
+            filter: invert(var(--cursor-invert));
+        }
+
+        .light-mode .custom-cursor {
+            --cursor-invert: 0;
+        }
+
+        .dark-mode .custom-cursor {
+            --cursor-invert: 1;
+        }
+
+        .custom-cursor.active {
+            transform: translate(-50%, -50%) scale(1.5);
+        }
+
+        #canvas-background {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            opacity: 0.2;
+        }
+
+        .nav-link {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+
+        .nav-link:hover::after {
+            width: 100%;
+        }
+
+        .article-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.8s ease, transform 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .stagger-item {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        .search-input {
+            background-color: transparent;
+            border: 1px solid currentColor;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: var(--accent-light);
+            box-shadow: 0 0 0 2px rgba(100, 100, 100, 0.2);
+        }
+
+        .toggle-switch {
+            position: relative;
+            display: inline-block;
+            width: 60px;
+            height: 30px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: #ccc;
+            transition: .4s;
+            border-radius: 30px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 4px;
+            bottom: 4px;
+            background-color: white;
+            transition: .4s;
+            border-radius: 50%;
+        }
+
+        input:checked+.toggle-slider {
+            background-color: #222;
+        }
+
+        input:checked+.toggle-slider:before {
+            transform: translateX(30px);
+        }
+
+        .loader {
+            width: 48px;
+            height: 48px;
+            border: 3px solid currentColor;
+            border-radius: 50%;
+            display: inline-block;
+            position: relative;
+            box-sizing: border-box;
+            animation: rotation 1s linear infinite;
+        }
+
+        .loader::after {
+            content: '';
+            box-sizing: border-box;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            border-bottom-color: currentColor;
+        }
+
+        @keyframes rotation {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 9999;
+            background-color: var(--bg-light);
+            transition: opacity 0.5s ease, visibility 0.5s ease;
+        }
+
+        .dark-mode .loading-screen {
+            background-color: var(--bg-dark);
+        }
+
+        .loading-screen.hidden {
+            opacity: 0;
+            visibility: hidden;
+        }
+
+        #page-content {
+            min-height: calc(100vh - 160px);
+        }
+
+        .latex-equation {
+            overflow-x: auto;
+            padding: 1rem 0;
+        }
+
+        .footer-links {
+            position: relative;
+        }
+
+        .footer-links::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background-color: currentColor;
+            transition: width 0.3s ease;
+        }
+
+        .footer-links:hover::after {
+            width: 100%;
+        }
+
+        .social-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .social-icon:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Media Queries */
+        @media (max-width: 768px) {
+            .nav-container {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .search-container {
+                width: 100%;
+                margin-top: 1rem;
+            }
+
+            .article-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .featured-post {
+            position: relative;
+            overflow: hidden;
+        }
+
+        .featured-post::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0) 50%);
+            z-index: 1;
+        }
+
+        .featured-content {
+            position: relative;
+            z-index: 2;
+        }
+    </style>
+</head>
+
+<body class="dark-mode">
+    <div class="custom-cursor"></div>
+
+    <div id="loading-screen" class="loading-screen">
+        <span class="loader"></span>
+    </div>
+
+    <canvas id="canvas-background"></canvas>
+
+    <header
+        class="py-6 px-6 md:px-12 border-b border-gray-800 dark:border-gray-200 sticky top-0 bg-opacity-80 backdrop-filter backdrop-blur-lg z-10">
+        <div class="nav-container flex flex-col md:flex-row justify-between items-center">
+            <div class="flex items-center w-full md:w-auto justify-between">
+                <a href="#" class="logo-container" data-page="home">
+                    <h1 class="heading-font text-3xl font-bold tracking-tighter">EXTROPY</h1>
+                </a>
+                <div class="md:hidden">
+                    <label class="toggle-switch">
+                        <input type="checkbox" id="mobile-dark-mode-toggle" checked>
+                        <span class="toggle-slider"></span>
+                    </label>
+                </div>
+            </div>
+
+            <nav class="w-full md:w-auto mt-4 md:mt-0">
+                <ul class="flex space-x-8 justify-center">
+                    <li><a href="#" class="nav-link text-lg" data-page="home">Home</a></li>
+                    <li><a href="#" class="nav-link text-lg" data-page="articles">Articles</a></li>
+                    <li><a href="#" class="nav-link text-lg" data-page="about">About</a></li>
+                </ul>
+            </nav>
+
+            <div class="search-container mt-4 md:mt-0 w-full md:w-64">
+                <div class="relative">
+                    <input type="text" id="search-input" placeholder="Search articles..."
+                        class="search-input w-full py-2 px-4 rounded-full">
+                    <div class="absolute right-3 top-2.5">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor"
+                            viewBox="0 0 256 256">
+                            <path
+                                d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z">
+                            </path>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="hidden md:block ml-6">
+                <label class="toggle-switch">
+                    <input type="checkbox" id="dark-mode-toggle" checked>
+                    <span class="toggle-slider"></span>
+                </label>
+            </div>
+        </div>
+    </header>
+
+    <main id="page-content" class="container mx-auto px-6 py-12">
+        <!-- Content will be loaded here dynamically -->
+    </main>
+
+    <footer class="border-t border-gray-800 dark:border-gray-200 py-12 px-6">
+        <div class="container mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-start">
+                <div class="mb-8 md:mb-0">
+                    <h2 class="heading-font text-2xl font-bold tracking-tighter">EXTROPY</h2>
+                </div>
+
+                <div class="mb-8 md:mb-0 flex flex-col items-center space-y-3">
+                    <a href="#" class="footer-links" data-page="home">Home</a>
+                    <a href="#" class="footer-links" data-page="articles">Articles</a>
+                    <a href="#" class="footer-links" data-page="about">About</a>
+                </div>
+
+                <div class="flex space-x-6">
+                    <a href="https://instagram.com/okuhlemadondo" target="_blank" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            viewBox="0 0 256 256">
+                            <path
+                                d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a href="https://x.com/OkuhleMadondo" target="_blank" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            viewBox="0 0 256 256">
+                            <path
+                                d="M247.39,68.94A8,8,0,0,0,240,64H209.57A48.66,48.66,0,0,0,168.1,40a46.91,46.91,0,0,0-33.75,13.7A47.9,47.9,0,0,0,120,88v6.09C79.74,83.47,46.81,50.72,46.46,50.37a8,8,0,0,0-13.65,4.92c-4.31,47.79,9.57,79.77,22,98.91a110.93,110.93,0,0,0,21.88,24.2c-15.23,17.53-39.21,26.74-39.47,26.84a8,8,0,0,0-3.85,11.93c.1.16,11.21,17.89,37.85,29.41A133.69,133.69,0,0,0,100,152.12C121.59,173.74,143.76,184,160,184a47.93,47.93,0,0,0,48-48V76A47.39,47.39,0,0,0,247.39,68.94ZM202.82,136a32,32,0,0,1-31.95,31.62c-21.11-1.84-44.82-21.88-57.11-48.49a8,8,0,0,0-14.36,1.56,64.79,64.79,0,0,1-8.77,20.64A86.28,86.28,0,0,1,80,127.82a75.18,75.18,0,0,1-12.49-19.24,101.77,101.77,0,0,1-5.74-16.25,127.2,127.2,0,0,0,26.59,21.55,92.09,92.09,0,0,0,46.29,16.69,8,8,0,0,0,8.32-8.12L136,88A32,32,0,0,1,167.86,56,32.93,32.93,0,0,1,199.27,80h-17a8,8,0,0,0-7.77,6.12,8.18,8.18,0,0,0,2,7.07L184,101.36V136Z">
+                            </path>
+                        </svg>
+                    </a>
+                    <a href="mailto:okuhlemadondo@icloud.com" class="social-icon">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="currentColor"
+                            viewBox="0 0 256 256">
+                            <path
+                                d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-8,144H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Zm-88-40L49.79,64H206.21Z">
+                            </path>
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="mt-12 text-center">
+                <p class="text-sm opacity-60">© 2023 Extropy. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Placeholder data for demonstration
+        const articles = [
+            {
+                id: 1,
+                title: "The Philosophy of Mathematical Structures",
+                author: "Okuhle Madondo",
+                headshot: "https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/fill/user-circle-fill.svg",
+                date: "2023-08-15",
+                category: "Philosophy",
+                image: "https://images.unsplash.com/photo-1635070041078-e363dbe005cb",
+                featured: true,
+                excerpt: "Exploring the philosophical implications of mathematical structures and how they shape our understanding of reality.",
+                content: `
+# The Philosophy of Mathematical Structures
+
+## Introduction
+
+Mathematics has long been considered the language of the universe. Its structures and patterns provide us with a framework to understand the physical world. But what is the philosophical significance of these mathematical structures?
+
+In this article, we'll explore how mathematical structures shape our understanding of reality and the implications this has for knowledge, science, and metaphysics.
+
+## Mathematical Platonism
+
+Mathematical Platonism is the view that mathematical entities exist independently of human thought and practice. According to this view, mathematicians discover, rather than invent, mathematical objects.
+
+The Platonic perspective suggests that mathematical objects and structures exist in an abstract realm, separate from the physical world, yet somehow connected to it.
+
+Consider the Fibonacci sequence:
+
+
+$$F_n = F_{n-1} + F_{n-2}$$
+
+With initial conditions $F_0 = 0$ and $F_1 = 1$.
+
+This sequence appears throughout nature - in the spirals of shells, the arrangement of leaves, and even in the structure of galaxies. Does this ubiquity suggest that the Fibonacci sequence is a fundamental structure of reality, existing independently of human cognition?
+
+## Structuralism in Mathematics
+
+Mathematical structuralism holds that mathematics is about structures or patterns rather than specific objects. According to this view, the essential nature of mathematical entities lies in their relationships within a structure.
+
+For example, in group theory, a group is defined not by its elements but by the properties of its operation. The identity element $e$ in a group is defined by the property that for any element $a$ in the group, $a \cdot e = e \cdot a = a$. What matters is not what $e$ is, but how it relates to other elements.
+
+## Conclusion
+
+The philosophy of mathematical structures raises profound questions about the nature of reality and knowledge. Whether we view mathematical structures as discovered or invented, their power to describe and predict phenomena in the physical world remains undeniable.
+
+As we continue to explore the universe, mathematical structures will undoubtedly remain our most reliable guide, illuminating the hidden patterns that underlie reality.
+                `
+            },
+            {
+                id: 2,
+                title: "Quantum Computing: A New Paradigm",
+                author: "Okuhle Madondo",
+                headshot: "https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/fill/user-circle-fill.svg",
+                date: "2023-09-02",
+                category: "Technology",
+                image: "https://images.unsplash.com/photo-1635241161466-541f065683ba",
+                excerpt: "Understanding the fundamentals of quantum computing and its potential to revolutionize computation.",
+                content: `
+# Quantum Computing: A New Paradigm
+
+## Introduction
+
+Classical computers have served us well for decades, but they are approaching their physical limits. Quantum computing represents a fundamentally new approach to computation, harnessing the strange properties of quantum mechanics to perform calculations in ways that classical computers cannot.
+
+## Quantum Bits and Superposition
+
+Unlike classical bits, which can be either 0 or 1, quantum bits or "qubits" can exist in a state of superposition, representing both 0 and 1 simultaneously. Mathematically, we represent a qubit's state as:
+
+
+$$|\psi⟩ = \alpha|0⟩ + \beta|1⟩$$
+
+Where $\alpha$ and $\beta$ are complex numbers such that $|\alpha|^2 + |\beta|^2 = 1$.
+
+This property allows quantum computers to process a vast number of possibilities simultaneously, potentially solving certain problems much faster than classical computers.
+
+## Quantum Entanglement
+
+Another key property of quantum computing is entanglement, where qubits become correlated in such a way that the state of one qubit cannot be described independently of the state of the others.
+
+Einstein famously referred to entanglement as "spooky action at a distance," as measuring one entangled qubit instantly determines the state of its partner, regardless of the distance between them.
+
+## Potential Applications
+
+Quantum computing has the potential to revolutionize fields such as:
+
+1. **Cryptography** - Breaking current encryption algorithms and developing new, quantum-resistant ones
+2. **Drug Discovery** - Simulating molecular interactions with unprecedented accuracy
+3. **Optimization Problems** - Solving complex logistics and scheduling problems more efficiently
+4. **Machine Learning** - Enhancing certain machine learning algorithms
+
+## Challenges and Future Directions
+
+Despite its promise, quantum computing faces significant challenges, including:
+
+- **Decoherence** - Quantum states are extremely fragile and easily disrupted by environmental interactions
+- **Error Correction** - Developing methods to detect and correct quantum errors
+- **Scalability** - Building systems with enough qubits to solve practical problems
+
+As these challenges are addressed, quantum computing will likely become an increasingly important part of our technological landscape, complementing rather than replacing classical computing for specific applications.
+                `
+            },
+            {
+                id: 3,
+                title: "The Art of Mathematical Proof",
+                author: "Okuhle Madondo",
+                headshot: "https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/fill/user-circle-fill.svg",
+                date: "2023-07-20",
+                category: "Mathematics",
+                image: "https://images.unsplash.com/photo-1509228468518-180dd4864904",
+                excerpt: "Exploring the beauty and logic behind mathematical proofs and their significance in modern mathematics.",
+                content: `
+# The Art of Mathematical Proof
+
+## Introduction
+
+A mathematical proof is more than just a verification of truth—it's an elegant journey through logical reasoning that reveals the structure and beauty of mathematics itself. In this article, we'll explore what makes a good proof and why proofs are central to mathematical thinking.
+
+## The Nature of Proof
+
+A mathematical proof is a rigorous argument that establishes the truth of a mathematical statement beyond any doubt. Unlike empirical sciences, which rely on observation and experiment, mathematics builds knowledge through deductive reasoning.
+
+Consider the infinitude of prime numbers. We can prove there are infinitely many prime numbers by contradiction:
+
+1. Assume there are finitely many primes: $p_1, p_2, \ldots, p_n$
+2. Consider the number $Q = p_1 \times p_2 \times \ldots \times p_n + 1$
+3. $Q$ is either prime or not prime
+4. If $Q$ is prime, we've found a prime number not in our list
+5. If $Q$ is not prime, it must be divisible by some prime factor $p$
+6. This prime factor cannot be any of $p_1, p_2, \ldots, p_n$ (as dividing $Q$ by any of these leaves remainder 1)
+7. Therefore, there must be a prime number not in our original list
+8. This contradicts our assumption, proving that there must be infinitely many primes
+
+## Styles of Proof
+
+Mathematicians employ various techniques of proof:
+
+- **Direct Proof**: Proceeding directly from assumptions to conclusion
+- **Proof by Contradiction**: Assuming the opposite and deriving a contradiction
+- **Proof by Induction**: Proving a statement for a base case and then showing that if it holds for one case, it holds for the next
+- **Proof by Contrapositive**: Proving "if P, then Q" by showing "if not Q, then not P"
+
+## The Aesthetic Dimension
+
+At its highest level, a mathematical proof has aesthetic qualities that mathematicians often describe as "elegant" or "beautiful." An elegant proof is characterized by:
+
+- **Simplicity**: Using minimal assumptions and steps
+- **Insight**: Revealing deeper connections and structures
+- **Surprise**: Employing unexpected approaches or techniques
+- **Generality**: Extending beyond the specific problem at hand
+
+## Conclusion
+
+Mathematical proofs represent the pinnacle of logical reasoning. They provide certainty in an uncertain world and reveal the intricate patterns that underlie mathematical structures. As we continue to explore the mathematical universe, proofs will remain our most trusted guide, illuminating the path to deeper understanding.
+                `
+            },
+            {
+                id: 4,
+                title: "Consciousness and Computation",
+                author: "Okuhle Madondo",
+                headshot: "https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/fill/user-circle-fill.svg",
+                date: "2023-08-28",
+                category: "Philosophy",
+                image: "https://images.unsplash.com/photo-1509228627152-72ae9ae6848d",
+                excerpt: "Examining the relationships between human consciousness and computational models of mind.",
+                content: `
+# Consciousness and Computation
+
+## Introduction
+
+The nature of consciousness remains one of the most profound mysteries in science and philosophy. As computational technology advances, questions about the relationship between consciousness and computation become increasingly relevant. Can consciousness be understood as a form of computation? Could machines ever be conscious?
+
+## The Computational Theory of Mind
+
+The computational theory of mind suggests that the human mind operates fundamentally as an information processing system, similar to a computer. According to this view, mental states and processes can be understood as computational states and processes.
+
+Formally, we might represent a mental state $M$ as a function that maps sensory inputs $I$ and previous mental states to new mental states and behavioral outputs $O$:
+
+
+$$M_{t+1} = f(I_t, M_t, O_t)$$
+
+This framework has been tremendously successful in modeling many aspects of cognition, from perception to language processing to decision-making.
+
+## The Hard Problem of Consciousness
+
+However, as philosopher David Chalmers has argued, explaining how and why physical processes in the brain give rise to subjective experience—the "hard problem of consciousness"—seems to require something beyond computational explanation.
+
+The hard problem asks: Why is there something it feels like to be a conscious organism? Why does the processing of visual information, for instance, give rise to the subjective experience of seeing?
+
+## Quantum Approaches to Consciousness
+
+Some theorists, like Roger Penrose and Stuart Hameroff, have suggested that quantum mechanical processes in the brain might play a role in generating consciousness.
+
+Their Orchestrated Objective Reduction (Orch OR) theory proposes that quantum computations in microtubules within neurons could give rise to conscious experiences. According to this theory, consciousness might emerge from quantum processes that cannot be reduced to classical computation.
+
+## The Chinese Room Argument
+
+Philosopher John Searle's famous "Chinese Room" thought experiment challenges the notion that computation alone could give rise to understanding or consciousness.
+
+Searle imagines a room where a non-Chinese speaker follows a rulebook to respond to Chinese messages slipped under the door. The person might perfectly simulate understanding Chinese without actually understanding it, suggesting that computation (following rules) is insufficient for genuine understanding or consciousness.
+
+## Conclusion
+
+The relationship between consciousness and computation remains one of the most fascinating frontiers in philosophy and science. Whether consciousness can be fully explained in computational terms or requires new theoretical frameworks beyond current science is still an open question.
+
+As we develop more sophisticated AI systems and deepen our understanding of the brain, we may come closer to bridging the gap between the objective world of physical processes and the subjective world of conscious experience.
+                `
+            },
+            {
+                id: 5,
+                title: "Reflections on University Life as a Mathematics Student",
+                author: "Okuhle Madondo",
+                headshot: "https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/fill/user-circle-fill.svg",
+                date: "2023-09-10",
+                category: "Personal",
+                image: "https://images.unsplash.com/photo-1588072432836-e10032774350",
+                excerpt: "Personal reflections on the joys and challenges of studying Mathematics and Computer Science at university.",
+                content: `
+# Reflections on University Life as a Mathematics Student
+
+## Introduction
+
+As a mathematics and computer science student, my university journey has been filled with unique challenges, surprising revelations, and profound moments of understanding. In this more personal article, I'd like to share some reflections on what it's like to study these disciplines and how they've shaped my worldview.
+
+## The Beauty of Abstraction
+
+One of the most striking aspects of studying mathematics at an advanced level is encountering the beauty of abstraction. There's something deeply satisfying about distilling complex problems to their essential structures and seeing how these structures recur across seemingly unrelated domains.
+
+I still remember the moment when I first truly understood the connection between group theory and symmetry. Suddenly, the abstract algebraic structures we had been studying became visible in everything from the patterns in a snowflake to the conservation laws in physics.
+
+## The Challenge of Rigor
+
+Mathematics demands a level of rigor and precision unlike almost any other discipline. A proof must account for every possibility, every edge case, every potential counterexample. This rigor can be frustrating—I've spent countless hours tracking down errors in proofs or trying to formalize an intuition—but it also instills a valuable habit of mind.
+
+Learning to think with mathematical rigor has influenced how I approach problems in all areas of life, from analyzing arguments in philosophy to debugging complex code in computer science.
+
+## Bridging Mathematics and Computer Science
+
+The interplay between mathematics and computer science has been particularly fascinating. Concepts from discrete mathematics, formal logic, and algorithm analysis provide the theoretical foundation for practical programming and system design.
+
+Implementing algorithms or building systems that embody mathematical concepts has given me a deeper appreciation for both fields. There's something magical about seeing an abstract mathematical idea come to life in code, solving real-world problems.
+
+## The Community of Minds
+
+Perhaps the most valuable aspect of university life has been the community—engaging with professors who have dedicated their lives to these fields and collaborating with fellow students who share this peculiar passion for abstract ideas.
+
+Mathematical thinking is often portrayed as a solitary activity, but some of my most significant breakthroughs have come through discussions, where different perspectives illuminate new approaches to problems.
+
+## Conclusion
+
+Studying mathematics and computer science has been challenging but profoundly rewarding. These disciplines have given me not just knowledge and skills, but ways of thinking that continue to shape how I see and interact with the world.
+
+For those considering this path, I would say: embrace the challenge, find joy in the journey of understanding, and remember that behind the symbols and formalisms lies a world of beautiful ideas waiting to be explored.
+                `
+            }
+        ];
+
+        // Variables to track current state
+        let currentPage = 'home';
+        let filteredArticles = [...articles];
+        let sortDirection = 'desc';
+        let currentCategory = 'all';
+
+        // Initialize cursor
+        const cursor = document.querySelector('.custom-cursor');
+
+        document.addEventListener('mousemove', (e) => {
+            cursor.style.left = e.clientX + 'px';
+            cursor.style.top = e.clientY + 'px';
+        });
+
+        document.addEventListener('mousedown', () => {
+            cursor.classList.add('active');
+        });
+
+        document.addEventListener('mouseup', () => {
+            cursor.classList.remove('active');
+        });
+
+        // Dark mode toggle
+        const darkModeToggle = document.getElementById('dark-mode-toggle');
+        const mobileDarkModeToggle = document.getElementById('mobile-dark-mode-toggle');
+
+        function toggleDarkMode() {
+            document.body.classList.toggle('light-mode');
+            document.body.classList.toggle('dark-mode');
+        }
+
+        darkModeToggle.addEventListener('change', toggleDarkMode);
+        mobileDarkModeToggle.addEventListener('change', toggleDarkMode);
+
+        // Canvas background animation
+        const canvas = document.getElementById('canvas-background');
+        const ctx = canvas.getContext('2d');
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        // Particles for canvas animation
+        const particles = [];
+        const particleCount = 100;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 2 + 1;
+                this.speedX = Math.random() * 1 - 0.5;
+                this.speedY = Math.random() * 1 - 0.5;
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                if (this.x > canvas.width) this.x = 0;
+                else if (this.x < 0) this.x = canvas.width;
+
+                if (this.y > canvas.height) this.y = 0;
+                else if (this.y < 0) this.y = canvas.height;
+            }
+
+            draw() {
+                ctx.fillStyle = document.body.classList.contains('dark-mode') ? 'rgba(255, 255, 255, 0.8)' : 'rgba(0, 0, 0, 0.8)';
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.closePath();
+                ctx.fill();
+            }
+        }
+
+        function initParticles() {
+            for (let i = 0; i < particleCount; i++) {
+                particles.push(new Particle());
+            }
+        }
+
+        function animateParticles() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+            for (let i = 0; i < particles.length; i++) {
+                particles[i].update();
+                particles[i].draw();
+
+                // Connect particles with lines
+                for (let j = i; j < particles.length; j++) {
+                    const dx = particles[i].x - particles[j].x;
+                    const dy = particles[i].y - particles[j].y;
+                    const distance = Math.sqrt(dx * dx + dy * dy);
+
+                    if (distance < 100) {
+                        ctx.strokeStyle = document.body.classList.contains('dark-mode') ?
+                            `rgba(255, 255, 255, ${0.1 - distance / 1000})` :
+                            `rgba(0, 0, 0, ${0.1 - distance / 1000})`;
+                        ctx.lineWidth = 0.5;
+                        ctx.beginPath();
+                        ctx.moveTo(particles[i].x, particles[i].y);
+                        ctx.lineTo(particles[j].x, particles[j].y);
+                        ctx.stroke();
+                    }
+                }
+            }
+
+            requestAnimationFrame(animateParticles);
+        }
+
+        initParticles();
+        animateParticles();
+
+        // Navigation
+        document.querySelectorAll('[data-page]').forEach(element => {
+            element.addEventListener('click', (e) => {
+                e.preventDefault();
+                const page = e.currentTarget.getAttribute('data-page');
+                navigateTo(page);
+            });
+        });
+
+        function navigateTo(page, articleId = null) {
+            currentPage = page;
+
+            // Show loading screen
+            const loadingScreen = document.getElementById('loading-screen');
+            loadingScreen.classList.remove('hidden');
+
+            setTimeout(() => {
+                const content = document.getElementById('page-content');
+
+                switch (page) {
+                    case 'home':
+                        content.innerHTML = renderHomePage();
+                        break;
+                    case 'articles':
+                        content.innerHTML = renderArticlesPage();
+                        initializeArticleFilters();
+                        break;
+                    case 'about':
+                        content.innerHTML = renderAboutPage();
+                        break;
+                    case 'article':
+                        const article = articles.find(a => a.id === articleId);
+                        if (article) {
+                            content.innerHTML = renderArticlePage(article);
+                            renderMarkdown();
+                        } else {
+                            content.innerHTML = '<div class="text-center py-12"><h2 class="text-2xl">Article not found</h2></div>';
+                        }
+                        break;
+                }
+
+                // Initialize animations after content is loaded
+                initAnimations();
+
+                // Hide loading screen
+                setTimeout(() => {
+                    loadingScreen.classList.add('hidden');
+                }, 300);
+            }, 500);
+        }
+
+        function renderHomePage() {
+            const featuredArticle = articles.find(a => a.featured) || articles[0];
+            const recentArticles = [...articles]
+                .sort((a, b) => new Date(b.date) - new Date(a.date))
+                .filter(a => a.id !== featuredArticle.id)
+                .slice(0, 3);
+
+            return `
+                <section class="mb-20">
+                    <div class="text-center mb-16 fade-in">
+                        <h1 class="heading-font text-5xl md:text-7xl font-bold mb-4">EXTROPY</h1>
+                        <p class="text-xl md:text-2xl max-w-3xl mx-auto opacity-70">Expanding the boundaries of thought through philosophy, science, technology, and personal reflection.</p>
+                    </div>
+                    
+                    <div class="featured-post rounded-xl overflow-hidden mb-16 fade-in" style="background-color: ${document.body.classList.contains('dark-mode') ? '#1a1a1a' : '#f0f0f0'}">
+                        <div class="relative">
+                            <img src="${featuredArticle.image}" alt="${featuredArticle.title}" class="w-full h-[60vh] object-cover">
+                            <div class="featured-content absolute bottom-0 left-0 p-8 w-full">
+                                <span class="bg-white text-black px-3 py-1 rounded-full text-sm font-medium">${featuredArticle.category}</span>
+                                <h2 class="heading-font text-3xl md:text-5xl font-bold mt-4 text-white">${featuredArticle.title}</h2>
+                                <p class="mt-4 text-white text-lg opacity-90 max-w-3xl">${featuredArticle.excerpt}</p>
+                                <a href="#" class="inline-block mt-6 px-6 py-3 bg-white text-black rounded-full font-medium transition hover:bg-gray-200" onclick="event.preventDefault(); navigateTo('article', ${featuredArticle.id})">Read Article</a>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-12 fade-in">
+                        <h2 class="heading-font text-3xl font-bold mb-8">Recent Articles</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            ${recentArticles.map((article, index) => `
+                                <div class="article-card stagger-item rounded-xl overflow-hidden" style="background-color: ${document.body.classList.contains('dark-mode') ? '#1a1a1a' : '#f0f0f0'}" data-delay="${index * 150}">
+                                    <div class="relative h-48">
+                                        <img src="${article.image}" alt="${article.title}" class="w-full h-full object-cover">
+                                    </div>
+                                    <div class="p-6">
+                                        <span class="text-sm font-medium opacity-70">${article.category}</span>
+                                        <h3 class="heading-font text-xl font-bold mt-2">${article.title}</h3>
+                                        <p class="mt-3 text-sm opacity-70">${formatDate(article.date)}</p>
+                                        <a href="#" class="block mt-4 text-sm font-medium" onclick="event.preventDefault(); navigateTo('article', ${article.id})">Read More →</a>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="text-center mt-12 fade-in">
+                        <a href="#" class="inline-block px-8 py-4 border border-current rounded-full text-lg font-medium transition hover:bg-gray-100 dark:hover:bg-gray-800" onclick="event.preventDefault(); navigateTo('articles')">View All Articles</a>
+                    </div>
+                </section>
+            `;
+        }
+
+        function renderArticlesPage() {
+            const categories = ['all', ...new Set(articles.map(a => a.category))];
+
+            return `
+                <section class="mb-20">
+                    <div class="text-center mb-16 fade-in">
+                        <h1 class="heading-font text-5xl font-bold mb-4">Articles</h1>
+                        <p class="text-xl max-w-3xl mx-auto opacity-70">Explore the full collection of articles across various categories.</p>
+                    </div>
+                    
+                    <div class="mb-12 fade-in">
+                        <div class="flex flex-wrap items-center justify-between gap-4 mb-8">
+                            <div class="flex flex-wrap gap-2">
+                                ${categories.map(category => `
+                                    <button class="category-filter px-4 py-2 rounded-full text-sm font-medium transition ${category === 'all' ? 'bg-gray-800 text-white dark:bg-gray-200 dark:text-black' : 'bg-gray-200 text-black dark:bg-gray-800 dark:text-white'}" data-category="${category}">${category.charAt(0).toUpperCase() + category.slice(1)}</button>
+                                `).join('')}
+                            </div>
+                            
+                            <div class="flex items-center gap-4">
+                                <label class="text-sm font-medium">Sort by:</label>
+                                <select id="sort-order" class="bg-transparent border border-current rounded px-3 py-2 text-sm">
+                                    <option value="desc">Newest first</option>
+                                    <option value="asc">Oldest first</option>
+                                </select>
+                            </div>
+                        </div>
+                        
+                        <div class="relative mb-8">
+                            <input type="text" id="articles-search" placeholder="Search articles..." class="search-input w-full py-3 px-5 rounded-full">
+                            <div class="absolute right-4 top-3.5">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" viewBox="0 0 256 256"><path d="M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"></path></svg>
+                            </div>
+                        </div>
+                        
+                        <div id="articles-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                            ${renderArticleGrid(filteredArticles)}
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+
+        function renderArticleGrid(articles) {
+            if (articles.length === 0) {
+                return `<div class="col-span-full text-center py-12"><p>No articles found matching your criteria.</p></div>`;
+            }
+
+            return articles.map((article, index) => `
+                <div class="article-card stagger-item rounded-xl overflow-hidden" style="background-color: ${document.body.classList.contains('dark-mode') ? '#1a1a1a' : '#f0f0f0'}" data-delay="${index * 100}">
+                    <div class="relative h-48">
+                        <img src="${article.image}" alt="${article.title}" class="w-full h-full object-cover">
+                    </div>
+                    <div class="p-6">
+                        <span class="text-sm font-medium opacity-70">${article.category}</span>
+                        <h3 class="heading-font text-xl font-bold mt-2">${article.title}</h3>
+                        <p class="mt-3 text-sm opacity-70">${formatDate(article.date)}</p>
+                        <p class="mt-3">${article.excerpt}</p>
+                        <a href="#" class="block mt-4 text-sm font-medium" onclick="event.preventDefault(); navigateTo('article', ${article.id})">Read More →</a>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderArticlePage(article) {
+            return `
+                <article class="max-w-4xl mx-auto">
+                    <div class="mb-8 fade-in">
+                        <span class="text-sm font-medium opacity-70">${article.category}</span>
+                        <h1 class="heading-font text-4xl md:text-5xl font-bold mt-2">${article.title}</h1>
+                        
+                        <div class="flex items-center mt-8">
+                            <div class="w-12 h-12 rounded-full overflow-hidden">
+                                <img src="${article.headshot}" alt="${article.author}" class="w-full h-full object-cover">
+                            </div>
+                            <div class="ml-4">
+                                <p class="font-medium">${article.author}</p>
+                                <p class="text-sm opacity-70">${formatDate(article.date)}</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mb-12 fade-in">
+                        <img src="${article.image}" alt="${article.title}" class="w-full h-[40vh] object-cover rounded-xl">
+                    </div>
+                    
+                    <div class="article-content prose prose-lg max-w-none fade-in ${document.body.classList.contains('dark-mode') ? 'prose-invert' : ''}">
+                        <div id="markdown-content">${article.content}</div>
+                    </div>
+                    
+                    <div class="mt-16 pt-8 border-t border-gray-800 dark:border-gray-200 fade-in">
+                        <h3 class="heading-font text-xl font-bold mb-6">Continue Reading</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                            ${getRelatedArticles(article.id, article.category).map((relatedArticle, index) => `
+                                <div class="article-card stagger-item rounded-xl overflow-hidden" style="background-color: ${document.body.classList.contains('dark-mode') ? '#1a1a1a' : '#f0f0f0'}" data-delay="${index * 150}">
+                                    <div class="p-6">
+                                        <span class="text-sm font-medium opacity-70">${relatedArticle.category}</span>
+                                        <h3 class="heading-font text-lg font-bold mt-2">${relatedArticle.title}</h3>
+                                        <p class="mt-3 text-sm opacity-70">${formatDate(relatedArticle.date)}</p>
+                                        <a href="#" class="block mt-4 text-sm font-medium" onclick="event.preventDefault(); navigateTo('article', ${relatedArticle.id})">Read Article →</a>
+                                    </div>
+                                </div>
+                            `).join('')}
+                        </div>
+                    </div>
+                </article>
+            `;
+        }
+
+        function renderAboutPage() {
+            return `
+                <section class="max-w-4xl mx-auto mb-20">
+                    <div class="text-center mb-16 fade-in">
+                        <h1 class="heading-font text-5xl font-bold mb-4">About</h1>
+                        <p class="text-xl max-w-3xl mx-auto opacity-70">The mind behind Extropy</p>
+                    </div>
+                    
+                    <div class="mb-12 fade-in">
+                        <div class="flex flex-col md:flex-row gap-12 items-center">
+                            <div class="w-full md:w-1/3">
+                                <div class="rounded-xl overflow-hidden">
+                                    <img src="https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/fill/user-circle-fill.svg" alt="Okuhle Madondo" class="w-full aspect-square object-cover">
+                                </div>
+                            </div>
+                            
+                            <div class="w-full md:w-2/3">
+                                <h2 class="heading-font text-3xl font-bold mb-4">Okuhle Madondo</h2>
+                                <p class="text-lg opacity-80 mb-4">22-year-old Mathematics and Computer Science student</p>
+                                <p class="mb-4">I'm a South African student deeply passionate about the intersection of mathematics, computer science, philosophy, and their applications in understanding our complex world.</p>
+                                <p class="mb-4">My academic journey has been driven by a curiosity about the fundamental structures that underpin reality, from abstract mathematical concepts to the computational frameworks that power our digital world.</p>
+                                <p class="mb-4">Through Extropy, I aim to explore and share insights across disciplines, examining how these fields of knowledge interact and inform one another. The name "Extropy" reflects my belief in the power of knowledge and understanding to create order, meaning, and progress.</p>
+                                <p>When I'm not studying or writing, you might find me exploring new research papers, experimenting with programming projects, or engaging in philosophical discussions with friends and colleagues.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-16 fade-in">
+                        <h2 class="heading-font text-3xl font-bold mb-8">Topics I'm Passionate About</h2>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                            <div class="p-6 rounded-xl" style="background-color: ${document.body.classList.contains('dark-mode') ? '#1a1a1a' : '#f0f0f0'}">
+                                <h3 class="heading-font text-xl font-bold mb-3">Mathematics</h3>
+                                <p>Abstract algebra, mathematical logic, category theory, and the philosophy of mathematics.</p>
+                            </div>
+                            <div class="p-6 rounded-xl" style="background-color: ${document.body.classList.contains('dark-mode') ? '#1a1a1a' : '#f0f0f0'}">
+                                <h3 class="heading-font text-xl font-bold mb-3">Computer Science</h3>
+                                <p>Theoretical computer science, algorithms, artificial intelligence, and computational complexity.</p>
+                            </div>
+                            <div class="p-6 rounded-xl" style="background-color: ${document.body.classList.contains('dark-mode') ? '#1a1a1a' : '#f0f0f0'}">
+                                <h3 class="heading-font text-xl font-bold mb-3">Philosophy</h3>
+                                <p>Philosophy of mind, epistemology, metaphysics, and the philosophical implications of scientific discoveries.</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="mt-16 text-center fade-in">
+                        <h2 class="heading-font text-3xl font-bold mb-8">Get in Touch</h2>
+                        <div class="flex justify-center space-x-8">
+                            <a href="https://instagram.com/okuhlemadondo" target="_blank" class="social-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M128,80a48,48,0,1,0,48,48A48.05,48.05,0,0,0,128,80Zm0,80a32,32,0,1,1,32-32A32,32,0,0,1,128,160ZM176,24H80A56.06,56.06,0,0,0,24,80v96a56.06,56.06,0,0,0,56,56h96a56.06,56.06,0,0,0,56-56V80A56.06,56.06,0,0,0,176,24Zm40,152a40,40,0,0,1-40,40H80a40,40,0,0,1-40-40V80A40,40,0,0,1,80,40h96a40,40,0,0,1,40,40ZM192,76a12,12,0,1,1-12-12A12,12,0,0,1,192,76Z"></path></svg>
+                            </a>
+                            <a href="https://x.com/OkuhleMadondo" target="_blank" class="social-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M247.39,68.94A8,8,0,0,0,240,64H209.57A48.66,48.66,0,0,0,168.1,40a46.91,46.91,0,0,0-33.75,13.7A47.9,47.9,0,0,0,120,88v6.09C79.74,83.47,46.81,50.72,46.46,50.37a8,8,0,0,0-13.65,4.92c-4.31,47.79,9.57,79.77,22,98.91a110.93,110.93,0,0,0,21.88,24.2c-15.23,17.53-39.21,26.74-39.47,26.84a8,8,0,0,0-3.85,11.93c.1.16,11.21,17.89,37.85,29.41A133.69,133.69,0,0,0,100,152.12C121.59,173.74,143.76,184,160,184a47.93,47.93,0,0,0,48-48V76A47.39,47.39,0,0,0,247.39,68.94ZM202.82,136a32,32,0,0,1-31.95,31.62c-21.11-1.84-44.82-21.88-57.11-48.49a8,8,0,0,0-14.36,1.56,64.79,64.79,0,0,1-8.77,20.64A86.28,86.28,0,0,1,80,127.82a75.18,75.18,0,0,1-12.49-19.24,101.77,101.77,0,0,1-5.74-16.25,127.2,127.2,0,0,0,26.59,21.55,92.09,92.09,0,0,0,46.29,16.69,8,8,0,0,0,8.32-8.12L136,88A32,32,0,0,1,167.86,56,32.93,32.93,0,0,1,199.27,80h-17a8,8,0,0,0-7.77,6.12,8.18,8.18,0,0,0,2,7.07L184,101.36V136Z"></path></svg>
+                            </a>
+                            <a href="mailto:okuhlemadondo@icloud.com" class="social-icon">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="currentColor" viewBox="0 0 256 256"><path d="M224,48H32a8,8,0,0,0-8,8V192a16,16,0,0,0,16,16H216a16,16,0,0,0,16-16V56A8,8,0,0,0,224,48Zm-8,144H40V74.19l82.59,75.71a8,8,0,0,0,10.82,0L216,74.19V192Zm-88-40L49.79,64H206.21Z"></path></svg>
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            `;
+        }
+
+        function renderMarkdown() {
+            const markdownContent = document.getElementById('markdown-content');
+            if (!markdownContent) return;
+
+            const htmlContent = marked.parse(markdownContent.textContent);
+            markdownContent.innerHTML = htmlContent;
+
+            // Render KaTeX equations
+            document.querySelectorAll('code').forEach(block => {
+                if (block.textContent.startsWith('$$') && block.textContent.endsWith('$$')) {
+                    const tex = block.textContent.slice(2, -2);
+                    const div = document.createElement('div');
+                    div.className = 'latex-equation';
+                    try {
+                        katex.render(tex, div, { displayMode: true });
+                        block.parentNode.replaceChild(div, block);
+                    } catch (e) {
+                        console.error('Failed to render LaTeX:', e);
+                    }
+                } else if (block.textContent.startsWith('$') && block.textContent.endsWith('$')) {
+                    const tex = block.textContent.slice(1, -1);
+                    const span = document.createElement('span');
+                    try {
+                        katex.render(tex, span, { displayMode: false });
+                        block.parentNode.replaceChild(span, block);
+                    } catch (e) {
+                        console.error('Failed to render LaTeX:', e);
+                    }
+                }
+            });
+        }
+
+        function initializeArticleFilters() {
+            const searchInput = document.getElementById('articles-search');
+            const sortSelect = document.getElementById('sort-order');
+            const categoryButtons = document.querySelectorAll('.category-filter');
+
+            if (!searchInput || !sortSelect || !categoryButtons.length) return;
+
+            searchInput.addEventListener('input', updateArticlesDisplay);
+            sortSelect.addEventListener('change', updateArticlesDisplay);
+
+            categoryButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    categoryButtons.forEach(btn => {
+                        btn.classList.remove('bg-gray-800', 'text-white', 'dark:bg-gray-200', 'dark:text-black');
+                        btn.classList.add('bg-gray-200', 'text-black', 'dark:bg-gray-800', 'dark:text-white');
+                    });
+
+                    button.classList.remove('bg-gray-200', 'text-black', 'dark:bg-gray-800', 'dark:text-white');
+                    button.classList.add('bg-gray-800', 'text-white', 'dark:bg-gray-200', 'dark:text-black');
+
+                    currentCategory = button.getAttribute('data-category');
+                    updateArticlesDisplay();
+                });
+            });
+        }
+
+        function updateArticlesDisplay() {
+            const searchInput = document.getElementById('articles-search');
+            const sortSelect = document.getElementById('sort-order');
+            const articlesGrid = document.getElementById('articles-grid');
+
+            if (!searchInput || !sortSelect || !articlesGrid) return;
+
+            const searchTerm = searchInput.value.toLowerCase();
+            sortDirection = sortSelect.value;
+
+            // Filter articles
+            filteredArticles = articles.filter(article => {
+                const matchesSearch = article.title.toLowerCase().includes(searchTerm) ||
+                    article.content.toLowerCase().includes(searchTerm) ||
+                    article.excerpt.toLowerCase().includes(searchTerm);
+
+                const matchesCategory = currentCategory === 'all' || article.category === currentCategory;
+
+                return matchesSearch && matchesCategory;
+            });
+
+            // Sort articles
+            filteredArticles.sort((a, b) => {
+                const dateA = new Date(a.date);
+                const dateB = new Date(b.date);
+
+                return sortDirection === 'desc' ? dateB - dateA : dateA - dateB;
+            });
+
+            // Render filtered articles
+            articlesGrid.innerHTML = renderArticleGrid(filteredArticles);
+
+            // Reinitialize animations
+            initAnimations();
+        }
+
+        function getRelatedArticles(currentId, category) {
+            // Get articles in the same category, excluding the current one
+            let related = articles.filter(a => a.id !== currentId && a.category === category);
+
+            // If we don't have enough related articles by category, get some by recency
+            if (related.length < 2) {
+                const additional = articles
+                    .filter(a => a.id !== currentId && a.category !== category)
+                    .sort((a, b) => new Date(b.date) - new Date(a.date))
+                    .slice(0, 2 - related.length);
+
+                related = [...related, ...additional];
+            }
+
+            return related.slice(0, 2);
+        }
+
+        function formatDate(dateString) {
+            const options = { year: 'numeric', month: 'long', day: 'numeric' };
+            return new Date(dateString).toLocaleDateString(undefined, options);
+        }
+
+        function initAnimations() {
+            // Fade in animations
+            const fadeElements = document.querySelectorAll('.fade-in');
+
+            fadeElements.forEach(element => {
+                setTimeout(() => {
+                    element.classList.add('visible');
+                }, 100);
+            });
+
+            // Staggered animations with GSAP
+            const staggerItems = document.querySelectorAll('.stagger-item');
+
+            staggerItems.forEach(item => {
+                gsap.fromTo(
+                    item,
+                    { opacity: 0, y: 20 },
+                    {
+                        opacity: 1,
+                        y: 0,
+                        duration: 0.6,
+                        delay: (item.getAttribute('data-delay') || 0) / 1000,
+                        ease: 'power2.out'
+                    }
+                );
+            });
+        }
+
+        // Initialize the app
+        document.addEventListener('DOMContentLoaded', () => {
+            // Default to the home page on load
+            navigateTo('home');
+
+            // Initialize search functionality in header
+            const searchInput = document.getElementById('search-input');
+
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    navigateTo('articles');
+
+                    setTimeout(() => {
+                        const articlesSearch = document.getElementById('articles-search');
+                        if (articlesSearch) {
+                            articlesSearch.value = searchInput.value;
+                            articlesSearch.dispatchEvent(new Event('input'));
+                        }
+                    }, 1000);
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
