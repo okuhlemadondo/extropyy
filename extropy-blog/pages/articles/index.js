@@ -1,12 +1,23 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import { getAllPosts } from '../../lib/articles';
 import ArticleCard from '../../components/ArticleCard';
 
 export default function Articles({ posts, setIsLoading }) {
+    const router = useRouter();
+    const { search } = router.query;
+
     const [filteredPosts, setFilteredPosts] = useState(posts);
     const [category, setCategory] = useState('all');
     const [sortOrder, setSortOrder] = useState('desc');
     const [searchTerm, setSearchTerm] = useState('');
+
+    // Update searchTerm when the URL query parameter changes
+    useEffect(() => {
+        if (search) {
+            setSearchTerm(search);
+        }
+    }, [search]);
 
     useEffect(() => {
         setIsLoading(true);
@@ -54,7 +65,8 @@ export default function Articles({ posts, setIsLoading }) {
         if (searchTerm) {
             result = result.filter((p) =>
                 p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                p.excerpt.toLowerCase().includes(searchTerm.toLowerCase())
+                p.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                (p.content && p.content.toLowerCase().includes(searchTerm.toLowerCase()))
             );
         }
 
@@ -80,6 +92,20 @@ export default function Articles({ posts, setIsLoading }) {
             <div className="text-center mb-16 fade-in">
                 <h1 className="heading-font text-5xl font-bold mb-4">Articles</h1>
                 <p className="text-xl max-w-3xl mx-auto opacity-70">Explore the full collection of articles.</p>
+                {searchTerm && (
+                    <p className="mt-4 text-lg">
+                        Showing results for: <span className="font-medium">{searchTerm}</span>
+                        <button
+                            onClick={() => {
+                                setSearchTerm('');
+                                router.push('/articles');
+                            }}
+                            className="ml-2 text-sm underline"
+                        >
+                            Clear search
+                        </button>
+                    </p>
+                )}
             </div>
             <div className="mb-12 fade-in">
                 <div className="flex flex-wrap items-center justify-between gap-4 mb-8">
@@ -117,9 +143,15 @@ export default function Articles({ posts, setIsLoading }) {
                 </div>
                 {/* Removed the search bar as its handled in the header */}
                 <div id="articles-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    {filteredPosts.map((post, index) => (
-                        <ArticleCard key={post.id} article={post} dataDelay={index * 100} />
-                    ))}
+                    {filteredPosts.length > 0 ? (
+                        filteredPosts.map((post, index) => (
+                            <ArticleCard key={post.id} article={post} dataDelay={index * 100} />
+                        ))
+                    ) : (
+                        <div className="col-span-full text-center py-12">
+                            <p className="text-xl opacity-70">No articles found matching your criteria.</p>
+                        </div>
+                    )}
                 </div>
             </div>
         </section>

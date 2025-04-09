@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react';
+import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Cursor from '../components/Cursor';
@@ -9,6 +10,7 @@ import '../app/globals.css';
 function MyApp({ Component, pageProps }) {
     const [darkMode, setDarkMode] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
+    const router = useRouter();
 
     useEffect(() => {
         document.body.classList.add(darkMode ? 'dark-mode' : 'light-mode');
@@ -18,9 +20,13 @@ function MyApp({ Component, pageProps }) {
     const toggleDarkMode = () => setDarkMode(!darkMode);
 
     const handleSearch = (term) => {
-        // Handle search logic (e.g., redirect to articles with query)
-        console.log('Search:', term);
-        // Here you could use useRouter to push the search term to the articles page with a query parameter
+        if (term.trim()) {
+            // Navigate to the articles page with the search term as a query parameter
+            router.push({
+                pathname: '/articles',
+                query: { search: term.trim() }
+            });
+        }
     };
 
     return (
