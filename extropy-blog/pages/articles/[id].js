@@ -10,10 +10,26 @@ export default function Article({ post, relatedPosts, setIsLoading }) {
         setIsLoading(true);
         const timeoutId = setTimeout(() => {
             setIsLoading(false);
+
+            // Add visible class to fade-in elements
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(element => {
+                setTimeout(() => {
+                    element.classList.add('visible');
+                }, 100);
+            });
+
+            // Add visible class to stagger-item elements
+            const staggerItems = document.querySelectorAll('.stagger-item');
+            staggerItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
         }, 500);
 
         return () => clearTimeout(timeoutId); // Cleanup on unmount
-
     }, [setIsLoading]);
 
 
@@ -42,7 +58,7 @@ export default function Article({ post, relatedPosts, setIsLoading }) {
                 <h3 className="heading-font text-xl font-bold mb-6">Continue Reading</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {relatedPosts.map((related, index) => (
-                        <ArticleCard key={related.id} article={related} data-delay={index * 150} />
+                        <ArticleCard key={related.id} article={related} dataDelay={index * 150} />
                     ))}
                 </div>
             </div>

@@ -1,9 +1,18 @@
 import Link from 'next/link';
 import { formatDate } from '../lib/date';
 
-export default function ArticleCard({ article }) {
+export default function ArticleCard({ article, dataDelay }) {
     return (
-        <div className="article-card stagger-item rounded-xl overflow-hidden" style={{ backgroundColor: 'var(--card-bg)' }}>
+        <div
+            className="article-card stagger-item rounded-xl overflow-hidden"
+            style={{
+                backgroundColor: 'var(--card-bg)',
+                opacity: 0,
+                transform: 'translateY(20px)',
+                transition: 'opacity 0.6s ease, transform 0.6s ease',
+                transitionDelay: `${dataDelay || 0}ms`
+            }}
+        >
             <div className="relative h-48">
                 <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
             </div>

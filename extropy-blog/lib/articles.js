@@ -12,9 +12,15 @@ export function getAllPosts() {
         const fileContents = fs.readFileSync(fullPath, 'utf8');
         const { data, content } = matter(fileContents);
 
+        // Normalize the category field
+        const normalizedData = {
+            ...data,
+            category: data.category ? data.category.trim() : 'Uncategorized',
+        };
+
         return {
             id: id,
-            ...data,
+            ...normalizedData,
             content,
         };
     });

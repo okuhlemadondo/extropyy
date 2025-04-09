@@ -13,14 +13,43 @@ export default function Articles({ posts, setIsLoading }) {
         setTimeout(() => {
             setIsLoading(false);
             filterAndSortPosts();
+
+            // Add visible class to fade-in elements
+            const fadeElements = document.querySelectorAll('.fade-in');
+            fadeElements.forEach(element => {
+                setTimeout(() => {
+                    element.classList.add('visible');
+                }, 100);
+            });
+
+            // Add visible class to stagger-item elements
+            const staggerItems = document.querySelectorAll('.stagger-item');
+            staggerItems.forEach((item, index) => {
+                setTimeout(() => {
+                    item.style.opacity = '1';
+                    item.style.transform = 'translateY(0)';
+                }, index * 100);
+            });
+
+            // Debug information
+            console.log('Current category:', category);
+            console.log('Available categories:', [...new Set(posts.map(p => p.category ? p.category.trim() : ''))].filter(Boolean));
+            console.log('Filtered posts count:', filteredPosts.length);
+            console.log('Filtered posts:', filteredPosts.map(p => ({ id: p.id, title: p.title, category: p.category })));
         }, 500);
-    }, [category, sortOrder, searchTerm, setIsLoading]);
+    }, [category, sortOrder, searchTerm, setIsLoading, filteredPosts.length]);
 
     const filterAndSortPosts = () => {
         let result = [...posts];
 
         if (category !== 'all') {
-            result = result.filter((p) => p.category === category);
+            // Normalize category comparison to handle case sensitivity and whitespace
+            result = result.filter((p) => {
+                // Normalize both the post category and the selected category
+                const postCategory = p.category ? p.category.trim().toLowerCase() : '';
+                const selectedCategory = category.trim().toLowerCase();
+                return postCategory === selectedCategory;
+            });
         }
         if (searchTerm) {
             result = result.filter((p) =>
@@ -36,7 +65,9 @@ export default function Articles({ posts, setIsLoading }) {
     };
 
     const handleCategoryClick = (category) => {
-        setCategory(category);
+        // Ensure category is a string and trim any whitespace
+        const normalizedCategory = typeof category === 'string' ? category.trim() : 'all';
+        setCategory(normalizedCategory);
     };
 
     const handleSortChange = (event) => {
@@ -60,7 +91,7 @@ export default function Articles({ posts, setIsLoading }) {
                         >
                             All
                         </button>
-                        {[...new Set(posts.map(p => p.category))].map((cat) => (
+                        {[...new Set(posts.map(p => p.category ? p.category.trim() : ''))].filter(Boolean).map((cat) => (
                             <button
                                 key={cat}
                                 className={`category-filter px-4 py-2 rounded-full text-sm font-medium transition ${category === cat ? 'bg-gray-800 text-white dark:bg-gray-200 dark:text-black' : 'bg-gray-200 text-black dark:bg-gray-800 dark:text-white'}`}
@@ -87,7 +118,7 @@ export default function Articles({ posts, setIsLoading }) {
                 {/* Removed the search bar as its handled in the header */}
                 <div id="articles-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filteredPosts.map((post, index) => (
-                        <ArticleCard key={post.id} article={post} data-delay={index * 100} />
+                        <ArticleCard key={post.id} article={post} dataDelay={index * 100} />
                     ))}
                 </div>
             </div>
