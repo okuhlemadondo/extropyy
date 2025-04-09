@@ -45,13 +45,16 @@ export default function Header({ onSearch, darkMode, toggleDarkMode }) {
                             type="text"
                             id="search-input"
                             placeholder="Search articles..."
-                            className="search-input w-full py-2 px-4 rounded-l-full"
+                            className="search-input w-full py-2 px-4 rounded-l-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             onKeyPress={handleSearch}
                         />
                         <button
-                            className="bg-gray-800 text-white dark:bg-gray-200 dark:text-black px-4 py-2 rounded-r-full"
+                            className={`px-4 py-2 rounded-r-full transition-colors ${darkMode
+                                ? 'bg-white text-black hover:bg-gray-100'
+                                : 'bg-black text-white hover:bg-gray-800'
+                                }`}
                             onClick={handleSearchClick}
                             aria-label="Search"
                         >
