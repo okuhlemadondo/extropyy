@@ -86,5 +86,5 @@ export default function CanvasBackground() {
         };
     }, []);
 
-    return <canvas id="canvas-background" className="fixed top-0 left-0 z-[-1000] opacity-20" />;
+    return <canvas id="canvas-background" className="fixed top-0 left-0 z-[-1] opacity-20" />;
 }

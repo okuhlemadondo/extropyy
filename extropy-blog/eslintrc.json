@@ -1,0 +1,11 @@
+{
+    "extends": "next",
+    "overrides": [
+      {
+        "files": ["*.css"],
+        "rules": {
+          "no-unknown-at-rules": "off"
+        }
+      }
+    ]
+  }
