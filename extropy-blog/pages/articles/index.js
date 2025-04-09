@@ -19,11 +19,15 @@ export default function Articles({ posts, setIsLoading }) {
         }
     }, [search]);
 
+    // Call filterAndSortPosts when category, sortOrder, or searchTerm changes
+    useEffect(() => {
+        filterAndSortPosts();
+    }, [category, sortOrder, searchTerm]);
+
     useEffect(() => {
         setIsLoading(true);
         setTimeout(() => {
             setIsLoading(false);
-            filterAndSortPosts();
 
             // Add visible class to fade-in elements
             const fadeElements = document.querySelectorAll('.fade-in');
@@ -48,7 +52,7 @@ export default function Articles({ posts, setIsLoading }) {
             console.log('Filtered posts count:', filteredPosts.length);
             console.log('Filtered posts:', filteredPosts.map(p => ({ id: p.id, title: p.title, category: p.category })));
         }, 500);
-    }, [category, sortOrder, searchTerm, setIsLoading, filteredPosts.length]);
+    }, [setIsLoading, category, sortOrder, searchTerm, filteredPosts.length]);
 
     const filterAndSortPosts = () => {
         let result = [...posts];
@@ -59,6 +63,10 @@ export default function Articles({ posts, setIsLoading }) {
                 // Normalize both the post category and the selected category
                 const postCategory = p.category ? p.category.trim().toLowerCase() : '';
                 const selectedCategory = category.trim().toLowerCase();
+
+                // Debug category comparison
+                console.log(`Comparing post "${p.title}" category "${postCategory}" with selected category "${selectedCategory}"`);
+
                 return postCategory === selectedCategory;
             });
         }
@@ -79,6 +87,7 @@ export default function Articles({ posts, setIsLoading }) {
     const handleCategoryClick = (category) => {
         // Ensure category is a string and trim any whitespace
         const normalizedCategory = typeof category === 'string' ? category.trim() : 'all';
+        console.log('Setting category to:', normalizedCategory);
         setCategory(normalizedCategory);
     };
 
