@@ -4,7 +4,7 @@ import Footer from '../components/Footer';
 import Cursor from '../components/Cursor';
 import CanvasBackground from '../components/CanvasBackground';
 import LoadingScreen from '../components/LoadingScreen';
-import '../styles/globals.css';
+import '../app/globals.css';
 
 function MyApp({ Component, pageProps }) {
     const [darkMode, setDarkMode] = useState(true);

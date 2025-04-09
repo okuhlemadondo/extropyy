@@ -6,8 +6,9 @@ module.exports = {
         "./components/**/*.{js,ts,jsx,tsx,mdx}", // This line is ESSENTIAL
         // Or if using `src` directory:
         "./src/**/*.{js,ts,jsx,tsx,mdx}",
+        "./styles/**/*.{css,js,ts,jsx,tsx,mdx}",
         "./styles/**/*.css",
-        "./pages/articles/**/*.{css, js,ts,jsx,tsx,mdx}",
+        "./pages/articles/**/*.{css,js,ts,jsx,tsx,mdx}",
     ],
     theme: {
         extend: {},

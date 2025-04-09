@@ -52,12 +52,14 @@ export default function Article({ post, relatedPosts, setIsLoading }) {
 
 export async function getStaticPaths() {
     const posts = getAllPosts();
+
     const paths = posts.map((post) => ({ params: { id: post.id.toString() } }));
     return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
     const post = getPostById(params.id);
+
     if (!post) {
         return {
             notFound: true, // This is crucial for handling non-existent articles
@@ -67,5 +69,6 @@ export async function getStaticProps({ params }) {
     const relatedPosts = allPosts
         .filter((p) => p.id !== post.id && p.category === post.category)
         .slice(0, 2);
+
     return { props: { post, relatedPosts } };
 }
