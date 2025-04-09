@@ -1,5 +1,5 @@
 import { getAllPosts, getPostById } from '../../lib/articles';
-import MarkdownRenderer from '../../components/MarkdownRenderer';
+import SimpleMarkdownRenderer from '../../components/SimpleMarkdownRenderer';
 import ArticleCard from '../../components/ArticleCard';
 import { formatDate } from '../../lib/date';
 import { useEffect } from 'react';
@@ -51,9 +51,9 @@ export default function Article({ post, relatedPosts, setIsLoading }) {
                 </div>
             </div>
             <div className="mb-12 fade-in">
-                <img src={post.image} alt={post.title} className="w-full h-[40vh] object-cover rounded-xl" />
+                <img src={post.image} alt={post.title} className="w-full h-[40vh] object-cover rounded-3xl" />
             </div>
-            <MarkdownRenderer content={post.content} />
+            <SimpleMarkdownRenderer content={post.content} />
             <div className="mt-16 pt-8 border-t border-gray-800 dark:border-gray-200 fade-in">
                 <h3 className="heading-font text-xl font-bold mb-6">Continue Reading</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">

@@ -2,7 +2,7 @@
 id: "5"
 title: "Reflections on University Life as a Mathematics Student"
 author: "Okuhle Madondo"
-headshot: "https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/fill/user-circle-fill.svg"
+headshot: "/headshots/madondo.png"
 date: "2023-09-10"
 category: "Personal"
 image: "https://images.unsplash.com/photo-1588072432836-e10032774350"

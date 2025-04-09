@@ -1,0 +1,42 @@
+/* KaTeX styling */
+.katex {
+    font-size: 1.1em;
+    font-weight: 400;
+    line-height: 1.2;
+    text-indent: 0;
+    text-rendering: auto;
+}
+
+.katex-display {
+    display: block;
+    margin: 1em 0;
+    text-align: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 1em 0;
+}
+
+.latex-equation {
+    display: block;
+    margin: 1em 0;
+    text-align: center;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 1em 0;
+}
+
+/* Ensure inline math is properly aligned */
+.katex-inline {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Ensure display math is properly centered */
+.katex-display > .katex {
+    display: inline-block;
+    text-align: center;
+    white-space: nowrap;
+    text-indent: 0;
+    max-width: 100%;
+    overflow-x: auto;
+} 

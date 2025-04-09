@@ -6,6 +6,7 @@ import Cursor from '../components/Cursor';
 import CanvasBackground from '../components/CanvasBackground';
 import LoadingScreen from '../components/LoadingScreen';
 import '../app/globals.css';
+import '../styles/katex.css';
 
 function MyApp({ Component, pageProps }) {
     const [darkMode, setDarkMode] = useState(true);

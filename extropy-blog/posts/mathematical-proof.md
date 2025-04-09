@@ -2,7 +2,7 @@
 id: "3"
 title: "The Art of Mathematical Proof"
 author: "Okuhle Madondo"
-headshot: "https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/fill/user-circle-fill.svg"
+headshot: "/headshots/madondo.png"
 date: "2023-07-20"
 category: "Mathematics"
 image: "https://images.unsplash.com/photo-1509228468518-180dd4864904"

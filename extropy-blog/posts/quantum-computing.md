@@ -2,7 +2,7 @@
 id: "2"
 title: "Quantum Computing: A New Paradigm"
 author: "Okuhle Madondo"
-headshot: "https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/fill/user-circle-fill.svg"
+headshot: "/headshots/madondo.png"
 date: "2023-09-02"
 category: "Technology"
 image: "https://images.unsplash.com/photo-1635241161466-541f065683ba"

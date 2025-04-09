@@ -2,7 +2,7 @@
 id: "4"
 title: "Consciousness and Computation"
 author: "Okuhle Madondo"
-headshot: "https://cdn.jsdelivr.net/gh/phosphor-icons/core@main/assets/fill/user-circle-fill.svg"
+headshot: "/headshots/madondo.png"
 date: "2023-08-28"
 category: "Philosophy"
 image: "https://images.unsplash.com/photo-1509228627152-72ae9ae6848d"

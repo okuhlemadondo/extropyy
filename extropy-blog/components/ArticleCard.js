@@ -4,7 +4,7 @@ import { formatDate } from '../lib/date';
 export default function ArticleCard({ article, dataDelay }) {
     return (
         <div
-            className="article-card stagger-item rounded-xl overflow-hidden"
+            className="article-card stagger-item rounded-3xl overflow-hidden"
             style={{
                 backgroundColor: 'var(--card-bg)',
                 opacity: 0,

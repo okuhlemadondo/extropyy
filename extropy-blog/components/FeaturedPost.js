@@ -4,7 +4,7 @@ export default function FeaturedPost({ post }) {
     if (!post) return null;
 
     return (
-        <div className="featured-post rounded-xl overflow-hidden mb-16" style={{ backgroundColor: 'var(--card-bg)' }}>
+        <div className="featured-post rounded-3xl overflow-hidden mb-16" style={{ backgroundColor: 'var(--card-bg)' }}>
             <div className="relative">
                 <img src={post.image} alt={post.title} className="w-full h-[60vh] object-cover" />
                 <div className="featured-content absolute bottom-0 left-0 p-8 w-full">
