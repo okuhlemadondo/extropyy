@@ -1,6 +1,9 @@
 import Link from 'next/link';
 
 export default function Footer() {
+    // Get the current year dynamically
+    const currentYear = new Date().getFullYear();
+
     return (
         <footer className="border-t border-gray-800 dark:border-gray-200 py-12 px-6">
             <div className="container mx-auto">
@@ -34,7 +37,7 @@ export default function Footer() {
                     </div>
                 </div>
                 <div className="mt-12 text-center">
-                    <p className="text-sm opacity-60">© 2023 Extropy. All rights reserved.</p>
+                    <p className="text-sm opacity-60">© {currentYear} Extropy. All rights reserved.</p>
                 </div>
             </div>
         </footer>

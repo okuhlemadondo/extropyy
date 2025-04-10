@@ -3,7 +3,7 @@ id: "1"
 title: "The Cold Light"
 author: "Okuhle Madondo"
 headshot: "/headshots/madondo.png"
-date: "2023-08-15"
+date: "2025-03-24"
 category: "Abstract"
 image: "/images/the-cold-light.png"
 featured: true
