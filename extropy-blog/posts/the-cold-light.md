@@ -4,7 +4,7 @@ title: "The Cold Light"
 author: "Okuhle Madondo"
 headshot: "/headshots/madondo.png"
 date: "2025-03-24"
-category: "Abstract"
+category: "Philosophy"
 image: "/images/the-cold-light.png"
 featured: true
 excerpt: "A flicker of light pierced our ancient shadows. Now, poised on an unseen edge, humanity faces a veiled choice—ascend or fade. The stars hold their silence."

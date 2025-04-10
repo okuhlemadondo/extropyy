@@ -4,7 +4,7 @@ title: "The Art of Mathematical Proof"
 author: "Okuhle Madondo"
 headshot: "/headshots/madondo.png"
 date: "2023-07-20"
-category: "Mathematics"
+category: "Philosophy"
 image: "https://images.unsplash.com/photo-1509228468518-180dd4864904"
 excerpt: "Exploring the beauty and logic behind mathematical proofs and their significance in modern mathematics."
 ---

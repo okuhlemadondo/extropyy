@@ -5,7 +5,6 @@ import { formatDate } from '../../lib/date';
 import { useEffect } from 'react';
 
 export default function Article({ post, relatedPosts, setIsLoading }) {
-
     useEffect(() => {
         setIsLoading(true);
         const timeoutId = setTimeout(() => {
@@ -19,19 +18,12 @@ export default function Article({ post, relatedPosts, setIsLoading }) {
                 }, 100);
             });
 
-            // Add visible class to stagger-item elements
-            const staggerItems = document.querySelectorAll('.stagger-item');
-            staggerItems.forEach((item, index) => {
-                setTimeout(() => {
-                    item.style.opacity = '1';
-                    item.style.transform = 'translateY(0)';
-                }, index * 100);
-            });
+            // We no longer need to handle stagger-item animations here
+            // as they're handled directly in the ArticleCard component
         }, 500);
 
         return () => clearTimeout(timeoutId); // Cleanup on unmount
     }, [setIsLoading]);
-
 
     if (!post) {
         return <div>Article not found</div>; // Handle the case where the article doesn't exist
@@ -58,7 +50,11 @@ export default function Article({ post, relatedPosts, setIsLoading }) {
                 <h3 className="heading-font text-xl font-bold mb-6">Continue Reading</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                     {relatedPosts.map((related, index) => (
-                        <ArticleCard key={related.id} article={related} dataDelay={index * 150} />
+                        <ArticleCard
+                            key={related.id}
+                            article={related}
+                            dataDelay={index * 150}
+                        />
                     ))}
                 </div>
             </div>
@@ -82,9 +78,42 @@ export async function getStaticProps({ params }) {
         };
     }
     const allPosts = getAllPosts();
-    const relatedPosts = allPosts
-        .filter((p) => p.id !== post.id && p.category === post.category)
-        .slice(0, 2);
+
+    // First try to get posts from the same category
+    let sameCategoryPosts = allPosts
+        .filter((p) => p.id !== post.id && p.category === post.category);
+
+    let relatedPosts = [];
+
+    // If we have enough posts in the same category, take 2
+    if (sameCategoryPosts.length >= 2) {
+        // Sort by a deterministic value that depends on the current post's ID
+        // This ensures different recommendations for each post while being consistent
+        const seed = parseInt(post.id, 10) || 0;
+        sameCategoryPosts = sameCategoryPosts.sort((a, b) => {
+            // Create a deterministic "score" for each post based on the current post ID
+            const scoreA = (parseInt(a.id, 10) * seed) % 100;
+            const scoreB = (parseInt(b.id, 10) * seed) % 100;
+            return scoreA - scoreB;
+        });
+
+        relatedPosts = sameCategoryPosts.slice(0, 2);
+    }
+    // If we don't have enough posts in the same category
+    else {
+        // Add all the same category posts first
+        relatedPosts = [...sameCategoryPosts];
+
+        // Then fill the remaining slots with posts from other categories
+        const otherPosts = allPosts
+            .filter((p) => p.id !== post.id && p.category !== post.category)
+            // Sort by date to get the most recent posts from other categories
+            .sort((a, b) => new Date(b.date) - new Date(a.date));
+
+        // Add enough other posts to make the total up to 2
+        const neededCount = 2 - relatedPosts.length;
+        relatedPosts = [...relatedPosts, ...otherPosts.slice(0, neededCount)];
+    }
 
     return { props: { post, relatedPosts } };
 }

@@ -1,14 +1,29 @@
 import Link from 'next/link';
 import { formatDate } from '../lib/date';
+import { useEffect, useRef, useState } from 'react';
 
 export default function ArticleCard({ article, dataDelay }) {
+    const cardRef = useRef(null);
+    const [isVisible, setIsVisible] = useState(false);
+
+    // Ensure visibility with useEffect
+    useEffect(() => {
+        // Initial render delay to ensure animation works
+        const timer = setTimeout(() => {
+            setIsVisible(true);
+        }, 500 + (dataDelay || 0));
+
+        return () => clearTimeout(timer);
+    }, [dataDelay]);
+
     return (
         <div
-            className="article-card stagger-item rounded-3xl overflow-hidden flex flex-col h-full"
+            ref={cardRef}
+            className="article-card rounded-3xl overflow-hidden flex flex-col h-full"
             style={{
                 backgroundColor: 'var(--card-bg)',
-                opacity: 0,
-                transform: 'translateY(20px)',
+                opacity: isVisible ? 1 : 0,
+                transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
                 transition: 'opacity 0.6s ease, transform 0.6s ease',
                 transitionDelay: `${dataDelay || 0}ms`
             }}
