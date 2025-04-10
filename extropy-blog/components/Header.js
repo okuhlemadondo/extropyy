@@ -34,7 +34,7 @@ export default function Header({ onSearch, darkMode, toggleDarkMode }) {
     };
 
     return (
-        <header className="py-6 px-6 md:px-12 border-b border-gray-800 dark:border-gray-200 sticky top-0 bg-opacity-80 backdrop-filter backdrop-blur-lg z-10">
+        <header className="py-6 px-6 md:px-12 border-b border-gray-800 dark:border-gray-200 sticky top-0 bg-opacity-80 backdrop-filter backdrop-blur-lg z-15">
             <div className="flex flex-col w-full">
                 {/* Main row with logo, nav, and dark mode toggle */}
                 <div className="flex items-center justify-between w-full">
