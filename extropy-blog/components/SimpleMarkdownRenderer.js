@@ -9,22 +9,6 @@ export default function SimpleMarkdownRenderer({ content }) {
     useEffect(() => {
         if (!content) return;
 
-        // First, extract and save all code blocks to prevent processing them
-        const codeBlockRegex = /```([\w-]*)\n([\s\S]*?)```/g;
-        const codeBlocks = [];
-        let codeMatch;
-        let contentWithPlaceholders = content;
-
-        // Extract code blocks and replace them with placeholders
-        while ((codeMatch = codeBlockRegex.exec(content)) !== null) {
-            const language = codeMatch[1] || 'plaintext';
-            const codeContent = codeMatch[2];
-            const placeholder = `CODE_BLOCK_PLACEHOLDER_${codeBlocks.length}`;
-
-            codeBlocks.push({ language, code: codeContent });
-            contentWithPlaceholders = contentWithPlaceholders.replace(codeMatch[0], placeholder);
-        }
-
         // Function to render math expressions
         const renderMath = (tex, displayMode) => {
             try {
@@ -37,6 +21,23 @@ export default function SimpleMarkdownRenderer({ content }) {
                 return tex;
             }
         };
+
+        // Fix code block regex to handle various backtick patterns and whitespace
+        const codeBlockRegex = /```([\w-]*)\s*\n([\s\S]*?)```/g;
+        const codeBlocks = [];
+        let contentWithPlaceholders = content;
+
+        // Extract code blocks and replace with placeholders
+        let match;
+        while ((match = codeBlockRegex.exec(content)) !== null) {
+            const placeholder = `CODE_BLOCK_${codeBlocks.length}`;
+            const language = match[1].trim() || 'plaintext';
+            // Preserve code content exactly as it is
+            const code = match[2];
+
+            codeBlocks.push({ language, code });
+            contentWithPlaceholders = contentWithPlaceholders.replace(match[0], placeholder);
+        }
 
         // Process display math ($$...$$)
         let processedContent = contentWithPlaceholders.replace(/\$\$([\s\S]*?)\$\$/g, (match, tex) => {
@@ -66,90 +67,97 @@ export default function SimpleMarkdownRenderer({ content }) {
         processedContent = processedContent.replace(/([^\n])\n([^\n])/g, '$1<br>$2');
 
         // Configure marked options
-        marked.use({
+        marked.setOptions({
             breaks: true,
             gfm: true,
             headerIds: true,
             mangle: false,
             pedantic: false,
+            sanitize: false,
             smartLists: true,
-            smartypants: true
+            smartypants: true,
+            xhtml: false
         });
 
-        try {
-            // Convert markdown to HTML
-            let html = marked.parse(processedContent);
+        // Convert markdown to HTML after processing math and headings
+        let html = marked(processedContent);
 
-            // Now restore code blocks with proper formatting
-            codeBlocks.forEach((block, index) => {
-                const placeholder = `CODE_BLOCK_PLACEHOLDER_${index}`;
+        // Replace code block placeholders with highlighted code
+        codeBlocks.forEach((block, index) => {
+            const placeholder = `CODE_BLOCK_${index}`;
+
+            try {
+                // Use the correct language or fallback to plaintext
+                const validLanguage = hljs.getLanguage(block.language) ? block.language : 'plaintext';
+
+                // Highlight code using highlight.js
                 const highlightedCode = hljs.highlight(block.code, {
-                    language: hljs.getLanguage(block.language) ? block.language : 'plaintext'
+                    language: validLanguage
                 }).value;
 
-                // Generate a unique ID for this code block
+                // Create a unique ID for the code block
                 const blockId = `code-block-${Math.random().toString(36).substr(2, 9)}`;
 
-                // Create HTML for the custom code block
+                // Create HTML for the code block with proper styling
                 const codeBlockHtml = `
-                    <div class="code-block my-4">
-                        <div class="code-header flex justify-between items-center bg-gray-900 text-white px-4 py-2 rounded-t-lg">
-                            <span class="text-xs font-mono">${block.language || 'plaintext'}</span>
+                    <div class="code-block">
+                        <div class="code-header">
+                            <span>${validLanguage}</span>
                             <button 
-                                class="copy-button text-xs px-2 py-1 bg-gray-700 rounded hover:bg-gray-600 transition-colors"
+                                class="copy-button"
                                 onclick="copyCodeToClipboard('${blockId}')"
                             >
                                 Copy
                             </button>
                         </div>
-                        <pre id="${blockId}" class="bg-gray-800 p-4 rounded-b-lg overflow-x-auto"><code class="language-${block.language}">${highlightedCode}</code></pre>
+                        <pre id="${blockId}"><code class="language-${validLanguage}">${highlightedCode}</code></pre>
                     </div>
                 `;
 
-                // Replace the placeholder with the formatted code block
+                // Replace the placeholder in the HTML
                 html = html.replace(`<p>${placeholder}</p>`, codeBlockHtml);
-            });
-
-            // Handle inline code separately
-            const contentElement = document.getElementById('markdown-content');
-            if (contentElement) {
-                contentElement.innerHTML = html;
-
-                // Add the clipboard functionality script
-                if (!window.copyCodeToClipboard) {
-                    window.copyCodeToClipboard = function (blockId) {
-                        const codeBlock = document.getElementById(blockId);
-                        const code = codeBlock.querySelector('code').innerText;
-
-                        navigator.clipboard.writeText(code).then(() => {
-                            // Find the button for this block
-                            const button = codeBlock.parentElement.querySelector('.copy-button');
-                            const originalText = button.textContent;
-
-                            // Change button text to indicate success
-                            button.textContent = 'Copied!';
-
-                            // Revert back after a short delay
-                            setTimeout(() => {
-                                button.textContent = originalText;
-                            }, 2000);
-                        }).catch(err => {
-                            console.error('Failed to copy code: ', err);
-                        });
-                    };
-                }
-
-                // Style inline code elements
-                const inlineCode = contentElement.querySelectorAll('p code, li code');
-                inlineCode.forEach((code) => {
-                    code.className = 'bg-gray-200 dark:bg-gray-700 px-1 py-0.5 rounded text-sm';
-                });
+                // Also try without <p> tags in case of nested markdown
+                html = html.replace(placeholder, codeBlockHtml);
+            } catch (error) {
+                console.error('Error highlighting code:', error);
+                // Fallback to plain <pre><code> if highlighting fails
+                const fallbackHtml = `<pre><code>${block.code}</code></pre>`;
+                html = html.replace(`<p>${placeholder}</p>`, fallbackHtml);
+                html = html.replace(placeholder, fallbackHtml);
             }
-        } catch (error) {
-            console.error('Error rendering markdown:', error);
-            const contentElement = document.getElementById('markdown-content');
-            if (contentElement) {
-                contentElement.innerHTML = `<p>Error rendering content: ${error.message}</p>`;
+        });
+
+        // Set the processed HTML content
+        const contentElement = document.getElementById('markdown-content');
+        if (contentElement) {
+            contentElement.innerHTML = html;
+
+            // Add clipboard functionality
+            if (!window.copyCodeToClipboard) {
+                window.copyCodeToClipboard = function (blockId) {
+                    const codeBlock = document.getElementById(blockId);
+                    if (!codeBlock) return;
+
+                    // Get the code text
+                    const code = codeBlock.textContent;
+
+                    // Copy to clipboard
+                    navigator.clipboard.writeText(code).then(() => {
+                        // Find the button and provide feedback
+                        const button = codeBlock.parentElement.querySelector('.copy-button');
+                        if (!button) return;
+
+                        const originalText = button.textContent;
+                        button.textContent = 'Copied!';
+
+                        // Reset button text after delay
+                        setTimeout(() => {
+                            button.textContent = originalText;
+                        }, 2000);
+                    }).catch(err => {
+                        console.error('Failed to copy code: ', err);
+                    });
+                };
             }
         }
     }, [content]);
@@ -157,7 +165,7 @@ export default function SimpleMarkdownRenderer({ content }) {
     return (
         <div
             id="markdown-content"
-            className="prose dark:prose-invert max-w-none prose-p:my-4 prose-li:my-1 prose-img:rounded-lg prose-img:my-6 prose-hr:my-8 prose-blockquote:border-l-4 prose-blockquote:border-gray-300 dark:prose-blockquote:border-gray-700 prose-blockquote:pl-4 prose-blockquote:italic"
+            className="prose dark:prose-invert max-w-none prose-p:my-4 prose-li:my-1 prose-img:rounded-lg prose-img:my-6 prose-hr:my-8 prose-blockquote:border-l-4 prose-blockquote:border-gray-300 dark:prose-blockquote:border-gray-700 prose-blockquote:pl-4 prose-blockquote:italic whitespace-pre-line"
         />
     );
 } 

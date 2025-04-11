@@ -7,6 +7,7 @@ import CanvasBackground from '../components/CanvasBackground';
 import LoadingScreen from '../components/LoadingScreen';
 import '../app/globals.css';
 import '../styles/katex.css';
+import '../styles/code-blocks.css';
 
 function MyApp({ Component, pageProps }) {
     const [darkMode, setDarkMode] = useState(true);

@@ -42,6 +42,5 @@ Joscha Bach’s take—free will as a perception under uncertainty, driven by an
 ```python
 def greet(name):
     return f"Hello, {name}!"
-
 print(greet("Alice"))
 ```
