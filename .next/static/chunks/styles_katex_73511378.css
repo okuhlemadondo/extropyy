@@ -1,0 +1,42 @@
+/* [project]/styles/katex.css [client] (css) */
+.katex {
+  font-size: 1.1em;
+  font-weight: 400;
+  line-height: 1.2;
+  text-indent: 0;
+  text-rendering: auto;
+}
+
+.katex-display {
+  display: block;
+  margin: 1em 0;
+  text-align: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 1em 0;
+}
+
+.latex-equation {
+  display: block;
+  margin: 1em 0;
+  text-align: center;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 1em 0;
+}
+
+.katex-inline {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.katex-display > .katex {
+  display: inline-block;
+  text-align: center;
+  white-space: nowrap;
+  text-indent: 0;
+  max-width: 100%;
+  overflow-x: auto;
+}
+
+/*# sourceMappingURL=styles_katex_73511378.css.map*/

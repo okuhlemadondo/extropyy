@@ -1,0 +1,8 @@
+{
+  "pages": {
+    "/articles/[slug]": []
+  },
+  "app": {},
+  "appUsingSizeAdjust": false,
+  "pagesUsingSizeAdjust": false
+}

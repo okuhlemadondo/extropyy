@@ -1,0 +1,6 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 1, "column": 0}, "map": {"version":3,"sources":["turbopack:///[project]/styles/katex.css"],"sourcesContent":["/* KaTeX styling */\n.katex {\n    font-size: 1.1em;\n    font-weight: 400;\n    line-height: 1.2;\n    text-indent: 0;\n    text-rendering: auto;\n}\n\n.katex-display {\n    display: block;\n    margin: 1em 0;\n    text-align: center;\n    overflow-x: auto;\n    overflow-y: hidden;\n    padding: 1em 0;\n}\n\n.latex-equation {\n    display: block;\n    margin: 1em 0;\n    text-align: center;\n    overflow-x: auto;\n    overflow-y: hidden;\n    padding: 1em 0;\n}\n\n/* Ensure inline math is properly aligned */\n.katex-inline {\n    display: inline-block;\n    vertical-align: middle;\n}\n\n/* Ensure display math is properly centered */\n.katex-display > .katex {\n    display: inline-block;\n    text-align: center;\n    white-space: nowrap;\n    text-indent: 0;\n    max-width: 100%;\n    overflow-x: auto;\n} "],"names":[],"mappings":"AACA;;;;;;;;AAQA;;;;;;;;;AASA;;;;;;;;;AAUA;;;;;AAMA"}}]
+}
