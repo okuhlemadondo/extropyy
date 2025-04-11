@@ -38,3 +38,10 @@ What sets Bach apart is his computational framing. Calling free will an outcome 
 Bach’s algorithmic angle highlights a key contrast: AI follows transparent rules, so we don’t attribute free will to it, even under uncertainty. Humans, shaped by evolution’s opaque processes, experience freedom because we can’t decode our own “code.” This gap, central to Bach’s view, echoes Dennett’s evolved agency but adds a computational twist unique to our AI-driven era.
 
 Joscha Bach’s take—free will as a perception under uncertainty, driven by an elusive algorithm—offers a thought-provoking lens. It’s not wholly novel, resting on compatibilist shoulders and modern science, but its interdisciplinary flair makes it stand out. From ice cream to career choices, our sense of freedom thrives in the shadows of an unknown process. As we unravel the mind’s workings, this view might evolve, but for now, it captures a vital human experience with a contemporary edge.
+
+```python
+def greet(name):
+    return f"Hello, {name}!"
+
+print(greet("Alice"))
+```

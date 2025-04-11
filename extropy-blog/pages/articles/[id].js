@@ -1,4 +1,4 @@
-import { getAllPosts, getPostBySlug } from '../../lib/articles';
+import { getAllPosts, getPostById } from '../../lib/articles';
 import SimpleMarkdownRenderer from '../../components/SimpleMarkdownRenderer';
 import ArticleCard from '../../components/ArticleCard';
 import { formatDate } from '../../lib/date';
@@ -65,12 +65,12 @@ export default function Article({ post, relatedPosts, setIsLoading }) {
 export async function getStaticPaths() {
     const posts = getAllPosts();
 
-    const paths = posts.map((post) => ({ params: { slug: post.slug } }));
+    const paths = posts.map((post) => ({ params: { id: post.id.toString() } }));
     return { paths, fallback: false };
 }
 
 export async function getStaticProps({ params }) {
-    const post = getPostBySlug(params.slug);
+    const post = getPostById(params.id);
 
     if (!post) {
         return {
