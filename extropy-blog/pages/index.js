@@ -49,7 +49,7 @@ export default function Home({ posts, setIsLoading }) {
             <div className="text-center mb-16 fade-in">
                 <h1 className="heading-font text-5xl md:text-7xl font-bold mb-4">EXTROPY</h1>
                 <p className="text-xl md:text-2xl max-w-3xl mx-auto opacity-70">
-                    Expanding the boundaries of thought through philosophy, science, technology, and personal reflection.
+                    "Ideas are the only structures that outlive stone."
                 </p>
             </div>
             <FeaturedPost post={featuredPost} />

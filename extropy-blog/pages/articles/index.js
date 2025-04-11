@@ -100,7 +100,7 @@ export default function Articles({ posts, setIsLoading }) {
         <section className="mb-20">
             <div className="text-center mb-16 fade-in">
                 <h1 className="heading-font text-5xl font-bold mb-4">Articles</h1>
-                <p className="text-xl max-w-3xl mx-auto opacity-70">Explore the full collection of articles.</p>
+                <p className="text-xl max-w-3xl mx-auto opacity-70">Ideas captured mid-flight, arranged for deeper reflection.</p>
                 {searchTerm && (
                     <p className="mt-4 text-lg">
                         Showing results for: <span className="font-medium">{searchTerm}</span>

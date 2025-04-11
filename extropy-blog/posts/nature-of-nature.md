@@ -5,7 +5,7 @@ author: "Okuhle Madondo"
 headshot: "/headshots/madondo.png"
 date: "2025-03-25"
 category: "Philosophy"
-image: "https://images.unsplash.com/photo-1509228468518-180dd4864904"
+image: "/images/nature-of-nature.png"
 excerpt: "What separates a smartphone from a spiderweb? One’s a gleaming gadget, the other a sticky trap—yet both come from creatures shaped by this planet. We label one 'artificial' and the other 'natural,' but what if that line’s blurrier than we think?"
 ---
 

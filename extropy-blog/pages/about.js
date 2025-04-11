@@ -42,17 +42,24 @@ export default function About({ setIsLoading }) {
 
                     <div className="w-full md:w-2/3">
                         <h2 className="heading-font text-3xl font-bold mb-4">Okuhle Madondo</h2>
-                        <p className="text-lg opacity-80 mb-4">22-year-old Mathematics and Computer Science student</p>
-                        <p className="mb-4">I'm a South African student deeply passionate about the intersection of mathematics, computer science, philosophy, and their applications in understanding our complex world.</p>
-                        <p className="mb-4">My academic journey has been driven by a curiosity about the fundamental structures that underpin reality, from abstract mathematical concepts to the computational frameworks that power our digital world.</p>
-                        <p className="mb-4">Through Extropy, I aim to explore and share insights across disciplines, examining how these fields of knowledge interact and inform one another. The name "Extropy" reflects my belief in the power of knowledge and understanding to create order, meaning, and progress.</p>
-                        <p>When I'm not studying or writing, you might find me exploring new research papers, experimenting with programming projects, or engaging in philosophical discussions with friends and colleagues.</p>
+                        <p className="text-lg opacity-80 mb-4">Mathematics & Computer Science Student</p>
+                        <p className='mb-4'>Somewhere between equations and code, logic and language, I chase patterns—hidden structures that pulse beneath the surface of our world.</p>
+
+                        <p className='mb-4'>I have a restless mind, drawn to the strange and beautiful overlaps between the formal sciences, the applied sciences, philosophy, and the humanities. Not just as separate fields, but as instruments in a symphony that hums with deeper meaning. What begins as abstraction often ends in revelation.</p>
+
+                        <p className='mb-4'>This site, Extropy, is my way of mapping that pursuit. It’s a space for those who suspect that reality is more than atoms and algorithms—that beneath complexity lies coherence, and that with the right tools, we might just glimpse it.</p>
+
+                        <p className='mb-4'>I don’t claim to have "answers" or whatever. But I believe in following questions to the edge of what we know—and pushing beyond. Whether through code, theory, or reflection, I seek clarity in chaos and symmetry in the unexpected.</p>
+
+                        <p className='mb-4'>When I’m not sketching out ideas or decoding research papers, I’m usually lost in thought, appreciating the mundane, building something weird, or debating the metaphysics of existence over too much coffee.</p>
+
+                        <p className='mb-4'>Welcome to the labyrinth, anon.</p>
                     </div>
                 </div>
             </div>
 
             <div className="mt-16 fade-in">
-                <h2 className="heading-font text-3xl font-bold mb-8">Topics I'm Passionate About</h2>
+                <h2 className="heading-font text-3xl font-bold mb-8">Passions, Interests & Odd Fixations</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div className="p-6 rounded-xl" style={{ backgroundColor: 'var(--card-bg)' }}>
                         <h3 className="heading-font text-xl font-bold mb-3">Mathematics</h3>
