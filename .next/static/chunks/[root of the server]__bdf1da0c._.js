@@ -519,6 +519,8 @@ function ArticleCard({ article, dataDelay }) {
     }["ArticleCard.useEffect"], [
         dataDelay
     ]);
+    // Handle both old and new post formats
+    const postData = article.frontMatter || article;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         ref: cardRef,
         className: "article-card rounded-3xl overflow-hidden flex flex-col h-full",
@@ -535,22 +537,22 @@ function ArticleCard({ article, dataDelay }) {
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
                     href: `/articles/${article.slug}`,
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                        src: article.image,
-                        alt: article.title,
+                        src: postData.image,
+                        alt: postData.title,
                         className: "w-full h-full object-cover"
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 33,
+                        lineNumber: 36,
                         columnNumber: 21
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/components/ArticleCard.js",
-                    lineNumber: 32,
+                    lineNumber: 35,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/ArticleCard.js",
-                lineNumber: 31,
+                lineNumber: 34,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -558,41 +560,41 @@ function ArticleCard({ article, dataDelay }) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         className: "text-sm font-medium opacity-70",
-                        children: article.category
+                        children: postData.category
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 37,
+                        lineNumber: 40,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
                         href: `/articles/${article.slug}`,
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                             className: "heading-font text-xl font-bold mt-2 hover:text-gray-200 dark:hover:text-gray-500 transition-colors duration-300",
-                            children: article.title
+                            children: postData.title
                         }, void 0, false, {
                             fileName: "[project]/components/ArticleCard.js",
-                            lineNumber: 39,
+                            lineNumber: 42,
                             columnNumber: 21
                         }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 38,
-                        columnNumber: 17
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "mt-3 text-sm opacity-70",
-                        children: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$date$2e$js__$5b$client$5d$__$28$ecmascript$29$__["formatDate"])(article.date)
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
                         lineNumber: 41,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "mt-3 flex-grow",
-                        children: article.excerpt
+                        className: "mt-3 text-sm opacity-70",
+                        children: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$date$2e$js__$5b$client$5d$__$28$ecmascript$29$__["formatDate"])(postData.date)
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 42,
+                        lineNumber: 44,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "mt-3 flex-grow",
+                        children: postData.excerpt
+                    }, void 0, false, {
+                        fileName: "[project]/components/ArticleCard.js",
+                        lineNumber: 45,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -607,30 +609,30 @@ function ArticleCard({ article, dataDelay }) {
                                     children: "→"
                                 }, void 0, false, {
                                     fileName: "[project]/components/ArticleCard.js",
-                                    lineNumber: 45,
+                                    lineNumber: 48,
                                     columnNumber: 35
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/ArticleCard.js",
-                            lineNumber: 44,
+                            lineNumber: 47,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 43,
+                        lineNumber: 46,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/ArticleCard.js",
-                lineNumber: 36,
+                lineNumber: 39,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/ArticleCard.js",
-        lineNumber: 20,
+        lineNumber: 23,
         columnNumber: 9
     }, this);
 }
@@ -722,15 +724,15 @@ function Articles({ posts, setIsLoading }) {
                     console.log('Current category:', category);
                     console.log('Available categories:', [
                         ...new Set(posts.map({
-                            "Articles.useEffect": (p)=>p.category ? p.category.trim() : ''
+                            "Articles.useEffect": (p)=>p.frontMatter?.category ? p.frontMatter.category.trim() : ''
                         }["Articles.useEffect"]))
                     ].filter(Boolean));
                     console.log('Filtered posts count:', filteredPosts.length);
                     console.log('Filtered posts:', filteredPosts.map({
                         "Articles.useEffect": (p)=>({
-                                id: p.id,
-                                title: p.title,
-                                category: p.category
+                                slug: p.slug,
+                                title: p.frontMatter?.title,
+                                category: p.frontMatter?.category
                             })
                     }["Articles.useEffect"]));
                 }
@@ -741,7 +743,8 @@ function Articles({ posts, setIsLoading }) {
         category,
         sortOrder,
         searchTerm,
-        filteredPosts.length
+        filteredPosts.length,
+        posts
     ]);
     const filterAndSortPosts = ()=>{
         let result = [
@@ -751,17 +754,17 @@ function Articles({ posts, setIsLoading }) {
             // Normalize category comparison to handle case sensitivity and whitespace
             result = result.filter((p)=>{
                 // Normalize both the post category and the selected category
-                const postCategory = p.category ? p.category.trim().toLowerCase() : '';
+                const postCategory = p.frontMatter?.category ? p.frontMatter.category.trim().toLowerCase() : '';
                 const selectedCategory = category.trim().toLowerCase();
                 // Debug category comparison
-                console.log(`Comparing post "${p.title}" category "${postCategory}" with selected category "${selectedCategory}"`);
+                console.log(`Comparing post "${p.frontMatter?.title}" category "${postCategory}" with selected category "${selectedCategory}"`);
                 return postCategory === selectedCategory;
             });
         }
         if (searchTerm) {
-            result = result.filter((p)=>p.title.toLowerCase().includes(searchTerm.toLowerCase()) || p.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) || p.content && p.content.toLowerCase().includes(searchTerm.toLowerCase()));
+            result = result.filter((p)=>p.frontMatter?.title?.toLowerCase().includes(searchTerm.toLowerCase()) || p.frontMatter?.excerpt?.toLowerCase().includes(searchTerm.toLowerCase()));
         }
-        result.sort((a, b)=>sortOrder === 'desc' ? new Date(b.date) - new Date(a.date) : new Date(a.date) - new Date(b.date));
+        result.sort((a, b)=>sortOrder === 'desc' ? new Date(b.frontMatter?.date) - new Date(a.frontMatter?.date) : new Date(a.frontMatter?.date) - new Date(b.frontMatter?.date));
         setFilteredPosts(result);
     };
     const handleCategoryClick = (category)=>{
@@ -851,7 +854,7 @@ function Articles({ posts, setIsLoading }) {
                                         columnNumber: 25
                                     }, this),
                                     [
-                                        ...new Set(posts.map((p)=>p.category ? p.category.trim() : ''))
+                                        ...new Set(posts.map((p)=>p.frontMatter?.category ? p.frontMatter.category.trim() : ''))
                                     ].filter(Boolean).map((cat)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
                                             className: `category-filter px-4 py-2 rounded-full text-sm font-medium transition ${category === cat ? 'bg-gray-800 text-white dark:bg-gray-200 dark:text-black' : 'bg-gray-200 text-black dark:bg-gray-800 dark:text-white'}`,
                                             "data-category": cat,
@@ -925,7 +928,7 @@ function Articles({ posts, setIsLoading }) {
                         children: filteredPosts.length > 0 ? filteredPosts.map((post, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ArticleCard$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
                                 article: post,
                                 dataDelay: index * 100
-                            }, post.id, false, {
+                            }, post.slug, false, {
                                 fileName: "[project]/pages/articles/index.js",
                                 lineNumber: 157,
                                 columnNumber: 29

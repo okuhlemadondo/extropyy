@@ -16,6 +16,9 @@ export default function ArticleCard({ article, dataDelay }) {
         return () => clearTimeout(timer);
     }, [dataDelay]);
 
+    // Handle both old and new post formats
+    const postData = article.frontMatter || article;
+
     return (
         <div
             ref={cardRef}
@@ -30,16 +33,16 @@ export default function ArticleCard({ article, dataDelay }) {
         >
             <div className="relative h-48">
                 <Link href={`/articles/${article.slug}`}>
-                    <img src={article.image} alt={article.title} className="w-full h-full object-cover" />
+                    <img src={postData.image} alt={postData.title} className="w-full h-full object-cover" />
                 </Link>
             </div>
             <div className="p-6 flex flex-col flex-grow">
-                <span className="text-sm font-medium opacity-70">{article.category}</span>
+                <span className="text-sm font-medium opacity-70">{postData.category}</span>
                 <Link href={`/articles/${article.slug}`}>
-                    <h3 className="heading-font text-xl font-bold mt-2 hover:text-gray-200 dark:hover:text-gray-500 transition-colors duration-300">{article.title}</h3>
+                    <h3 className="heading-font text-xl font-bold mt-2 hover:text-gray-200 dark:hover:text-gray-500 transition-colors duration-300">{postData.title}</h3>
                 </Link>
-                <p className="mt-3 text-sm opacity-70">{formatDate(article.date)}</p>
-                <p className="mt-3 flex-grow">{article.excerpt}</p>
+                <p className="mt-3 text-sm opacity-70">{formatDate(postData.date)}</p>
+                <p className="mt-3 flex-grow">{postData.excerpt}</p>
                 <div className="mt-auto pt-4">
                     <Link href={`/articles/${article.slug}`} className="inline-flex items-center text-sm font-medium hover:text-gray-200 dark:hover:text-gray-500 transition-colors duration-300">
                         Read More <span className="ml-1">→</span>

@@ -643,6 +643,8 @@ function ArticleCard({ article, dataDelay }) {
     }["ArticleCard.useEffect"], [
         dataDelay
     ]);
+    // Handle both old and new post formats
+    const postData = article.frontMatter || article;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         ref: cardRef,
         className: "article-card rounded-3xl overflow-hidden flex flex-col h-full",
@@ -659,22 +661,22 @@ function ArticleCard({ article, dataDelay }) {
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
                     href: `/articles/${article.slug}`,
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                        src: article.image,
-                        alt: article.title,
+                        src: postData.image,
+                        alt: postData.title,
                         className: "w-full h-full object-cover"
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 33,
+                        lineNumber: 36,
                         columnNumber: 21
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/components/ArticleCard.js",
-                    lineNumber: 32,
+                    lineNumber: 35,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/ArticleCard.js",
-                lineNumber: 31,
+                lineNumber: 34,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -682,41 +684,41 @@ function ArticleCard({ article, dataDelay }) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         className: "text-sm font-medium opacity-70",
-                        children: article.category
+                        children: postData.category
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 37,
+                        lineNumber: 40,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
                         href: `/articles/${article.slug}`,
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                             className: "heading-font text-xl font-bold mt-2 hover:text-gray-200 dark:hover:text-gray-500 transition-colors duration-300",
-                            children: article.title
+                            children: postData.title
                         }, void 0, false, {
                             fileName: "[project]/components/ArticleCard.js",
-                            lineNumber: 39,
+                            lineNumber: 42,
                             columnNumber: 21
                         }, this)
-                    }, void 0, false, {
-                        fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 38,
-                        columnNumber: 17
-                    }, this),
-                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "mt-3 text-sm opacity-70",
-                        children: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$date$2e$js__$5b$client$5d$__$28$ecmascript$29$__["formatDate"])(article.date)
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
                         lineNumber: 41,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                        className: "mt-3 flex-grow",
-                        children: article.excerpt
+                        className: "mt-3 text-sm opacity-70",
+                        children: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$date$2e$js__$5b$client$5d$__$28$ecmascript$29$__["formatDate"])(postData.date)
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 42,
+                        lineNumber: 44,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                        className: "mt-3 flex-grow",
+                        children: postData.excerpt
+                    }, void 0, false, {
+                        fileName: "[project]/components/ArticleCard.js",
+                        lineNumber: 45,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -731,30 +733,30 @@ function ArticleCard({ article, dataDelay }) {
                                     children: "→"
                                 }, void 0, false, {
                                     fileName: "[project]/components/ArticleCard.js",
-                                    lineNumber: 45,
+                                    lineNumber: 48,
                                     columnNumber: 35
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/ArticleCard.js",
-                            lineNumber: 44,
+                            lineNumber: 47,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 43,
+                        lineNumber: 46,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/ArticleCard.js",
-                lineNumber: 36,
+                lineNumber: 39,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/ArticleCard.js",
-        lineNumber: 20,
+        lineNumber: 23,
         columnNumber: 9
     }, this);
 }

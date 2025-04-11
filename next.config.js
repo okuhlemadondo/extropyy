@@ -1,17 +1,10 @@
-const { getAllPosts } = require('./lib/articles');
-
+/** @type {import('next').NextConfig} */
 const nextConfig = {
   /* config options here */
-  async redirects() {
-    // Get all posts to create redirects from ID-based URLs to slug-based URLs
-    const posts = getAllPosts();
-
-    return posts.map(post => ({
-      source: `/articles/${post.id}`,
-      destination: `/articles/${post.slug}`,
-      permanent: true,
-    }));
-  },
+  reactStrictMode: true,
+  swcMinify: true,
+  // We'll handle redirects in a more compatible way
+  // that doesn't require importing fs modules at the top level
 };
 
 module.exports = nextConfig;

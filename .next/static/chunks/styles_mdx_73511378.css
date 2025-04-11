@@ -1,0 +1,86 @@
+/* [project]/styles/mdx.css [client] (css) */
+pre {
+  background-color: #282c34;
+  border-radius: .5rem;
+  padding: 1rem;
+  overflow-x: auto;
+  margin: 1.5rem 0;
+}
+
+.code-header {
+  font-family: monospace;
+  font-size: .8rem;
+  color: #9ca3af;
+  margin-bottom: -.5rem;
+  text-align: right;
+}
+
+.prose p {
+  white-space: pre-wrap;
+}
+
+.prose blockquote p {
+  white-space: pre-wrap;
+}
+
+.prose li {
+  margin-bottom: .25rem;
+}
+
+.youtube-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%;
+  margin: 2rem 0;
+}
+
+.youtube-container iframe {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: .5rem;
+}
+
+.tweet-container {
+  display: flex;
+  justify-content: center;
+  margin: 2rem 0;
+}
+
+.prose img {
+  max-width: 100%;
+  height: auto;
+}
+
+.prose table {
+  border-collapse: collapse;
+  width: 100%;
+  margin: 2rem 0;
+}
+
+.prose th {
+  background-color: #d1d5db1a;
+  font-weight: 600;
+}
+
+.prose td, .prose th {
+  border: 1px solid #d1d5db;
+  padding: .5rem;
+  text-align: left;
+}
+
+.dark .prose th {
+  background-color: #37415180;
+}
+
+.dark .prose td, .dark .prose th {
+  border-color: #4b5563;
+}
+
+.katex-display {
+  margin: 1.5rem 0;
+  overflow-x: auto;
+  overflow-y: hidden;
+}
+
+/*# sourceMappingURL=styles_mdx_73511378.css.map*/

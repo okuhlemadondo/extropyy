@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/router';
-import { getAllPosts } from '../../lib/articles';
 import ArticleCard from '../../components/ArticleCard';
 
 export default function Articles({ posts, setIsLoading }) {
@@ -48,11 +47,11 @@ export default function Articles({ posts, setIsLoading }) {
 
             // Debug information
             console.log('Current category:', category);
-            console.log('Available categories:', [...new Set(posts.map(p => p.category ? p.category.trim() : ''))].filter(Boolean));
+            console.log('Available categories:', [...new Set(posts.map(p => p.frontMatter?.category ? p.frontMatter.category.trim() : ''))].filter(Boolean));
             console.log('Filtered posts count:', filteredPosts.length);
-            console.log('Filtered posts:', filteredPosts.map(p => ({ id: p.id, title: p.title, category: p.category })));
+            console.log('Filtered posts:', filteredPosts.map(p => ({ slug: p.slug, title: p.frontMatter?.title, category: p.frontMatter?.category })));
         }, 500);
-    }, [setIsLoading, category, sortOrder, searchTerm, filteredPosts.length]);
+    }, [setIsLoading, category, sortOrder, searchTerm, filteredPosts.length, posts]);
 
     const filterAndSortPosts = () => {
         let result = [...posts];
@@ -61,25 +60,26 @@ export default function Articles({ posts, setIsLoading }) {
             // Normalize category comparison to handle case sensitivity and whitespace
             result = result.filter((p) => {
                 // Normalize both the post category and the selected category
-                const postCategory = p.category ? p.category.trim().toLowerCase() : '';
+                const postCategory = p.frontMatter?.category ? p.frontMatter.category.trim().toLowerCase() : '';
                 const selectedCategory = category.trim().toLowerCase();
 
                 // Debug category comparison
-                console.log(`Comparing post "${p.title}" category "${postCategory}" with selected category "${selectedCategory}"`);
+                console.log(`Comparing post "${p.frontMatter?.title}" category "${postCategory}" with selected category "${selectedCategory}"`);
 
                 return postCategory === selectedCategory;
             });
         }
         if (searchTerm) {
             result = result.filter((p) =>
-                p.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                p.excerpt.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                (p.content && p.content.toLowerCase().includes(searchTerm.toLowerCase()))
+                p.frontMatter?.title?.toLowerCase().includes(searchTerm.toLowerCase()) ||
+                p.frontMatter?.excerpt?.toLowerCase().includes(searchTerm.toLowerCase())
             );
         }
 
         result.sort((a, b) =>
-            sortOrder === 'desc' ? new Date(b.date) - new Date(a.date) : new Date(a.date) - new Date(b.date)
+            sortOrder === 'desc'
+                ? new Date(b.frontMatter?.date) - new Date(a.frontMatter?.date)
+                : new Date(a.frontMatter?.date) - new Date(b.frontMatter?.date)
         );
         setFilteredPosts(result);
     };
@@ -126,7 +126,7 @@ export default function Articles({ posts, setIsLoading }) {
                         >
                             All
                         </button>
-                        {[...new Set(posts.map(p => p.category ? p.category.trim() : ''))].filter(Boolean).map((cat) => (
+                        {[...new Set(posts.map(p => p.frontMatter?.category ? p.frontMatter.category.trim() : ''))].filter(Boolean).map((cat) => (
                             <button
                                 key={cat}
                                 className={`category-filter px-4 py-2 rounded-full text-sm font-medium transition ${category === cat ? 'bg-gray-800 text-white dark:bg-gray-200 dark:text-black' : 'bg-gray-200 text-black dark:bg-gray-800 dark:text-white'}`}
@@ -154,7 +154,7 @@ export default function Articles({ posts, setIsLoading }) {
                 <div id="articles-grid" className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                     {filteredPosts.length > 0 ? (
                         filteredPosts.map((post, index) => (
-                            <ArticleCard key={post.id} article={post} dataDelay={index * 100} />
+                            <ArticleCard key={post.slug} article={post} dataDelay={index * 100} />
                         ))
                     ) : (
                         <div className="col-span-full text-center py-12">
@@ -168,6 +168,40 @@ export default function Articles({ posts, setIsLoading }) {
 }
 
 export async function getStaticProps() {
-    const posts = getAllPosts();
-    return { props: { posts } };
+    try {
+        // In Node.js environment, we need to use the fs module directly
+        // Import fs and path dynamically to keep them server-side only
+        const fs = await import('fs');
+        const path = await import('path');
+        const matter = await import('gray-matter');
+
+        const postsDirectory = path.default.join(process.cwd(), 'posts');
+        const filenames = fs.default.readdirSync(postsDirectory);
+
+        const posts = filenames
+            .filter(filename => filename.endsWith('.md'))
+            .map(filename => {
+                const slug = filename.replace(/\.md$/, '');
+                const fullPath = path.default.join(postsDirectory, filename);
+                const fileContents = fs.default.readFileSync(fullPath, 'utf8');
+                const { data } = matter.default(fileContents);
+
+                return {
+                    slug,
+                    frontMatter: data,
+                };
+            });
+
+        return {
+            props: { posts },
+            // Revalidate every hour
+            revalidate: 3600
+        };
+    } catch (error) {
+        console.error('Error in getStaticProps:', error);
+        return {
+            props: { posts: [] },
+            revalidate: 60 // Try again sooner if there was an error
+        };
+    }
 }
