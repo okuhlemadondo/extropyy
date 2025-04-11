@@ -3,10 +3,10 @@ id: "5"
 title: "Quantum Hypergraph Networks"
 author: "Okuhle Madondo"
 headshot: "/headshots/madondo.png"
-date: "2023-09-10"
+date: "2025-01-24"
 category: "Technology"
-image: "https://images.unsplash.com/photo-1588072432836-e10032774350"
-excerpt: "Not every edge is binary. Not every interaction is pairwise. Quantum hypergraphs ask: what if computation recognized that, natively?"
+image: "/images/hypergraph.jpg"
+excerpt: "Hypergraph-based architectures already outperform GNNs on multi-party tasks. Quantum implementations could take this further, using entanglement to model collective influence—faster, deeper, and natively parallel."
 ---
 
 The world of computation is a fascinating place, where ideas like hypergraphs, neural networks, and quantum mechanics can collide to spark something entirely new. Lately, I’ve been flirting the concept of Quantum Hypergraph Networks (QHNs)—a speculative blend of hypergraph theory, machine learning, and quantum computing that feels like it could push the boundaries of what’s possible. It’s not a fully formed technology yet, more of a tantalizing “what if,” but the thought of digging into it someday, maybe when quantum hardware catches up, has me quietly hooked. In this essay, I’ll unpack what QHNs might be, how they could work, and where they might make a difference, tossing in some rough math on how much faster they could run compared to what we’ve got now.

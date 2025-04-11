@@ -43,17 +43,13 @@ export default function About({ setIsLoading }) {
                     <div className="w-full md:w-2/3">
                         <h2 className="heading-font text-3xl font-bold mb-4">Okuhle Madondo</h2>
                         <p className="text-lg opacity-80 mb-4">Mathematics & Computer Science Student</p>
-                        <p className='mb-4'>Somewhere between equations and code, logic and language, I chase patterns—hidden structures that pulse beneath the surface of our world.</p>
+                        <p className='mb-4'>Welcome to Extropy, my corner of the internet where I explore the wild intersections of science, philosophy, code, and whatever else catches my curious mind. I like digging into big (and sometimes niche) questions—whether it’s how the universe ticks or why humans think the way we do. This site is my sandbox for sharing ideas, experiments, and reflections.</p>
 
-                        <p className='mb-4'>I have a restless mind, drawn to the strange and beautiful overlaps between the formal sciences, the applied sciences, philosophy, and the humanities. Not just as separate fields, but as instruments in a symphony that hums with deeper meaning. What begins as abstraction often ends in revelation.</p>
+                        <p className='mb-4'>Expect a bit of everything: some logic, theory, history, tech stuff, personal stuff, and maybe a dash of humor. I might toss in the occasional curse word for emphasis, so if that’s not your thing, fair warning. I'm not big on convention so I do tend to poke at beliefs—mine included—so if you’re not up for having your convictions nudged, you might want to tread lightly.</p>
 
-                        <p className='mb-4'>This site, Extropy, is my way of mapping that pursuit. It’s a space for those who suspect that reality is more than atoms and algorithms—that beneath complexity lies coherence, and that with the right tools, we might just glimpse it.</p>
+                        <p className='mb-4'>One big note: nothing here is advice—financial, medical, or otherwise. It’s just my thoughts, not gospel. Take it all with a grain of salt, do your own digging, and enjoy the ride.</p>
 
-                        <p className='mb-4'>I don’t claim to have "answers" or whatever. But I believe in following questions to the edge of what we know—and pushing beyond. Whether through code, theory, or reflection, I seek clarity in chaos and symmetry in the unexpected.</p>
-
-                        <p className='mb-4'>When I’m not sketching out ideas or decoding research papers, I’m usually lost in thought, appreciating the mundane, building something weird, or debating the metaphysics of existence over too much coffee.</p>
-
-                        <p className='mb-4'>Welcome to the labyrinth, anon.</p>
+                        <p className='mb-4'>Glad you’re here, anon. Let’s dive into the mess of ideas together.</p>
                     </div>
                 </div>
             </div>
@@ -63,7 +59,7 @@ export default function About({ setIsLoading }) {
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     <div className="p-6 rounded-xl" style={{ backgroundColor: 'var(--card-bg)' }}>
                         <h3 className="heading-font text-xl font-bold mb-3">Mathematics</h3>
-                        <p>Abstract algebra, mathematical logic, category theory, and the philosophy of mathematics.</p>
+                        <p>Discrete mathematics, probability theory, statistics, and decision theory (amongst other things).</p>
                     </div>
                     <div className="p-6 rounded-xl" style={{ backgroundColor: 'var(--card-bg)' }}>
                         <h3 className="heading-font text-xl font-bold mb-3">Computer Science</h3>
@@ -71,7 +67,7 @@ export default function About({ setIsLoading }) {
                     </div>
                     <div className="p-6 rounded-xl" style={{ backgroundColor: 'var(--card-bg)' }}>
                         <h3 className="heading-font text-xl font-bold mb-3">Philosophy</h3>
-                        <p>Philosophy of mind, epistemology, metaphysics, and the philosophical implications of scientific discoveries.</p>
+                        <p>Philosophy of science, epistemology, metaphysics, and the philosophical implications of technological advancements.</p>
                     </div>
                 </div>
             </div>
