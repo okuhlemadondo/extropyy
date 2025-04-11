@@ -3,9 +3,14 @@ import { useState, useEffect } from 'react';
 
 export default function FeaturedPost({ post }) {
     if (!post) return null;
-    const [isLargeScreen, setIsLargeScreen] = useState(false);
-    useEffect(() => {
 
+    const [isLargeScreen, setIsLargeScreen] = useState(false);
+    const [imageError, setImageError] = useState(false);
+
+    // Default image for posts with missing images
+    const defaultImage = '/images/default-featured.jpg';
+
+    useEffect(() => {
         // Check initial screen size
         setIsLargeScreen(window.innerWidth > 1023);
 
@@ -18,13 +23,17 @@ export default function FeaturedPost({ post }) {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    // Handle both old and new post formats
+    const postData = post.frontMatter || post;
+
     return (
         <div className="featured-post rounded-3xl overflow-hidden mb-16" style={{ backgroundColor: 'var(--card-bg)' }}>
             <div className="relative">
                 <img
-                    src={post.image}
-                    alt={post.title}
+                    src={imageError ? defaultImage : postData.image || defaultImage}
+                    alt={postData.title || 'Featured article'}
                     className="w-full object-cover"
+                    onError={() => setImageError(true)}
                     style={{
                         height: isLargeScreen ? '60vh' : '35vh'
                     }}
@@ -38,11 +47,11 @@ export default function FeaturedPost({ post }) {
                     `}
                     style={{ zIndex: 10 }}
                 >
-                    <span className="bg-white text-black px-3 py-1 rounded-full text-sm font-medium relative">{post.category}</span>
-                    <h2 className={`heading-font text-2xl md:text-5xl font-bold mt-4 ${isLargeScreen ? 'text-white' : 'text-black dark:text-white'} relative`}>{post.title}</h2>
-                    <p className={`mt-4 text-lg opacity-90 max-w-3xl ${isLargeScreen ? 'text-white' : 'text-black dark:text-white'} relative`}>{post.excerpt}</p>
+                    <span className="bg-white text-black px-3 py-1 rounded-full text-sm font-medium relative">{postData.category || 'Uncategorized'}</span>
+                    <h2 className={`heading-font text-2xl md:text-5xl font-bold mt-4 ${isLargeScreen ? 'text-white' : 'text-black dark:text-white'} relative`}>{postData.title || 'Untitled Article'}</h2>
+                    <p className={`mt-4 text-lg opacity-90 max-w-3xl ${isLargeScreen ? 'text-white' : 'text-black dark:text-white'} relative`}>{postData.excerpt || 'No excerpt available'}</p>
                     <Link
-                        href={`/articles/${post.id}`}
+                        href={`/articles/${post.slug}`}
                         className="inline-block mt-4 md:mt-6 px-6 py-2 md:py-3 bg-white text-black rounded-full font-medium transition hover:bg-gray-200 relative"
                     >
                         Read Article

@@ -1126,7 +1126,19 @@ function getPostBySlug(slug) {
 }
 function getSortedPosts() {
     const posts = getAllPosts();
-    return posts.sort((a, b)=>new Date(b.date) - new Date(a.date));
+    const now = new Date();
+    // Filter out posts with future dates
+    const publishedPosts = posts.filter((post)=>{
+        const postDate = new Date(post.date);
+        const isPublished = postDate <= now;
+        // Log future posts that are being filtered out
+        if (!isPublished) {
+            console.log(`Filtering out future-dated post: "${post.title}" (Date: ${post.date})`);
+        }
+        return isPublished;
+    });
+    // Sort by date, newest first
+    return publishedPosts.sort((a, b)=>new Date(b.date) - new Date(a.date));
 }
 module.exports = {
     getAllPosts,
@@ -1153,6 +1165,9 @@ var __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$
 function FeaturedPost({ post }) {
     if (!post) return null;
     const [isLargeScreen, setIsLargeScreen] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])(false);
+    const [imageError, setImageError] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])(false);
+    // Default image for posts with missing images
+    const defaultImage = '/images/default-featured.jpg';
     (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useEffect"])(()=>{
         // Check initial screen size
         setIsLargeScreen(window.innerWidth > 1023);
@@ -1163,6 +1178,8 @@ function FeaturedPost({ post }) {
         window.addEventListener('resize', handleResize);
         return ()=>window.removeEventListener('resize', handleResize);
     }, []);
+    // Handle both old and new post formats
+    const postData = post.frontMatter || post;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
         className: "featured-post rounded-3xl overflow-hidden mb-16",
         style: {
@@ -1172,15 +1189,16 @@ function FeaturedPost({ post }) {
             className: "relative",
             children: [
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("img", {
-                    src: post.image,
-                    alt: post.title,
+                    src: imageError ? defaultImage : postData.image || defaultImage,
+                    alt: postData.title || 'Featured article',
                     className: "w-full object-cover",
+                    onError: ()=>setImageError(true),
                     style: {
                         height: isLargeScreen ? '60vh' : '35vh'
                     }
                 }, void 0, false, {
                     fileName: "[project]/components/FeaturedPost.js",
-                    lineNumber: 24,
+                    lineNumber: 32,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -1195,52 +1213,52 @@ function FeaturedPost({ post }) {
                     children: [
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
                             className: "bg-white text-black px-3 py-1 rounded-full text-sm font-medium relative",
-                            children: post.category
+                            children: postData.category || 'Uncategorized'
                         }, void 0, false, {
                             fileName: "[project]/components/FeaturedPost.js",
-                            lineNumber: 41,
+                            lineNumber: 50,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h2", {
                             className: `heading-font text-2xl md:text-5xl font-bold mt-4 ${isLargeScreen ? 'text-white' : 'text-black dark:text-white'} relative`,
-                            children: post.title
+                            children: postData.title || 'Untitled Article'
                         }, void 0, false, {
                             fileName: "[project]/components/FeaturedPost.js",
-                            lineNumber: 42,
+                            lineNumber: 51,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
                             className: `mt-4 text-lg opacity-90 max-w-3xl ${isLargeScreen ? 'text-white' : 'text-black dark:text-white'} relative`,
-                            children: post.excerpt
+                            children: postData.excerpt || 'No excerpt available'
                         }, void 0, false, {
                             fileName: "[project]/components/FeaturedPost.js",
-                            lineNumber: 43,
+                            lineNumber: 52,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
-                            href: `/articles/${post.id}`,
+                            href: `/articles/${post.slug}`,
                             className: "inline-block mt-4 md:mt-6 px-6 py-2 md:py-3 bg-white text-black rounded-full font-medium transition hover:bg-gray-200 relative",
                             children: "Read Article"
                         }, void 0, false, {
                             fileName: "[project]/components/FeaturedPost.js",
-                            lineNumber: 44,
+                            lineNumber: 53,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/FeaturedPost.js",
-                    lineNumber: 33,
+                    lineNumber: 42,
                     columnNumber: 17
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/components/FeaturedPost.js",
-            lineNumber: 23,
+            lineNumber: 31,
             columnNumber: 13
         }, this)
     }, void 0, false, {
         fileName: "[project]/components/FeaturedPost.js",
-        lineNumber: 22,
+        lineNumber: 30,
         columnNumber: 9
     }, this);
 }
@@ -1254,12 +1272,22 @@ __turbopack_context__.s({
     "formatDate": (()=>formatDate)
 });
 function formatDate(dateString) {
-    const options = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+    try {
+        // Check if dateString is valid
+        if (!dateString) return 'No date provided';
+        const date = new Date(dateString);
+        // Check if date is valid
+        if (isNaN(date.getTime())) return 'Invalid date format';
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        };
+        return date.toLocaleDateString(undefined, options);
+    } catch (error) {
+        console.error('Error formatting date:', error);
+        return 'Invalid date';
+    }
 }
 }}),
 "[project]/components/ArticleCard.js [ssr] (ecmascript)": ((__turbopack_context__) => {
@@ -1281,6 +1309,7 @@ var __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$
 function ArticleCard({ article, dataDelay }) {
     const cardRef = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useRef"])(null);
     const [isVisible, setIsVisible] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])(false);
+    const [imageError, setImageError] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])(false);
     // Ensure visibility with useEffect
     (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useEffect"])(()=>{
         // Initial render delay to ensure animation works
@@ -1293,6 +1322,8 @@ function ArticleCard({ article, dataDelay }) {
     ]);
     // Handle both old and new post formats
     const postData = article.frontMatter || article;
+    // Default image for posts with missing images
+    const defaultImage = '/images/default-article.jpg';
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
         ref: cardRef,
         className: "article-card rounded-3xl overflow-hidden flex flex-col h-full",
@@ -1309,22 +1340,23 @@ function ArticleCard({ article, dataDelay }) {
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
                     href: `/articles/${article.slug}`,
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("img", {
-                        src: postData.image,
-                        alt: postData.title,
-                        className: "w-full h-full object-cover"
+                        src: imageError ? defaultImage : postData.image || defaultImage,
+                        alt: postData.title || 'Article image',
+                        className: "w-full h-full object-cover",
+                        onError: ()=>setImageError(true)
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 36,
+                        lineNumber: 40,
                         columnNumber: 21
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/components/ArticleCard.js",
-                    lineNumber: 35,
+                    lineNumber: 39,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/ArticleCard.js",
-                lineNumber: 34,
+                lineNumber: 38,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -1332,25 +1364,25 @@ function ArticleCard({ article, dataDelay }) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
                         className: "text-sm font-medium opacity-70",
-                        children: postData.category
+                        children: postData.category || 'Uncategorized'
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 40,
+                        lineNumber: 49,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
                         href: `/articles/${article.slug}`,
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h3", {
                             className: "heading-font text-xl font-bold mt-2 hover:text-gray-200 dark:hover:text-gray-500 transition-colors duration-300",
-                            children: postData.title
+                            children: postData.title || 'Untitled Article'
                         }, void 0, false, {
                             fileName: "[project]/components/ArticleCard.js",
-                            lineNumber: 42,
+                            lineNumber: 51,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 41,
+                        lineNumber: 50,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -1358,15 +1390,15 @@ function ArticleCard({ article, dataDelay }) {
                         children: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$date$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["formatDate"])(postData.date)
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 44,
+                        lineNumber: 53,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
                         className: "mt-3 flex-grow",
-                        children: postData.excerpt
+                        children: postData.excerpt || 'No excerpt available'
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 45,
+                        lineNumber: 54,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -1381,30 +1413,30 @@ function ArticleCard({ article, dataDelay }) {
                                     children: "→"
                                 }, void 0, false, {
                                     fileName: "[project]/components/ArticleCard.js",
-                                    lineNumber: 48,
+                                    lineNumber: 57,
                                     columnNumber: 35
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/ArticleCard.js",
-                            lineNumber: 47,
+                            lineNumber: 56,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 46,
+                        lineNumber: 55,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/ArticleCard.js",
-                lineNumber: 39,
+                lineNumber: 48,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/ArticleCard.js",
-        lineNumber: 23,
+        lineNumber: 27,
         columnNumber: 9
     }, this);
 }
@@ -1439,8 +1471,23 @@ var __TURBOPACK__imported__module__$5b$externals$5d2f$gsap__$5b$external$5d$__$2
 ;
 ;
 function Home({ posts, setIsLoading }) {
-    const featuredPost = posts.find((p)=>p.featured) || posts[0];
-    const recentPosts = posts.filter((p)=>p.id !== featuredPost.id).slice(0, 3);
+    // Handle both frontMatter format and direct properties
+    const processedPosts = posts.map((post)=>{
+        // If post has frontMatter, use it, otherwise use the post directly
+        const postData = post.frontMatter || post;
+        return {
+            ...post,
+            title: postData.title,
+            date: postData.date,
+            category: postData.category || 'Uncategorized',
+            image: postData.image,
+            excerpt: postData.excerpt,
+            slug: post.slug || generateSlug(postData.title),
+            featured: postData.featured
+        };
+    });
+    const featuredPost = processedPosts.find((p)=>p.featured) || processedPosts[0];
+    const recentPosts = processedPosts.filter((p)=>p.slug !== featuredPost.slug).slice(0, 3);
     (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useEffect"])(()=>{
         setIsLoading(true);
         setTimeout(()=>{
@@ -1473,6 +1520,14 @@ function Home({ posts, setIsLoading }) {
             });
         });
     }
+    // Helper function to generate a slug if needed
+    function generateSlug(text) {
+        if (!text) return '';
+        return text.toLowerCase().replace(/[^\w\s-]/g, '') // Remove special characters
+        .replace(/\s+/g, '-') // Replace spaces with hyphens
+        .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+        .trim(); // Remove whitespace from ends
+    }
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("section", {
         className: "mb-20",
         children: [
@@ -1484,7 +1539,7 @@ function Home({ posts, setIsLoading }) {
                         children: "EXTROPY"
                     }, void 0, false, {
                         fileName: "[project]/pages/index.js",
-                        lineNumber: 50,
+                        lineNumber: 79,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
@@ -1492,20 +1547,20 @@ function Home({ posts, setIsLoading }) {
                         children: '"Ideas are the only structures that outlive stone."'
                     }, void 0, false, {
                         fileName: "[project]/pages/index.js",
-                        lineNumber: 51,
+                        lineNumber: 80,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/pages/index.js",
-                lineNumber: 49,
+                lineNumber: 78,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$FeaturedPost$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
                 post: featuredPost
             }, void 0, false, {
                 fileName: "[project]/pages/index.js",
-                lineNumber: 55,
+                lineNumber: 84,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -1516,7 +1571,7 @@ function Home({ posts, setIsLoading }) {
                         children: "Recent Articles"
                     }, void 0, false, {
                         fileName: "[project]/pages/index.js",
-                        lineNumber: 57,
+                        lineNumber: 86,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -1524,31 +1579,42 @@ function Home({ posts, setIsLoading }) {
                         children: recentPosts.map((post, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ArticleCard$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
                                 article: post,
                                 dataDelay: index * 150
-                            }, post.id, false, {
+                            }, post.slug, false, {
                                 fileName: "[project]/pages/index.js",
-                                lineNumber: 60,
+                                lineNumber: 89,
                                 columnNumber: 25
                             }, this))
                     }, void 0, false, {
                         fileName: "[project]/pages/index.js",
-                        lineNumber: 58,
+                        lineNumber: 87,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/pages/index.js",
-                lineNumber: 56,
+                lineNumber: 85,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/pages/index.js",
-        lineNumber: 48,
+        lineNumber: 77,
         columnNumber: 9
     }, this);
 }
 async function getStaticProps() {
+    // Get posts from both the old and new systems
     const posts = (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$articles$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["getSortedPosts"])();
+    // Debug if any posts are missing required fields
+    posts.forEach((post)=>{
+        const data = post.frontMatter || post;
+        if (!data.image) {
+            console.warn(`Post "${post.slug || post.id}" is missing an image`);
+        }
+        if (!data.date) {
+            console.warn(`Post "${post.slug || post.id}" is missing a date`);
+        }
+    });
     return {
         props: {
             posts

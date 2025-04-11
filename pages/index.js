@@ -5,8 +5,26 @@ import ArticleCard from '../components/ArticleCard';
 import { gsap } from 'gsap';
 
 export default function Home({ posts, setIsLoading }) {
-    const featuredPost = posts.find((p) => p.featured) || posts[0];
-    const recentPosts = posts.filter((p) => p.id !== featuredPost.id).slice(0, 3);
+    // Handle both frontMatter format and direct properties
+    const processedPosts = posts.map(post => {
+        // If post has frontMatter, use it, otherwise use the post directly
+        const postData = post.frontMatter || post;
+        return {
+            ...post,
+            title: postData.title,
+            date: postData.date,
+            category: postData.category || 'Uncategorized',
+            image: postData.image,
+            excerpt: postData.excerpt,
+            slug: post.slug || generateSlug(postData.title),
+            featured: postData.featured
+        };
+    });
+
+    const featuredPost = processedPosts.find((p) => p.featured) || processedPosts[0];
+    const recentPosts = processedPosts
+        .filter((p) => p.slug !== featuredPost.slug)
+        .slice(0, 3);
 
     useEffect(() => {
         setIsLoading(true);
@@ -44,6 +62,17 @@ export default function Home({ posts, setIsLoading }) {
         });
     }
 
+    // Helper function to generate a slug if needed
+    function generateSlug(text) {
+        if (!text) return '';
+        return text
+            .toLowerCase()
+            .replace(/[^\w\s-]/g, '') // Remove special characters
+            .replace(/\s+/g, '-')     // Replace spaces with hyphens
+            .replace(/-+/g, '-')      // Replace multiple hyphens with single hyphen
+            .trim();                  // Remove whitespace from ends
+    }
+
     return (
         <section className="mb-20">
             <div className="text-center mb-16 fade-in">
@@ -57,7 +86,7 @@ export default function Home({ posts, setIsLoading }) {
                 <h2 className="heading-font text-3xl font-bold mb-8">Recent Articles</h2>
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
                     {recentPosts.map((post, index) => (
-                        <ArticleCard key={post.id} article={post} dataDelay={index * 150} />
+                        <ArticleCard key={post.slug} article={post} dataDelay={index * 150} />
                     ))}
                 </div>
             </div>
@@ -66,6 +95,19 @@ export default function Home({ posts, setIsLoading }) {
 }
 
 export async function getStaticProps() {
+    // Get posts from both the old and new systems
     const posts = getSortedPosts();
+
+    // Debug if any posts are missing required fields
+    posts.forEach(post => {
+        const data = post.frontMatter || post;
+        if (!data.image) {
+            console.warn(`Post "${post.slug || post.id}" is missing an image`);
+        }
+        if (!data.date) {
+            console.warn(`Post "${post.slug || post.id}" is missing a date`);
+        }
+    });
+
     return { props: { posts } };
 }

@@ -761,12 +761,22 @@ __turbopack_context__.s({
     "formatDate": (()=>formatDate)
 });
 function formatDate(dateString) {
-    const options = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric'
-    };
-    return new Date(dateString).toLocaleDateString(undefined, options);
+    try {
+        // Check if dateString is valid
+        if (!dateString) return 'No date provided';
+        const date = new Date(dateString);
+        // Check if date is valid
+        if (isNaN(date.getTime())) return 'Invalid date format';
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        };
+        return date.toLocaleDateString(undefined, options);
+    } catch (error) {
+        console.error('Error formatting date:', error);
+        return 'Invalid date';
+    }
 }
 if (typeof globalThis.$RefreshHelpers$ === 'object' && globalThis.$RefreshHelpers !== null) {
     __turbopack_context__.k.registerExports(module, globalThis.$RefreshHelpers$);
@@ -793,6 +803,7 @@ function ArticleCard({ article, dataDelay }) {
     _s();
     const cardRef = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useRef"])(null);
     const [isVisible, setIsVisible] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])(false);
+    const [imageError, setImageError] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useState"])(false);
     // Ensure visibility with useEffect
     (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__["useEffect"])({
         "ArticleCard.useEffect": ()=>{
@@ -811,6 +822,8 @@ function ArticleCard({ article, dataDelay }) {
     ]);
     // Handle both old and new post formats
     const postData = article.frontMatter || article;
+    // Default image for posts with missing images
+    const defaultImage = '/images/default-article.jpg';
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
         ref: cardRef,
         className: "article-card rounded-3xl overflow-hidden flex flex-col h-full",
@@ -827,22 +840,23 @@ function ArticleCard({ article, dataDelay }) {
                 children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
                     href: `/articles/${article.slug}`,
                     children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                        src: postData.image,
-                        alt: postData.title,
-                        className: "w-full h-full object-cover"
+                        src: imageError ? defaultImage : postData.image || defaultImage,
+                        alt: postData.title || 'Article image',
+                        className: "w-full h-full object-cover",
+                        onError: ()=>setImageError(true)
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 36,
+                        lineNumber: 40,
                         columnNumber: 21
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/components/ArticleCard.js",
-                    lineNumber: 35,
+                    lineNumber: 39,
                     columnNumber: 17
                 }, this)
             }, void 0, false, {
                 fileName: "[project]/components/ArticleCard.js",
-                lineNumber: 34,
+                lineNumber: 38,
                 columnNumber: 13
             }, this),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -850,25 +864,25 @@ function ArticleCard({ article, dataDelay }) {
                 children: [
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
                         className: "text-sm font-medium opacity-70",
-                        children: postData.category
+                        children: postData.category || 'Uncategorized'
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 40,
+                        lineNumber: 49,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
                         href: `/articles/${article.slug}`,
                         children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h3", {
                             className: "heading-font text-xl font-bold mt-2 hover:text-gray-200 dark:hover:text-gray-500 transition-colors duration-300",
-                            children: postData.title
+                            children: postData.title || 'Untitled Article'
                         }, void 0, false, {
                             fileName: "[project]/components/ArticleCard.js",
-                            lineNumber: 42,
+                            lineNumber: 51,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 41,
+                        lineNumber: 50,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
@@ -876,15 +890,15 @@ function ArticleCard({ article, dataDelay }) {
                         children: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$date$2e$js__$5b$client$5d$__$28$ecmascript$29$__["formatDate"])(postData.date)
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 44,
+                        lineNumber: 53,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                         className: "mt-3 flex-grow",
-                        children: postData.excerpt
+                        children: postData.excerpt || 'No excerpt available'
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 45,
+                        lineNumber: 54,
                         columnNumber: 17
                     }, this),
                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
@@ -899,34 +913,34 @@ function ArticleCard({ article, dataDelay }) {
                                     children: "→"
                                 }, void 0, false, {
                                     fileName: "[project]/components/ArticleCard.js",
-                                    lineNumber: 48,
+                                    lineNumber: 57,
                                     columnNumber: 35
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/ArticleCard.js",
-                            lineNumber: 47,
+                            lineNumber: 56,
                             columnNumber: 21
                         }, this)
                     }, void 0, false, {
                         fileName: "[project]/components/ArticleCard.js",
-                        lineNumber: 46,
+                        lineNumber: 55,
                         columnNumber: 17
                     }, this)
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/ArticleCard.js",
-                lineNumber: 39,
+                lineNumber: 48,
                 columnNumber: 13
             }, this)
         ]
     }, void 0, true, {
         fileName: "[project]/components/ArticleCard.js",
-        lineNumber: 23,
+        lineNumber: 27,
         columnNumber: 9
     }, this);
 }
-_s(ArticleCard, "nYgjwsKtvLdmjP2mHShow/lH2zA=");
+_s(ArticleCard, "jOz9VNHwkcRVSAKkNuzZQXiTU9Q=");
 _c = ArticleCard;
 var _c;
 __turbopack_context__.k.register(_c, "ArticleCard");

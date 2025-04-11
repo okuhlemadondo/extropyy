@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 export default function ArticleCard({ article, dataDelay }) {
     const cardRef = useRef(null);
     const [isVisible, setIsVisible] = useState(false);
+    const [imageError, setImageError] = useState(false);
 
     // Ensure visibility with useEffect
     useEffect(() => {
@@ -18,6 +19,9 @@ export default function ArticleCard({ article, dataDelay }) {
 
     // Handle both old and new post formats
     const postData = article.frontMatter || article;
+
+    // Default image for posts with missing images
+    const defaultImage = '/images/default-article.jpg';
 
     return (
         <div
@@ -33,16 +37,21 @@ export default function ArticleCard({ article, dataDelay }) {
         >
             <div className="relative h-48">
                 <Link href={`/articles/${article.slug}`}>
-                    <img src={postData.image} alt={postData.title} className="w-full h-full object-cover" />
+                    <img
+                        src={imageError ? defaultImage : postData.image || defaultImage}
+                        alt={postData.title || 'Article image'}
+                        className="w-full h-full object-cover"
+                        onError={() => setImageError(true)}
+                    />
                 </Link>
             </div>
             <div className="p-6 flex flex-col flex-grow">
-                <span className="text-sm font-medium opacity-70">{postData.category}</span>
+                <span className="text-sm font-medium opacity-70">{postData.category || 'Uncategorized'}</span>
                 <Link href={`/articles/${article.slug}`}>
-                    <h3 className="heading-font text-xl font-bold mt-2 hover:text-gray-200 dark:hover:text-gray-500 transition-colors duration-300">{postData.title}</h3>
+                    <h3 className="heading-font text-xl font-bold mt-2 hover:text-gray-200 dark:hover:text-gray-500 transition-colors duration-300">{postData.title || 'Untitled Article'}</h3>
                 </Link>
                 <p className="mt-3 text-sm opacity-70">{formatDate(postData.date)}</p>
-                <p className="mt-3 flex-grow">{postData.excerpt}</p>
+                <p className="mt-3 flex-grow">{postData.excerpt || 'No excerpt available'}</p>
                 <div className="mt-auto pt-4">
                     <Link href={`/articles/${article.slug}`} className="inline-flex items-center text-sm font-medium hover:text-gray-200 dark:hover:text-gray-500 transition-colors duration-300">
                         Read More <span className="ml-1">→</span>
