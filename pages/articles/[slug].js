@@ -66,17 +66,48 @@ export async function getStaticPaths() {
         // Import fs and path dynamically to keep them server-side only
         const fs = await import('fs');
         const path = await import('path');
+        const matter = await import('gray-matter');
 
         const postsDirectory = path.default.join(process.cwd(), 'posts');
         const filenames = fs.default.readdirSync(postsDirectory);
 
-        const paths = filenames
+        // Helper function to generate a slug from title
+        function generateSlug(text) {
+            if (!text) return '';
+            return text
+                .toLowerCase()
+                .replace(/[^\w\s-]/g, '') // Remove special characters
+                .replace(/\s+/g, '-')     // Replace spaces with hyphens
+                .replace(/-+/g, '-')      // Replace multiple hyphens with single hyphen
+                .trim();                  // Remove whitespace from ends
+        }
+
+        const paths = [];
+
+        filenames
             .filter(filename => filename.endsWith('.md'))
-            .map(filename => ({
-                params: {
-                    slug: filename.replace(/\.md$/, '')
+            .forEach(filename => {
+                // Add path for filename-based slug
+                const filenameSlug = filename.replace(/\.md$/, '');
+                paths.push({ params: { slug: filenameSlug } });
+
+                // Also add path for title-based slug if it's different
+                try {
+                    const fullPath = path.default.join(postsDirectory, filename);
+                    const fileContents = fs.default.readFileSync(fullPath, 'utf8');
+                    const { data } = matter.default(fileContents);
+
+                    if (data.title) {
+                        const titleSlug = generateSlug(data.title);
+                        // Only add if different from filename slug and not already in paths
+                        if (titleSlug !== filenameSlug && !paths.some(p => p.params.slug === titleSlug)) {
+                            paths.push({ params: { slug: titleSlug } });
+                        }
+                    }
+                } catch (error) {
+                    console.error(`Error processing file ${filename}:`, error);
                 }
-            }));
+            });
 
         return { paths, fallback: 'blocking' };
     } catch (error) {
@@ -100,11 +131,44 @@ export async function getStaticProps({ params }) {
         const rehypeAutolinkHeadings = (await import('rehype-autolink-headings')).default;
 
         const postsDirectory = path.default.join(process.cwd(), 'posts');
-        const fullPath = path.default.join(postsDirectory, `${params.slug}.md`);
+        const requestedSlug = params.slug;
 
-        // Check if the file exists
+        // Helper function to generate slug from title
+        function generateSlug(text) {
+            if (!text) return '';
+            return text
+                .toLowerCase()
+                .replace(/[^\w\s-]/g, '') // Remove special characters
+                .replace(/\s+/g, '-')     // Replace spaces with hyphens
+                .replace(/-+/g, '-')      // Replace multiple hyphens with single hyphen
+                .trim();                  // Remove whitespace from ends
+        }
+
+        // First try to find a file that matches the slug directly
+        let fullPath = path.default.join(postsDirectory, `${requestedSlug}.md`);
+
+        // If direct match file doesn't exist, try to find by title-based slug
         if (!fs.default.existsSync(fullPath)) {
-            return { notFound: true };
+            // Check all md files and match by title-based slug
+            const filenames = fs.default.readdirSync(postsDirectory);
+            let matchingFile = null;
+
+            for (const filename of filenames.filter(f => f.endsWith('.md'))) {
+                const filePath = path.default.join(postsDirectory, filename);
+                const fileContents = fs.default.readFileSync(filePath, 'utf8');
+                const { data } = matter.default(fileContents);
+
+                if (data.title && generateSlug(data.title) === requestedSlug) {
+                    matchingFile = filename;
+                    break;
+                }
+            }
+
+            if (matchingFile) {
+                fullPath = path.default.join(postsDirectory, matchingFile);
+            } else {
+                return { notFound: true };
+            }
         }
 
         // Read and parse the markdown file
