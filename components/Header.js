@@ -1,11 +1,25 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, forwardRef } from 'react';
 import Link from 'next/link';
 
-export default function Header({ onSearch, darkMode, toggleDarkMode }) {
+const Header = forwardRef(function Header({ onSearch, darkMode, toggleDarkMode }, ref) {
     const [searchTerm, setSearchTerm] = useState('');
     // Variable for the left margin of navigation links - 2rem = 32px
     const navLeftMargin = '15vw';
     const [isLargeScreen, setIsLargeScreen] = useState(false);
+    const [isVisible, setIsVisible] = useState(true);
+    const [scrollY, setScrollY] = useState(0);
+    const innerRef = useRef(null);
+    const headerHeight = useRef(0);
+
+    // Combine refs
+    const combinedRef = (node) => {
+        innerRef.current = node;
+        if (typeof ref === 'function') {
+            ref(node);
+        } else if (ref) {
+            ref.current = node;
+        }
+    };
 
     // Effect to detect screen size
     useEffect(() => {
@@ -21,6 +35,32 @@ export default function Header({ onSearch, darkMode, toggleDarkMode }) {
         return () => window.removeEventListener('resize', handleResize);
     }, []);
 
+    // Effect to handle the sticky header behavior
+    useEffect(() => {
+        if (!innerRef.current) return;
+
+        // Store the header height for calculations
+        headerHeight.current = innerRef.current.offsetHeight;
+
+        const handleScroll = () => {
+            const currentScrollY = window.scrollY;
+
+            // Make header visible at the top of the page
+            if (currentScrollY < headerHeight.current) {
+                setIsVisible(true);
+                setScrollY(currentScrollY);
+                return;
+            }
+
+            // Hide header when scrolling down, show when scrolling up
+            setIsVisible(currentScrollY <= scrollY || currentScrollY <= 100);
+            setScrollY(currentScrollY);
+        };
+
+        window.addEventListener('scroll', handleScroll, { passive: true });
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [scrollY]);
+
     const handleSearch = (e) => {
         if (e.key === 'Enter') {
             onSearch(searchTerm);
@@ -34,7 +74,11 @@ export default function Header({ onSearch, darkMode, toggleDarkMode }) {
     };
 
     return (
-        <header className="py-6 px-6 md:px-12 border-b border-gray-800 dark:border-gray-200 sticky top-0 bg-opacity-80 backdrop-filter backdrop-blur-lg z-15">
+        <header
+            ref={combinedRef}
+            className={`py-6 px-6 md:px-12 border-b border-gray-800 dark:border-gray-200 fixed top-0 left-0 right-0 bg-white dark:bg-black bg-opacity-90 dark:bg-opacity-90 backdrop-filter backdrop-blur-lg z-50 transition-all duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'
+                }`}
+        >
             <div className="flex flex-col w-full">
                 {/* Main row with logo, nav, and dark mode toggle */}
                 <div className="flex items-center justify-between w-full">
@@ -148,15 +192,10 @@ export default function Header({ onSearch, darkMode, toggleDarkMode }) {
                             </svg>
                         </button>
                     </div>
-                    {/* Single dark mode toggle for mobile 
-                    <div className="flex justify-center mt-4">
-                        <label className="toggle-switch">
-                            <input type="checkbox" id="dark-mode-toggle-mobile" checked={darkMode} onChange={toggleDarkMode} />
-                            <span className="toggle-slider"></span>
-                        </label>
-                    </div> */}
                 </div>
             </div>
         </header>
     );
-}
+});
+
+export default Header;

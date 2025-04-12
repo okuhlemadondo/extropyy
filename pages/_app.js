@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useRouter } from 'next/router';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -15,12 +15,33 @@ import '../styles/mdx.css';
 function MyApp({ Component, pageProps }) {
     const [darkMode, setDarkMode] = useState(true);
     const [isLoading, setIsLoading] = useState(false);
+    const [headerHeight, setHeaderHeight] = useState(0);
+    const headerRef = useRef(null);
     const router = useRouter();
 
     useEffect(() => {
         document.body.classList.add(darkMode ? 'dark-mode' : 'light-mode');
         document.body.classList.remove(darkMode ? 'light-mode' : 'dark-mode');
     }, [darkMode]);
+
+    // Effect to measure header height and update on resize
+    useEffect(() => {
+        if (!headerRef.current) return;
+
+        const updateHeaderHeight = () => {
+            if (headerRef.current) {
+                setHeaderHeight(headerRef.current.offsetHeight);
+            }
+        };
+
+        // Initial measurement
+        updateHeaderHeight();
+
+        // Update on resize
+        window.addEventListener('resize', updateHeaderHeight);
+
+        return () => window.removeEventListener('resize', updateHeaderHeight);
+    }, []);
 
     const toggleDarkMode = () => setDarkMode(!darkMode);
 
@@ -39,8 +60,17 @@ function MyApp({ Component, pageProps }) {
             <Cursor />
             <LoadingScreen isLoading={isLoading} />
             <CanvasBackground />
-            <Header darkMode={darkMode} toggleDarkMode={toggleDarkMode} onSearch={handleSearch} />
-            <main id="page-content" className="container mx-auto px-6 py-12">
+            <Header
+                ref={headerRef}
+                darkMode={darkMode}
+                toggleDarkMode={toggleDarkMode}
+                onSearch={handleSearch}
+            />
+            <main
+                id="page-content"
+                className="container mx-auto px-6 py-12"
+                style={{ paddingTop: `calc(${headerHeight}px + 3rem)` }}
+            >
                 <Component {...pageProps} setIsLoading={setIsLoading} />
             </main>
             <Footer />
