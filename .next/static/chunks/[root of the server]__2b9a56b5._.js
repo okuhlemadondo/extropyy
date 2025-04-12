@@ -588,7 +588,7 @@ function About({ setIsLoading }) {
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
                                     className: "mb-4",
-                                    children: "Expect a bit of everything: some logic, theory, history, tech stuff, personal stuff, and maybe a dash of humor. I might toss in the occasional curse word for emphasis, so if that’s not your thing, fair warning. I'm not big on convention so I do tend to poke at beliefs—mine included—so if you’re not up for having your convictions nudged, you might want to tread lightly."
+                                    children: "Expect a bit of everything: some logic, theory, history, tech stuff, personal stuff, and maybe a dash of humor. I might toss in the occasional curse word for emphasis, so if that’s not your thing, fair warning. I'm not big on convention and I'm a huge fan of radical candor and truth-seeking, so a natural side effect of that is that I will poke at beliefs—mine included—so if you’re not up for having your convictions nudged, you might want to tread lightly (or simply don't read)."
                                 }, void 0, false, {
                                     fileName: "[project]/pages/about.js",
                                     lineNumber: 48,

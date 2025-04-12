@@ -45,7 +45,7 @@ export default function About({ setIsLoading }) {
                         <p className="text-lg opacity-80 mb-4">Mathematics & Computer Science Student</p>
                         <p className='mb-4'>Welcome to Extropy, my corner of the internet where I explore the wild intersections of science, philosophy, code, and whatever else catches my curious mind. I like digging into big (and sometimes niche) questions—whether it’s how the universe ticks or why humans think the way we do. This site is my sandbox for sharing ideas, experiments, and reflections.</p>
 
-                        <p className='mb-4'>Expect a bit of everything: some logic, theory, history, tech stuff, personal stuff, and maybe a dash of humor. I might toss in the occasional curse word for emphasis, so if that’s not your thing, fair warning. I'm not big on convention so I do tend to poke at beliefs—mine included—so if you’re not up for having your convictions nudged, you might want to tread lightly.</p>
+                        <p className='mb-4'>Expect a bit of everything: some logic, theory, history, tech stuff, personal stuff, and maybe a dash of humor. I might toss in the occasional curse word for emphasis, so if that’s not your thing, fair warning. I'm not big on convention and I'm a huge fan of radical candor and truth-seeking, so a natural side effect of that is that I will poke at beliefs—mine included—so if you’re not up for having your convictions nudged, you might want to tread lightly (or simply don't read).</p>
 
                         <p className='mb-4'>One big note: nothing here is advice—financial, medical, or otherwise. It’s just my thoughts, not gospel. Take it all with a grain of salt, do your own digging, and enjoy the ride.</p>
 
