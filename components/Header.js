@@ -76,8 +76,12 @@ const Header = forwardRef(function Header({ onSearch, darkMode, toggleDarkMode }
     return (
         <header
             ref={combinedRef}
-            className={`py-6 px-6 md:px-12 border-b border-gray-800 dark:border-gray-200 fixed top-0 left-0 right-0 bg-white dark:bg-black bg-opacity-90 dark:bg-opacity-90 backdrop-filter backdrop-blur-lg z-50 transition-all duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'
+            className={`py-6 px-6 md:px-12 border-b fixed top-0 left-0 right-0 bg-opacity-80 backdrop-filter backdrop-blur-lg z-50 transition-all duration-300 ${isVisible ? 'translate-y-0' : '-translate-y-full'
                 }`}
+            style={{
+                backgroundColor: darkMode ? 'var(--bg-dark)' : 'var(--bg-light)',
+                borderColor: darkMode ? '#333' : '#eaeaea'
+            }}
         >
             <div className="flex flex-col w-full">
                 {/* Main row with logo, nav, and dark mode toggle */}
@@ -113,7 +117,12 @@ const Header = forwardRef(function Header({ onSearch, darkMode, toggleDarkMode }
                                     type="text"
                                     id="search-input"
                                     placeholder="Search articles..."
-                                    className="search-input w-full py-2 px-4 rounded-l-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                                    className="search-input w-full py-2 px-4 rounded-l-full"
+                                    style={{
+                                        backgroundColor: darkMode ? '#333' : '#fff',
+                                        color: darkMode ? '#fff' : '#333',
+                                        borderColor: darkMode ? '#444' : '#ddd'
+                                    }}
                                     value={searchTerm}
                                     onChange={(e) => setSearchTerm(e.target.value)}
                                     onKeyPress={handleSearch}
@@ -141,7 +150,12 @@ const Header = forwardRef(function Header({ onSearch, darkMode, toggleDarkMode }
                         <input
                             type="text"
                             placeholder="Search articles..."
-                            className="search-input w-full py-2 px-4 rounded-l-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                            className="search-input w-full py-2 px-4 rounded-l-full"
+                            style={{
+                                backgroundColor: darkMode ? '#333' : '#fff',
+                                color: darkMode ? '#fff' : '#333',
+                                borderColor: darkMode ? '#444' : '#ddd'
+                            }}
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             onKeyPress={handleSearch}
@@ -174,7 +188,12 @@ const Header = forwardRef(function Header({ onSearch, darkMode, toggleDarkMode }
                         <input
                             type="text"
                             placeholder="Search articles..."
-                            className="search-input w-full py-2 px-4 rounded-l-full bg-white dark:bg-gray-800 text-gray-900 dark:text-white placeholder-gray-500 dark:placeholder-gray-400"
+                            className="search-input w-full py-2 px-4 rounded-l-full"
+                            style={{
+                                backgroundColor: darkMode ? '#333' : '#fff',
+                                color: darkMode ? '#fff' : '#333',
+                                borderColor: darkMode ? '#444' : '#ddd'
+                            }}
                             value={searchTerm}
                             onChange={(e) => setSearchTerm(e.target.value)}
                             onKeyPress={handleSearch}

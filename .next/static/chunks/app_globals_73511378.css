@@ -775,6 +775,11 @@
     border-width: 1px;
   }
 
+  .border-0 {
+    border-style: var(--tw-border-style);
+    border-width: 0;
+  }
+
   .border-t {
     border-top-style: var(--tw-border-style);
     border-top-width: 1px;
@@ -794,6 +799,10 @@
     border-color: currentColor;
   }
 
+  .border-gray-200 {
+    border-color: var(--color-gray-200);
+  }
+
   .border-gray-300 {
     border-color: var(--color-gray-300);
   }
@@ -804,6 +813,10 @@
 
   .bg-black {
     background-color: var(--color-black);
+  }
+
+  .bg-gray-100 {
+    background-color: var(--color-gray-100);
   }
 
   .bg-gray-200 {
@@ -998,6 +1011,10 @@
     color: var(--color-gray-500);
   }
 
+  .text-gray-800 {
+    color: var(--color-gray-800);
+  }
+
   .text-gray-900 {
     color: var(--color-gray-900);
   }
@@ -1141,6 +1158,12 @@
   }
 
   @media (hover: hover) {
+    .hover\:text-black:hover {
+      color: var(--color-black);
+    }
+  }
+
+  @media (hover: hover) {
     .hover\:text-gray-200:hover {
       color: var(--color-gray-200);
     }
@@ -1276,6 +1299,12 @@
   }
 
   @media (prefers-color-scheme: dark) {
+    .dark\:border-gray-800 {
+      border-color: var(--color-gray-800);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
     .dark\:bg-black {
       background-color: var(--color-black);
     }
@@ -1294,8 +1323,20 @@
   }
 
   @media (prefers-color-scheme: dark) {
+    .dark\:bg-gray-900 {
+      background-color: var(--color-gray-900);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
     .dark\:text-black {
       color: var(--color-black);
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    .dark\:text-gray-200 {
+      color: var(--color-gray-200);
     }
   }
 
@@ -1319,6 +1360,14 @@
     @media (hover: hover) {
       .dark\:hover\:text-gray-500:hover {
         color: var(--color-gray-500);
+      }
+    }
+  }
+
+  @media (prefers-color-scheme: dark) {
+    @media (hover: hover) {
+      .dark\:hover\:text-white:hover {
+        color: var(--color-white);
       }
     }
   }

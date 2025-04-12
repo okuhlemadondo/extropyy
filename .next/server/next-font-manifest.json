@@ -2,8 +2,7 @@
   "app": {},
   "appUsingSizeAdjust": false,
   "pages": {
-    "/_app": [],
-    "/articles/[slug]": []
+    "/_app": []
   },
   "pagesUsingSizeAdjust": false
 }

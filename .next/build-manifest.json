@@ -17,31 +17,6 @@
       "static/chunks/_5b1365bd._.css",
       "static/chunks/pages__app_5771e187._.js",
       "static/chunks/pages__app_6a8a72cd._.js"
-    ],
-    "/about": [
-      "static/chunks/node_modules_next_dist_eb81a647._.js",
-      "static/chunks/node_modules_react-dom_82bb97c6._.js",
-      "static/chunks/node_modules_1b7400a8._.js",
-      "static/chunks/[root of the server]__2b9a56b5._.js",
-      "static/chunks/pages_about_5771e187._.js",
-      "static/chunks/pages_about_de115c1d._.js"
-    ],
-    "/articles": [
-      "static/chunks/node_modules_next_4185f83a._.js",
-      "static/chunks/node_modules_react-dom_82bb97c6._.js",
-      "static/chunks/node_modules_1b7400a8._.js",
-      "static/chunks/[root of the server]__bdf1da0c._.js",
-      "static/chunks/pages_articles_index_5771e187.js",
-      "static/chunks/pages_articles_index_9a7c01fd.js"
-    ],
-    "/articles/[slug]": [
-      "static/chunks/node_modules_next_74fc0813._.js",
-      "static/chunks/node_modules_react-dom_82bb97c6._.js",
-      "static/chunks/node_modules_c3b8fb78._.js",
-      "static/chunks/[root of the server]__1c6d739f._.js",
-      "static/chunks/node_modules_0c79e38a._.css",
-      "static/chunks/pages_articles_[slug]_5771e187.js",
-      "static/chunks/pages_articles_[slug]_5fe5595f.js"
     ]
   },
   "devFiles": [],
