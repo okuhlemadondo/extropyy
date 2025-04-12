@@ -1158,12 +1158,6 @@
   }
 
   @media (hover: hover) {
-    .hover\:text-black:hover {
-      color: var(--color-black);
-    }
-  }
-
-  @media (hover: hover) {
     .hover\:text-gray-200:hover {
       color: var(--color-gray-200);
     }
@@ -1299,12 +1293,6 @@
   }
 
   @media (prefers-color-scheme: dark) {
-    .dark\:border-gray-800 {
-      border-color: var(--color-gray-800);
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
     .dark\:bg-black {
       background-color: var(--color-black);
     }
@@ -1323,20 +1311,8 @@
   }
 
   @media (prefers-color-scheme: dark) {
-    .dark\:bg-gray-900 {
-      background-color: var(--color-gray-900);
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
     .dark\:text-black {
       color: var(--color-black);
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    .dark\:text-gray-200 {
-      color: var(--color-gray-200);
     }
   }
 
@@ -1360,14 +1336,6 @@
     @media (hover: hover) {
       .dark\:hover\:text-gray-500:hover {
         color: var(--color-gray-500);
-      }
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
-    @media (hover: hover) {
-      .dark\:hover\:text-white:hover {
-        color: var(--color-white);
       }
     }
   }

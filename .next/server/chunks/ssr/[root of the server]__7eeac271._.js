@@ -1,10 +1,26 @@
 module.exports = {
 
+"[externals]/next/dist/compiled/next-server/pages.runtime.dev.js [external] (next/dist/compiled/next-server/pages.runtime.dev.js, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("next/dist/compiled/next-server/pages.runtime.dev.js", () => require("next/dist/compiled/next-server/pages.runtime.dev.js"));
+
+module.exports = mod;
+}}),
 "[externals]/react/jsx-dev-runtime [external] (react/jsx-dev-runtime, cjs)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
 const mod = __turbopack_context__.x("react/jsx-dev-runtime", () => require("react/jsx-dev-runtime"));
+
+module.exports = mod;
+}}),
+"[externals]/react/jsx-runtime [external] (react/jsx-runtime, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("react/jsx-runtime", () => require("react/jsx-runtime"));
 
 module.exports = mod;
 }}),
@@ -15,6 +31,125 @@ var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 const mod = __turbopack_context__.x("react", () => require("react"));
 
 module.exports = mod;
+}}),
+"[externals]/path [external] (path, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("path", () => require("path"));
+
+module.exports = mod;
+}}),
+"[externals]/next/dist/compiled/@opentelemetry/api [external] (next/dist/compiled/@opentelemetry/api, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("next/dist/compiled/@opentelemetry/api", () => require("next/dist/compiled/@opentelemetry/api"));
+
+module.exports = mod;
+}}),
+"[project]/pages/_document.js [ssr] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "default": (()=>Document)
+});
+var __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/react/jsx-dev-runtime [external] (react/jsx-dev-runtime, cjs)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$document$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/document.js [ssr] (ecmascript)");
+;
+;
+function Document() {
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$document$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["Html"], {
+        lang: "en",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$document$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["Head"], {
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("link", {
+                        rel: "icon",
+                        href: "/favicon.svg",
+                        type: "image/svg+xml"
+                    }, void 0, false, {
+                        fileName: "[project]/pages/_document.js",
+                        lineNumber: 8,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("link", {
+                        rel: "icon",
+                        href: "/favicon.png",
+                        type: "image/png"
+                    }, void 0, false, {
+                        fileName: "[project]/pages/_document.js",
+                        lineNumber: 9,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("link", {
+                        rel: "preconnect",
+                        href: "https://fonts.googleapis.com"
+                    }, void 0, false, {
+                        fileName: "[project]/pages/_document.js",
+                        lineNumber: 10,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("link", {
+                        rel: "preconnect",
+                        href: "https://fonts.gstatic.com",
+                        crossOrigin: "true"
+                    }, void 0, false, {
+                        fileName: "[project]/pages/_document.js",
+                        lineNumber: 11,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("link", {
+                        href: "https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&family=Space+Grotesk:wght@300;400;500;600;700&display=swap",
+                        rel: "stylesheet"
+                    }, void 0, false, {
+                        fileName: "[project]/pages/_document.js",
+                        lineNumber: 12,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("link", {
+                        rel: "stylesheet",
+                        href: "https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css",
+                        integrity: "sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI+WdtXRGWt2kTvGFasHpSy3SV",
+                        crossOrigin: "anonymous"
+                    }, void 0, false, {
+                        fileName: "[project]/pages/_document.js",
+                        lineNumber: 15,
+                        columnNumber: 17
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/pages/_document.js",
+                lineNumber: 6,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("body", {
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$document$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["Main"], {}, void 0, false, {
+                        fileName: "[project]/pages/_document.js",
+                        lineNumber: 20,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$document$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["NextScript"], {}, void 0, false, {
+                        fileName: "[project]/pages/_document.js",
+                        lineNumber: 21,
+                        columnNumber: 17
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/pages/_document.js",
+                lineNumber: 19,
+                columnNumber: 13
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/pages/_document.js",
+        lineNumber: 5,
+        columnNumber: 9
+    }, this);
+}
 }}),
 "[externals]/fs [external] (fs, cjs)": (function(__turbopack_context__) {
 
@@ -40,27 +175,11 @@ const mod = __turbopack_context__.x("zlib", () => require("zlib"));
 
 module.exports = mod;
 }}),
-"[externals]/react/jsx-runtime [external] (react/jsx-runtime, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("react/jsx-runtime", () => require("react/jsx-runtime"));
-
-module.exports = mod;
-}}),
 "[externals]/react-dom [external] (react-dom, cjs)": (function(__turbopack_context__) {
 
 var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
 {
 const mod = __turbopack_context__.x("react-dom", () => require("react-dom"));
-
-module.exports = mod;
-}}),
-"[externals]/next/dist/compiled/next-server/pages.runtime.dev.js [external] (next/dist/compiled/next-server/pages.runtime.dev.js, cjs)": (function(__turbopack_context__) {
-
-var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
-{
-const mod = __turbopack_context__.x("next/dist/compiled/next-server/pages.runtime.dev.js", () => require("next/dist/compiled/next-server/pages.runtime.dev.js"));
 
 module.exports = mod;
 }}),
@@ -1028,7 +1147,576 @@ function MyApp({ Component, pageProps }) {
 }
 const __TURBOPACK__default__export__ = MyApp;
 }}),
+"[externals]/gray-matter [external] (gray-matter, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("gray-matter", () => require("gray-matter"));
+
+module.exports = mod;
+}}),
+"[project]/lib/articles.js [ssr] (ecmascript)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+// Using server-only features
+const fs = __turbopack_context__.r("[externals]/fs [external] (fs, cjs)");
+const path = __turbopack_context__.r("[externals]/path [external] (path, cjs)");
+const matter = __turbopack_context__.r("[externals]/gray-matter [external] (gray-matter, cjs)");
+const postsDirectory = path.join(process.cwd(), 'posts');
+// Generate slug from string (title or filename)
+function generateSlug(text) {
+    return text.toLowerCase().replace(/[^\w\s-]/g, '') // Remove special characters
+    .replace(/\s+/g, '-') // Replace spaces with hyphens
+    .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+    .trim(); // Remove whitespace from ends
+}
+function getAllPosts() {
+    const fileNames = fs.readdirSync(postsDirectory);
+    const allPosts = fileNames.map((fileName)=>{
+        const id = fileName.replace(/\.md$/, '');
+        const fullPath = path.join(postsDirectory, fileName);
+        const fileContents = fs.readFileSync(fullPath, 'utf8');
+        const { data, content } = matter(fileContents);
+        // Normalize the category field
+        const normalizedData = {
+            ...data,
+            category: data.category ? data.category.trim() : 'Uncategorized'
+        };
+        // Generate a slug from the title or use the filename without extension as fallback
+        const slug = normalizedData.title ? generateSlug(normalizedData.title) : generateSlug(id);
+        return {
+            id: id,
+            slug: slug,
+            ...normalizedData,
+            content
+        };
+    });
+    return allPosts;
+}
+function getPostById(id) {
+    const posts = getAllPosts();
+    return posts.find((post)=>post.id === id);
+}
+function getPostBySlug(slug) {
+    const posts = getAllPosts();
+    return posts.find((post)=>post.slug === slug);
+}
+function getSortedPosts() {
+    const posts = getAllPosts();
+    const now = new Date();
+    // Filter out posts with future dates
+    const publishedPosts = posts.filter((post)=>{
+        const postDate = new Date(post.date);
+        const isPublished = postDate <= now;
+        // Log future posts that are being filtered out
+        if (!isPublished) {
+            console.log(`Filtering out future-dated post: "${post.title}" (Date: ${post.date})`);
+        }
+        return isPublished;
+    });
+    // Sort by date, newest first
+    return publishedPosts.sort((a, b)=>new Date(b.date) - new Date(a.date));
+}
+module.exports = {
+    getAllPosts,
+    getPostById,
+    getPostBySlug,
+    getSortedPosts,
+    generateSlug
+};
+}}),
+"[externals]/styled-jsx/style.js [external] (styled-jsx/style.js, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("styled-jsx/style.js", () => require("styled-jsx/style.js"));
+
+module.exports = mod;
+}}),
+"[project]/components/FeaturedPost.js [ssr] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "default": (()=>FeaturedPost)
+});
+var __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/react/jsx-dev-runtime [external] (react/jsx-dev-runtime, cjs)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$styled$2d$jsx$2f$style$2e$js__$5b$external$5d$__$28$styled$2d$jsx$2f$style$2e$js$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/styled-jsx/style.js [external] (styled-jsx/style.js, cjs)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/link.js [ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/react [external] (react, cjs)");
+;
+;
+;
+;
+function FeaturedPost({ post }) {
+    if (!post) return null;
+    const [isLargeScreen, setIsLargeScreen] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])(false);
+    const [imageError, setImageError] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])(false);
+    // Default image for posts with missing images
+    const defaultImage = '/images/default-featured.jpg';
+    (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useEffect"])(()=>{
+        // Check initial screen size
+        setIsLargeScreen(window.innerWidth > 1023);
+        // Update on resize
+        const handleResize = ()=>{
+            setIsLargeScreen(window.innerWidth > 1023);
+        };
+        window.addEventListener('resize', handleResize);
+        return ()=>window.removeEventListener('resize', handleResize);
+    }, []);
+    // Handle both old and new post formats
+    const postData = post.frontMatter || post;
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+        style: {
+            backgroundColor: 'var(--card-bg)'
+        },
+        className: "jsx-f5a7d5ce87212a4" + " " + "featured-post rounded-3xl overflow-hidden mb-16",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                className: "jsx-f5a7d5ce87212a4" + " " + "relative",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("img", {
+                        src: imageError ? defaultImage : postData.image || defaultImage,
+                        alt: postData.title || 'Featured article',
+                        onError: ()=>setImageError(true),
+                        style: {
+                            height: isLargeScreen ? '60vh' : '35vh'
+                        },
+                        className: "jsx-f5a7d5ce87212a4" + " " + "w-full object-cover"
+                    }, void 0, false, {
+                        fileName: "[project]/components/FeaturedPost.js",
+                        lineNumber: 32,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                        style: {
+                            zIndex: 10
+                        },
+                        className: "jsx-f5a7d5ce87212a4" + " " + `
+                        ${isLargeScreen ? 'absolute bottom-0 left-0' : 'relative'} 
+                        p-6 md:p-8 w-full
+                        ${isLargeScreen ? 'bg-gradient-to-t from-black/80 to-transparent' : ''}
+                    `,
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                                className: "jsx-f5a7d5ce87212a4" + " " + "bg-white text-black px-3 py-1 rounded-full text-sm font-medium relative",
+                                children: postData.category || 'Uncategorized'
+                            }, void 0, false, {
+                                fileName: "[project]/components/FeaturedPost.js",
+                                lineNumber: 50,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h2", {
+                                className: "jsx-f5a7d5ce87212a4" + " " + "featured-title heading-font text-2xl md:text-5xl font-bold mt-4 relative",
+                                children: postData.title || 'Untitled Article'
+                            }, void 0, false, {
+                                fileName: "[project]/components/FeaturedPost.js",
+                                lineNumber: 54,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                                className: "jsx-f5a7d5ce87212a4" + " " + "featured-excerpt mt-4 text-lg opacity-90 max-w-3xl relative",
+                                children: postData.excerpt || 'No excerpt available'
+                            }, void 0, false, {
+                                fileName: "[project]/components/FeaturedPost.js",
+                                lineNumber: 58,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                href: `/articles/${post.slug}`,
+                                className: "inline-block mt-4 md:mt-6 px-6 py-2 md:py-3 bg-white text-black rounded-full font-medium transition hover:bg-gray-200 relative",
+                                children: "Read Article"
+                            }, void 0, false, {
+                                fileName: "[project]/components/FeaturedPost.js",
+                                lineNumber: 62,
+                                columnNumber: 21
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/FeaturedPost.js",
+                        lineNumber: 42,
+                        columnNumber: 17
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/components/FeaturedPost.js",
+                lineNumber: 31,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$externals$5d2f$styled$2d$jsx$2f$style$2e$js__$5b$external$5d$__$28$styled$2d$jsx$2f$style$2e$js$2c$__cjs$29$__["default"], {
+                id: "f5a7d5ce87212a4",
+                children: ".featured-title.jsx-f5a7d5ce87212a4,.featured-excerpt.jsx-f5a7d5ce87212a4{color:#000}.dark-mode .featured-title.jsx-f5a7d5ce87212a4,.dark-mode .featured-excerpt.jsx-f5a7d5ce87212a4{color:#fff}@media (width>=1024px){.featured-title.jsx-f5a7d5ce87212a4,.featured-excerpt.jsx-f5a7d5ce87212a4{color:#fff!important}}"
+            }, void 0, false, void 0, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/components/FeaturedPost.js",
+        lineNumber: 30,
+        columnNumber: 9
+    }, this);
+}
+}}),
+"[project]/lib/date.js [ssr] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "formatDate": (()=>formatDate)
+});
+function formatDate(dateString) {
+    try {
+        // Check if dateString is valid
+        if (!dateString) return 'No date provided';
+        const date = new Date(dateString);
+        // Check if date is valid
+        if (isNaN(date.getTime())) return 'Invalid date format';
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric'
+        };
+        return date.toLocaleDateString(undefined, options);
+    } catch (error) {
+        console.error('Error formatting date:', error);
+        return 'Invalid date';
+    }
+}
+}}),
+"[project]/components/ArticleCard.js [ssr] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "default": (()=>ArticleCard)
+});
+var __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/react/jsx-dev-runtime [external] (react/jsx-dev-runtime, cjs)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/link.js [ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$date$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/date.js [ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/react [external] (react, cjs)");
+;
+;
+;
+;
+function ArticleCard({ article, dataDelay }) {
+    const cardRef = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useRef"])(null);
+    const [isVisible, setIsVisible] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])(false);
+    const [imageError, setImageError] = (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useState"])(false);
+    // Ensure visibility with useEffect
+    (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useEffect"])(()=>{
+        // Initial render delay to ensure animation works
+        const timer = setTimeout(()=>{
+            setIsVisible(true);
+        }, 500 + (dataDelay || 0));
+        return ()=>clearTimeout(timer);
+    }, [
+        dataDelay
+    ]);
+    // Handle both old and new post formats
+    const postData = article.frontMatter || article;
+    // Default image for posts with missing images
+    const defaultImage = '/images/default-article.jpg';
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+        ref: cardRef,
+        className: "article-card rounded-3xl overflow-hidden flex flex-col h-full",
+        style: {
+            backgroundColor: 'var(--card-bg)',
+            opacity: isVisible ? 1 : 0,
+            transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+            transition: 'opacity 0.6s ease, transform 0.6s ease',
+            transitionDelay: `${dataDelay || 0}ms`
+        },
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                className: "relative h-48",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
+                    href: `/articles/${article.slug}`,
+                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("img", {
+                        src: imageError ? defaultImage : postData.image || defaultImage,
+                        alt: postData.title || 'Article image',
+                        className: "w-full h-full object-cover",
+                        onError: ()=>setImageError(true)
+                    }, void 0, false, {
+                        fileName: "[project]/components/ArticleCard.js",
+                        lineNumber: 40,
+                        columnNumber: 21
+                    }, this)
+                }, void 0, false, {
+                    fileName: "[project]/components/ArticleCard.js",
+                    lineNumber: 39,
+                    columnNumber: 17
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/components/ArticleCard.js",
+                lineNumber: 38,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                className: "p-6 flex flex-col flex-grow",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                        className: "text-sm font-medium opacity-70",
+                        children: postData.category || 'Uncategorized'
+                    }, void 0, false, {
+                        fileName: "[project]/components/ArticleCard.js",
+                        lineNumber: 49,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
+                        href: `/articles/${article.slug}`,
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h3", {
+                            className: "heading-font text-xl font-bold mt-2 hover:text-gray-200 dark:hover:text-gray-500 transition-colors duration-300",
+                            children: postData.title || 'Untitled Article'
+                        }, void 0, false, {
+                            fileName: "[project]/components/ArticleCard.js",
+                            lineNumber: 51,
+                            columnNumber: 21
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/components/ArticleCard.js",
+                        lineNumber: 50,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                        className: "mt-3 text-sm opacity-70",
+                        children: (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$date$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["formatDate"])(postData.date)
+                    }, void 0, false, {
+                        fileName: "[project]/components/ArticleCard.js",
+                        lineNumber: 53,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                        className: "mt-3 flex-grow",
+                        children: postData.excerpt || 'No excerpt available'
+                    }, void 0, false, {
+                        fileName: "[project]/components/ArticleCard.js",
+                        lineNumber: 54,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                        className: "mt-auto pt-4",
+                        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
+                            href: `/articles/${article.slug}`,
+                            className: "inline-flex items-center text-sm font-medium hover:text-gray-200 dark:hover:text-gray-500 transition-colors duration-300",
+                            children: [
+                                "Read More ",
+                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
+                                    className: "ml-1",
+                                    children: "→"
+                                }, void 0, false, {
+                                    fileName: "[project]/components/ArticleCard.js",
+                                    lineNumber: 57,
+                                    columnNumber: 35
+                                }, this)
+                            ]
+                        }, void 0, true, {
+                            fileName: "[project]/components/ArticleCard.js",
+                            lineNumber: 56,
+                            columnNumber: 21
+                        }, this)
+                    }, void 0, false, {
+                        fileName: "[project]/components/ArticleCard.js",
+                        lineNumber: 55,
+                        columnNumber: 17
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/components/ArticleCard.js",
+                lineNumber: 48,
+                columnNumber: 13
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/components/ArticleCard.js",
+        lineNumber: 27,
+        columnNumber: 9
+    }, this);
+}
+}}),
+"[externals]/gsap [external] (gsap, cjs)": (function(__turbopack_context__) {
+
+var { g: global, __dirname, m: module, e: exports } = __turbopack_context__;
+{
+const mod = __turbopack_context__.x("gsap", () => require("gsap"));
+
+module.exports = mod;
+}}),
+"[project]/pages/index.js [ssr] (ecmascript)": ((__turbopack_context__) => {
+"use strict";
+
+var { g: global, __dirname } = __turbopack_context__;
+{
+__turbopack_context__.s({
+    "default": (()=>Home),
+    "getStaticProps": (()=>getStaticProps)
+});
+var __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/react/jsx-dev-runtime [external] (react/jsx-dev-runtime, cjs)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/react [external] (react, cjs)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$articles$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/articles.js [ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$FeaturedPost$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/FeaturedPost.js [ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ArticleCard$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/components/ArticleCard.js [ssr] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$externals$5d2f$gsap__$5b$external$5d$__$28$gsap$2c$__cjs$29$__ = __turbopack_context__.i("[externals]/gsap [external] (gsap, cjs)");
+;
+;
+;
+;
+;
+;
+function Home({ posts, setIsLoading }) {
+    // Handle both frontMatter format and direct properties
+    const processedPosts = posts.map((post)=>{
+        // If post has frontMatter, use it, otherwise use the post directly
+        const postData = post.frontMatter || post;
+        return {
+            ...post,
+            title: postData.title,
+            date: postData.date,
+            category: postData.category || 'Uncategorized',
+            image: postData.image,
+            excerpt: postData.excerpt,
+            slug: post.slug || generateSlug(postData.title),
+            featured: postData.featured
+        };
+    });
+    const featuredPost = processedPosts.find((p)=>p.featured) || processedPosts[0];
+    const recentPosts = processedPosts.filter((p)=>p.slug !== featuredPost.slug).slice(0, 3);
+    (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react__$5b$external$5d$__$28$react$2c$__cjs$29$__["useEffect"])(()=>{
+        setIsLoading(true);
+        setTimeout(()=>{
+            setIsLoading(false);
+            initAnimations();
+        }, 500);
+    }, [
+        setIsLoading
+    ]);
+    function initAnimations() {
+        // Fade in animations
+        const fadeElements = document.querySelectorAll('.fade-in');
+        fadeElements.forEach((element)=>{
+            setTimeout(()=>{
+                element.classList.add('visible');
+            }, 100);
+        });
+        // Staggered animations with GSAP
+        const staggerItems = document.querySelectorAll('.stagger-item');
+        staggerItems.forEach((item)=>{
+            __TURBOPACK__imported__module__$5b$externals$5d2f$gsap__$5b$external$5d$__$28$gsap$2c$__cjs$29$__["gsap"].fromTo(item, {
+                opacity: 0,
+                y: 20
+            }, {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                delay: (item.getAttribute('data-delay') || 0) / 1000,
+                ease: 'power2.out'
+            });
+        });
+    }
+    // Helper function to generate a slug if needed
+    function generateSlug(text) {
+        if (!text) return '';
+        return text.toLowerCase().replace(/[^\w\s-]/g, '') // Remove special characters
+        .replace(/\s+/g, '-') // Replace spaces with hyphens
+        .replace(/-+/g, '-') // Replace multiple hyphens with single hyphen
+        .trim(); // Remove whitespace from ends
+    }
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("section", {
+        className: "mb-20",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                className: "text-center mb-16 fade-in",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h1", {
+                        className: "heading-font text-5xl md:text-7xl font-bold mb-4",
+                        children: "EXTROPY"
+                    }, void 0, false, {
+                        fileName: "[project]/pages/index.js",
+                        lineNumber: 79,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("p", {
+                        className: "text-xl md:text-2xl max-w-3xl mx-auto opacity-70",
+                        children: '"Ideas are the only structures that outlive stone."'
+                    }, void 0, false, {
+                        fileName: "[project]/pages/index.js",
+                        lineNumber: 80,
+                        columnNumber: 17
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/pages/index.js",
+                lineNumber: 78,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$FeaturedPost$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
+                post: featuredPost
+            }, void 0, false, {
+                fileName: "[project]/pages/index.js",
+                lineNumber: 84,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                className: "mb-12 fade-in",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("h2", {
+                        className: "heading-font text-3xl font-bold mb-8",
+                        children: "Recent Articles"
+                    }, void 0, false, {
+                        fileName: "[project]/pages/index.js",
+                        lineNumber: 86,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
+                        className: "grid grid-cols-1 md:grid-cols-3 gap-8",
+                        children: recentPosts.map((post, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$components$2f$ArticleCard$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                article: post,
+                                dataDelay: index * 150
+                            }, post.slug, false, {
+                                fileName: "[project]/pages/index.js",
+                                lineNumber: 89,
+                                columnNumber: 25
+                            }, this))
+                    }, void 0, false, {
+                        fileName: "[project]/pages/index.js",
+                        lineNumber: 87,
+                        columnNumber: 17
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/pages/index.js",
+                lineNumber: 85,
+                columnNumber: 13
+            }, this)
+        ]
+    }, void 0, true, {
+        fileName: "[project]/pages/index.js",
+        lineNumber: 77,
+        columnNumber: 9
+    }, this);
+}
+async function getStaticProps() {
+    // Get posts from both the old and new systems
+    const posts = (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$articles$2e$js__$5b$ssr$5d$__$28$ecmascript$29$__["getSortedPosts"])();
+    // Debug if any posts are missing required fields
+    posts.forEach((post)=>{
+        const data = post.frontMatter || post;
+        if (!data.image) {
+            console.warn(`Post "${post.slug || post.id}" is missing an image`);
+        }
+        if (!data.date) {
+            console.warn(`Post "${post.slug || post.id}" is missing a date`);
+        }
+    });
+    return {
+        props: {
+            posts
+        }
+    };
+}
+}}),
 
 };
 
-//# sourceMappingURL=%5Broot%20of%20the%20server%5D__4d7fa1d6._.js.map
+//# sourceMappingURL=%5Broot%20of%20the%20server%5D__7eeac271._.js.map

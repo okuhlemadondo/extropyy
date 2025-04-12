@@ -47,9 +47,18 @@ export default function FeaturedPost({ post }) {
                     `}
                     style={{ zIndex: 10 }}
                 >
-                    <span className="bg-white text-black px-3 py-1 rounded-full text-sm font-medium relative">{postData.category || 'Uncategorized'}</span>
-                    <h2 className={`heading-font text-2xl md:text-5xl font-bold mt-4 ${isLargeScreen ? 'text-white' : 'text-black dark:text-white'} relative`}>{postData.title || 'Untitled Article'}</h2>
-                    <p className={`mt-4 text-lg opacity-90 max-w-3xl ${isLargeScreen ? 'text-white' : 'text-black dark:text-white'} relative`}>{postData.excerpt || 'No excerpt available'}</p>
+                    <span className="bg-white text-black px-3 py-1 rounded-full text-sm font-medium relative">
+                        {postData.category || 'Uncategorized'}
+                    </span>
+
+                    <h2 className="featured-title heading-font text-2xl md:text-5xl font-bold mt-4 relative">
+                        {postData.title || 'Untitled Article'}
+                    </h2>
+
+                    <p className="featured-excerpt mt-4 text-lg opacity-90 max-w-3xl relative">
+                        {postData.excerpt || 'No excerpt available'}
+                    </p>
+
                     <Link
                         href={`/articles/${post.slug}`}
                         className="inline-block mt-4 md:mt-6 px-6 py-2 md:py-3 bg-white text-black rounded-full font-medium transition hover:bg-gray-200 relative"
@@ -58,6 +67,25 @@ export default function FeaturedPost({ post }) {
                     </Link>
                 </div>
             </div>
+
+            <style jsx>{`
+                .featured-title,
+                .featured-excerpt {
+                    color: #000; /* Black text by default on mobile in light mode */
+                }
+                
+                :global(.dark-mode) .featured-title,
+                :global(.dark-mode) .featured-excerpt {
+                    color: #fff; /* White text in dark mode */
+                }
+                
+                @media (min-width: 1024px) {
+                    .featured-title, 
+                    .featured-excerpt {
+                        color: #fff !important; /* Always white on large screens due to gradient */
+                    }
+                }
+            `}</style>
         </div>
     );
 }

@@ -119,7 +119,7 @@ const Header = forwardRef(function Header({ onSearch, darkMode, toggleDarkMode }
                                     placeholder="Search articles..."
                                     className="search-input w-full py-2 px-4 rounded-l-full"
                                     style={{
-                                        backgroundColor: darkMode ? '#333' : '#fff',
+                                        backgroundColor: darkMode ? '#000' : '#fff',
                                         color: darkMode ? '#fff' : '#333',
                                         borderColor: darkMode ? '#444' : '#ddd'
                                     }}
@@ -152,7 +152,7 @@ const Header = forwardRef(function Header({ onSearch, darkMode, toggleDarkMode }
                             placeholder="Search articles..."
                             className="search-input w-full py-2 px-4 rounded-l-full"
                             style={{
-                                backgroundColor: darkMode ? '#333' : '#fff',
+                                backgroundColor: darkMode ? '#000' : '#fff',
                                 color: darkMode ? '#fff' : '#333',
                                 borderColor: darkMode ? '#444' : '#ddd'
                             }}
@@ -190,7 +190,7 @@ const Header = forwardRef(function Header({ onSearch, darkMode, toggleDarkMode }
                             placeholder="Search articles..."
                             className="search-input w-full py-2 px-4 rounded-l-full"
                             style={{
-                                backgroundColor: darkMode ? '#333' : '#fff',
+                                backgroundColor: darkMode ? '#000' : '#fff',
                                 color: darkMode ? '#fff' : '#333',
                                 borderColor: darkMode ? '#444' : '#ddd'
                             }}

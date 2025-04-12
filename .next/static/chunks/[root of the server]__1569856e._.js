@@ -471,10 +471,12 @@ __turbopack_context__.s({
     "default": (()=>FeaturedPost)
 });
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react/jsx-dev-runtime.js [client] (ecmascript)");
+var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/styled-jsx/style.js [client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/link.js [client] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$index$2e$js__$5b$client$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/react/index.js [client] (ecmascript)");
 ;
 var _s = __turbopack_context__.k.signature();
+;
 ;
 ;
 function FeaturedPost({ post }) {
@@ -503,82 +505,88 @@ function FeaturedPost({ post }) {
     // Handle both old and new post formats
     const postData = post.frontMatter || post;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "featured-post rounded-3xl overflow-hidden mb-16",
         style: {
             backgroundColor: 'var(--card-bg)'
         },
-        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "relative",
-            children: [
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
-                    src: imageError ? defaultImage : postData.image || defaultImage,
-                    alt: postData.title || 'Featured article',
-                    className: "w-full object-cover",
-                    onError: ()=>setImageError(true),
-                    style: {
-                        height: isLargeScreen ? '60vh' : '35vh'
-                    }
-                }, void 0, false, {
-                    fileName: "[project]/components/FeaturedPost.js",
-                    lineNumber: 32,
-                    columnNumber: 17
-                }, this),
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: `
+        className: "jsx-f5a7d5ce87212a4" + " " + "featured-post rounded-3xl overflow-hidden mb-16",
+        children: [
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "jsx-f5a7d5ce87212a4" + " " + "relative",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("img", {
+                        src: imageError ? defaultImage : postData.image || defaultImage,
+                        alt: postData.title || 'Featured article',
+                        onError: ()=>setImageError(true),
+                        style: {
+                            height: isLargeScreen ? '60vh' : '35vh'
+                        },
+                        className: "jsx-f5a7d5ce87212a4" + " " + "w-full object-cover"
+                    }, void 0, false, {
+                        fileName: "[project]/components/FeaturedPost.js",
+                        lineNumber: 32,
+                        columnNumber: 17
+                    }, this),
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        style: {
+                            zIndex: 10
+                        },
+                        className: "jsx-f5a7d5ce87212a4" + " " + `
                         ${isLargeScreen ? 'absolute bottom-0 left-0' : 'relative'} 
                         p-6 md:p-8 w-full
                         ${isLargeScreen ? 'bg-gradient-to-t from-black/80 to-transparent' : ''}
                     `,
-                    style: {
-                        zIndex: 10
-                    },
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                            className: "bg-white text-black px-3 py-1 rounded-full text-sm font-medium relative",
-                            children: postData.category || 'Uncategorized'
-                        }, void 0, false, {
-                            fileName: "[project]/components/FeaturedPost.js",
-                            lineNumber: 50,
-                            columnNumber: 21
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                            className: `heading-font text-2xl md:text-5xl font-bold mt-4 ${isLargeScreen ? 'text-white' : 'text-black dark:text-white'} relative`,
-                            children: postData.title || 'Untitled Article'
-                        }, void 0, false, {
-                            fileName: "[project]/components/FeaturedPost.js",
-                            lineNumber: 51,
-                            columnNumber: 21
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                            className: `mt-4 text-lg opacity-90 max-w-3xl ${isLargeScreen ? 'text-white' : 'text-black dark:text-white'} relative`,
-                            children: postData.excerpt || 'No excerpt available'
-                        }, void 0, false, {
-                            fileName: "[project]/components/FeaturedPost.js",
-                            lineNumber: 52,
-                            columnNumber: 21
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
-                            href: `/articles/${post.slug}`,
-                            className: "inline-block mt-4 md:mt-6 px-6 py-2 md:py-3 bg-white text-black rounded-full font-medium transition hover:bg-gray-200 relative",
-                            children: "Read Article"
-                        }, void 0, false, {
-                            fileName: "[project]/components/FeaturedPost.js",
-                            lineNumber: 53,
-                            columnNumber: 21
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/components/FeaturedPost.js",
-                    lineNumber: 42,
-                    columnNumber: 17
-                }, this)
-            ]
-        }, void 0, true, {
-            fileName: "[project]/components/FeaturedPost.js",
-            lineNumber: 31,
-            columnNumber: 13
-        }, this)
-    }, void 0, false, {
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                className: "jsx-f5a7d5ce87212a4" + " " + "bg-white text-black px-3 py-1 rounded-full text-sm font-medium relative",
+                                children: postData.category || 'Uncategorized'
+                            }, void 0, false, {
+                                fileName: "[project]/components/FeaturedPost.js",
+                                lineNumber: 50,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                className: "jsx-f5a7d5ce87212a4" + " " + "featured-title heading-font text-2xl md:text-5xl font-bold mt-4 relative",
+                                children: postData.title || 'Untitled Article'
+                            }, void 0, false, {
+                                fileName: "[project]/components/FeaturedPost.js",
+                                lineNumber: 54,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                className: "jsx-f5a7d5ce87212a4" + " " + "featured-excerpt mt-4 text-lg opacity-90 max-w-3xl relative",
+                                children: postData.excerpt || 'No excerpt available'
+                            }, void 0, false, {
+                                fileName: "[project]/components/FeaturedPost.js",
+                                lineNumber: 58,
+                                columnNumber: 21
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$link$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
+                                href: `/articles/${post.slug}`,
+                                className: "inline-block mt-4 md:mt-6 px-6 py-2 md:py-3 bg-white text-black rounded-full font-medium transition hover:bg-gray-200 relative",
+                                children: "Read Article"
+                            }, void 0, false, {
+                                fileName: "[project]/components/FeaturedPost.js",
+                                lineNumber: 62,
+                                columnNumber: 21
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/components/FeaturedPost.js",
+                        lineNumber: 42,
+                        columnNumber: 17
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/components/FeaturedPost.js",
+                lineNumber: 31,
+                columnNumber: 13
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$react$2f$jsx$2d$dev$2d$runtime$2e$js__$5b$client$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$styled$2d$jsx$2f$style$2e$js__$5b$client$5d$__$28$ecmascript$29$__["default"], {
+                id: "f5a7d5ce87212a4",
+                children: ".featured-title.jsx-f5a7d5ce87212a4,.featured-excerpt.jsx-f5a7d5ce87212a4{color:#000}.dark-mode .featured-title.jsx-f5a7d5ce87212a4,.dark-mode .featured-excerpt.jsx-f5a7d5ce87212a4{color:#fff}@media (width>=1024px){.featured-title.jsx-f5a7d5ce87212a4,.featured-excerpt.jsx-f5a7d5ce87212a4{color:#fff!important}}"
+            }, void 0, false, void 0, this)
+        ]
+    }, void 0, true, {
         fileName: "[project]/components/FeaturedPost.js",
         lineNumber: 30,
         columnNumber: 9
