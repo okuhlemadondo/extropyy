@@ -45,6 +45,10 @@ const Header = forwardRef(function Header({ onSearch, darkMode, toggleDarkMode }
         const handleScroll = () => {
             const currentScrollY = window.scrollY;
 
+            // Add this to make header only respond to scrolls of at least 10px
+            const scrollDifference = Math.abs(currentScrollY - scrollY);
+            if (scrollDifference < 10) return; // Don't change visibility for tiny scrolls
+
             // Make header visible at the top of the page
             if (currentScrollY < headerHeight.current) {
                 setIsVisible(true);
@@ -52,7 +56,7 @@ const Header = forwardRef(function Header({ onSearch, darkMode, toggleDarkMode }
                 return;
             }
 
-            // Hide header when scrolling down, show when scrolling up
+            // Then only update visibility for more significant scrolls
             setIsVisible(currentScrollY <= scrollY || currentScrollY <= 100);
             setScrollY(currentScrollY);
         };

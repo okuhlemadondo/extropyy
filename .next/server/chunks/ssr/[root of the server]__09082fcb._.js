@@ -233,13 +233,16 @@ const Header = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d
         headerHeight.current = innerRef.current.offsetHeight;
         const handleScroll = ()=>{
             const currentScrollY = window.scrollY;
+            // Add this to make header only respond to scrolls of at least 10px
+            const scrollDifference = Math.abs(currentScrollY - scrollY);
+            if (scrollDifference < 10) return; // Don't change visibility for tiny scrolls
             // Make header visible at the top of the page
             if (currentScrollY < headerHeight.current) {
                 setIsVisible(true);
                 setScrollY(currentScrollY);
                 return;
             }
-            // Hide header when scrolling down, show when scrolling up
+            // Then only update visibility for more significant scrolls
             setIsVisible(currentScrollY <= scrollY || currentScrollY <= 100);
             setScrollY(currentScrollY);
         };
@@ -283,17 +286,17 @@ const Header = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d
                                     children: "EXTROPY"
                                 }, void 0, false, {
                                     fileName: "[project]/components/Header.js",
-                                    lineNumber: 92,
+                                    lineNumber: 96,
                                     columnNumber: 29
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/Header.js",
-                                lineNumber: 91,
+                                lineNumber: 95,
                                 columnNumber: 25
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/Header.js",
-                            lineNumber: 90,
+                            lineNumber: 94,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("nav", {
@@ -311,12 +314,12 @@ const Header = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d
                                             children: "Home"
                                         }, void 0, false, {
                                             fileName: "[project]/components/Header.js",
-                                            lineNumber: 99,
+                                            lineNumber: 103,
                                             columnNumber: 33
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/Header.js",
-                                        lineNumber: 99,
+                                        lineNumber: 103,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("li", {
@@ -326,12 +329,12 @@ const Header = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d
                                             children: "Articles"
                                         }, void 0, false, {
                                             fileName: "[project]/components/Header.js",
-                                            lineNumber: 100,
+                                            lineNumber: 104,
                                             columnNumber: 33
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/Header.js",
-                                        lineNumber: 100,
+                                        lineNumber: 104,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("li", {
@@ -341,23 +344,23 @@ const Header = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d
                                             children: "About"
                                         }, void 0, false, {
                                             fileName: "[project]/components/Header.js",
-                                            lineNumber: 101,
+                                            lineNumber: 105,
                                             columnNumber: 33
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/Header.js",
-                                        lineNumber: 101,
+                                        lineNumber: 105,
                                         columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/Header.js",
-                                lineNumber: 98,
+                                lineNumber: 102,
                                 columnNumber: 25
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/Header.js",
-                            lineNumber: 97,
+                            lineNumber: 101,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -373,20 +376,20 @@ const Header = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d
                                             onChange: toggleDarkMode
                                         }, void 0, false, {
                                             fileName: "[project]/components/Header.js",
-                                            lineNumber: 109,
+                                            lineNumber: 113,
                                             columnNumber: 29
                                         }, this),
                                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("span", {
                                             className: "toggle-slider"
                                         }, void 0, false, {
                                             fileName: "[project]/components/Header.js",
-                                            lineNumber: 110,
+                                            lineNumber: 114,
                                             columnNumber: 29
                                         }, this)
                                     ]
                                 }, void 0, true, {
                                     fileName: "[project]/components/Header.js",
-                                    lineNumber: 108,
+                                    lineNumber: 112,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -400,7 +403,7 @@ const Header = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d
                                                 placeholder: "Search articles...",
                                                 className: "search-input w-full py-2 px-4 rounded-l-full",
                                                 style: {
-                                                    backgroundColor: darkMode ? '#333' : '#fff',
+                                                    backgroundColor: darkMode ? '#000' : '#fff',
                                                     color: darkMode ? '#fff' : '#333',
                                                     borderColor: darkMode ? '#444' : '#ddd'
                                                 },
@@ -409,7 +412,7 @@ const Header = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d
                                                 onKeyPress: handleSearch
                                             }, void 0, false, {
                                                 fileName: "[project]/components/Header.js",
-                                                lineNumber: 116,
+                                                lineNumber: 120,
                                                 columnNumber: 33
                                             }, this),
                                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
@@ -426,40 +429,40 @@ const Header = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d
                                                         d: "M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
                                                     }, void 0, false, {
                                                         fileName: "[project]/components/Header.js",
-                                                        lineNumber: 139,
+                                                        lineNumber: 143,
                                                         columnNumber: 41
                                                     }, this)
                                                 }, void 0, false, {
                                                     fileName: "[project]/components/Header.js",
-                                                    lineNumber: 138,
+                                                    lineNumber: 142,
                                                     columnNumber: 37
                                                 }, this)
                                             }, void 0, false, {
                                                 fileName: "[project]/components/Header.js",
-                                                lineNumber: 130,
+                                                lineNumber: 134,
                                                 columnNumber: 33
                                             }, this)
                                         ]
                                     }, void 0, true, {
                                         fileName: "[project]/components/Header.js",
-                                        lineNumber: 115,
+                                        lineNumber: 119,
                                         columnNumber: 29
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/Header.js",
-                                    lineNumber: 114,
+                                    lineNumber: 118,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/Header.js",
-                            lineNumber: 106,
+                            lineNumber: 110,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/Header.js",
-                    lineNumber: 88,
+                    lineNumber: 92,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -472,7 +475,7 @@ const Header = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d
                                 placeholder: "Search articles...",
                                 className: "search-input w-full py-2 px-4 rounded-l-full",
                                 style: {
-                                    backgroundColor: darkMode ? '#333' : '#fff',
+                                    backgroundColor: darkMode ? '#000' : '#fff',
                                     color: darkMode ? '#fff' : '#333',
                                     borderColor: darkMode ? '#444' : '#ddd'
                                 },
@@ -481,7 +484,7 @@ const Header = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d
                                 onKeyPress: handleSearch
                             }, void 0, false, {
                                 fileName: "[project]/components/Header.js",
-                                lineNumber: 150,
+                                lineNumber: 154,
                                 columnNumber: 25
                             }, this),
                             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
@@ -498,28 +501,28 @@ const Header = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d
                                         d: "M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
                                     }, void 0, false, {
                                         fileName: "[project]/components/Header.js",
-                                        lineNumber: 172,
+                                        lineNumber: 176,
                                         columnNumber: 33
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/Header.js",
-                                    lineNumber: 171,
+                                    lineNumber: 175,
                                     columnNumber: 29
                                 }, this)
                             }, void 0, false, {
                                 fileName: "[project]/components/Header.js",
-                                lineNumber: 163,
+                                lineNumber: 167,
                                 columnNumber: 25
                             }, this)
                         ]
                     }, void 0, true, {
                         fileName: "[project]/components/Header.js",
-                        lineNumber: 149,
+                        lineNumber: 153,
                         columnNumber: 21
                     }, this)
                 }, void 0, false, {
                     fileName: "[project]/components/Header.js",
-                    lineNumber: 148,
+                    lineNumber: 152,
                     columnNumber: 17
                 }, this),
                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -537,12 +540,12 @@ const Header = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d
                                             children: "Home"
                                         }, void 0, false, {
                                             fileName: "[project]/components/Header.js",
-                                            lineNumber: 182,
+                                            lineNumber: 186,
                                             columnNumber: 33
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/Header.js",
-                                        lineNumber: 182,
+                                        lineNumber: 186,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("li", {
@@ -552,12 +555,12 @@ const Header = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d
                                             children: "Articles"
                                         }, void 0, false, {
                                             fileName: "[project]/components/Header.js",
-                                            lineNumber: 183,
+                                            lineNumber: 187,
                                             columnNumber: 33
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/Header.js",
-                                        lineNumber: 183,
+                                        lineNumber: 187,
                                         columnNumber: 29
                                     }, this),
                                     /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("li", {
@@ -567,23 +570,23 @@ const Header = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d
                                             children: "About"
                                         }, void 0, false, {
                                             fileName: "[project]/components/Header.js",
-                                            lineNumber: 184,
+                                            lineNumber: 188,
                                             columnNumber: 33
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/Header.js",
-                                        lineNumber: 184,
+                                        lineNumber: 188,
                                         columnNumber: 29
                                     }, this)
                                 ]
                             }, void 0, true, {
                                 fileName: "[project]/components/Header.js",
-                                lineNumber: 181,
+                                lineNumber: 185,
                                 columnNumber: 25
                             }, this)
                         }, void 0, false, {
                             fileName: "[project]/components/Header.js",
-                            lineNumber: 180,
+                            lineNumber: 184,
                             columnNumber: 21
                         }, this),
                         /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("div", {
@@ -594,7 +597,7 @@ const Header = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d
                                     placeholder: "Search articles...",
                                     className: "search-input w-full py-2 px-4 rounded-l-full",
                                     style: {
-                                        backgroundColor: darkMode ? '#333' : '#fff',
+                                        backgroundColor: darkMode ? '#000' : '#fff',
                                         color: darkMode ? '#fff' : '#333',
                                         borderColor: darkMode ? '#444' : '#ddd'
                                     },
@@ -603,7 +606,7 @@ const Header = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d
                                     onKeyPress: handleSearch
                                 }, void 0, false, {
                                     fileName: "[project]/components/Header.js",
-                                    lineNumber: 188,
+                                    lineNumber: 192,
                                     columnNumber: 25
                                 }, this),
                                 /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d2f$react$2f$jsx$2d$dev$2d$runtime__$5b$external$5d$__$28$react$2f$jsx$2d$dev$2d$runtime$2c$__cjs$29$__["jsxDEV"])("button", {
@@ -620,40 +623,40 @@ const Header = /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$externals$5d
                                             d: "M229.66,218.34l-50.07-50.06a88.11,88.11,0,1,0-11.31,11.31l50.06,50.07a8,8,0,0,0,11.32-11.32ZM40,112a72,72,0,1,1,72,72A72.08,72.08,0,0,1,40,112Z"
                                         }, void 0, false, {
                                             fileName: "[project]/components/Header.js",
-                                            lineNumber: 210,
+                                            lineNumber: 214,
                                             columnNumber: 33
                                         }, this)
                                     }, void 0, false, {
                                         fileName: "[project]/components/Header.js",
-                                        lineNumber: 209,
+                                        lineNumber: 213,
                                         columnNumber: 29
                                     }, this)
                                 }, void 0, false, {
                                     fileName: "[project]/components/Header.js",
-                                    lineNumber: 201,
+                                    lineNumber: 205,
                                     columnNumber: 25
                                 }, this)
                             ]
                         }, void 0, true, {
                             fileName: "[project]/components/Header.js",
-                            lineNumber: 187,
+                            lineNumber: 191,
                             columnNumber: 21
                         }, this)
                     ]
                 }, void 0, true, {
                     fileName: "[project]/components/Header.js",
-                    lineNumber: 179,
+                    lineNumber: 183,
                     columnNumber: 17
                 }, this)
             ]
         }, void 0, true, {
             fileName: "[project]/components/Header.js",
-            lineNumber: 86,
+            lineNumber: 90,
             columnNumber: 13
         }, this)
     }, void 0, false, {
         fileName: "[project]/components/Header.js",
-        lineNumber: 77,
+        lineNumber: 81,
         columnNumber: 9
     }, this);
 });
