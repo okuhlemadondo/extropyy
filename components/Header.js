@@ -47,7 +47,7 @@ const Header = forwardRef(function Header({ onSearch, darkMode, toggleDarkMode }
 
             // Add this to make header only respond to scrolls of at least 10px
             const scrollDifference = Math.abs(currentScrollY - scrollY);
-            if (scrollDifference < 10) return; // Don't change visibility for tiny scrolls
+            if (scrollDifference < 5) return; // Don't change visibility for tiny scrolls
 
             // Make header visible at the top of the page
             if (currentScrollY < headerHeight.current) {

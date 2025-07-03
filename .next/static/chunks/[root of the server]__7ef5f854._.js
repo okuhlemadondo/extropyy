@@ -524,7 +524,7 @@ const Header = /*#__PURE__*/ _s((0, __TURBOPACK__imported__module__$5b$project$5
                     const currentScrollY = window.scrollY;
                     // Add this to make header only respond to scrolls of at least 10px
                     const scrollDifference = Math.abs(currentScrollY - scrollY);
-                    if (scrollDifference < 10) return; // Don't change visibility for tiny scrolls
+                    if (scrollDifference < 5) return; // Don't change visibility for tiny scrolls
                     // Make header visible at the top of the page
                     if (currentScrollY < headerHeight.current) {
                         setIsVisible(true);
