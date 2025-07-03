@@ -5,7 +5,7 @@ author: "Okuhle Madondo"
 headshot: "/headshots/madondo.png"
 date: "2024-12-19"
 category: "Sociology"
-featured: true
+
 image: "/images/system.jpg"
 excerpt: "The notion that a single group could orchestrate the vast tapestry of human society oversimplifies history’s complexity. Power, woven through biology and survival, defies such tidy explanations. To unravel these threads is to confront a truth far messier than any one narrative can hold."
 ---

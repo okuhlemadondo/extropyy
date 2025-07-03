@@ -23,6 +23,16 @@ export default function ArticleCard({ article, dataDelay }) {
     // Default image for posts with missing images
     const defaultImage = '/images/default-article.jpg';
 
+    function formatDate(dateString) {
+  const date = new Date(dateString);
+  // Always use a fixed locale and options for SSR/CSR consistency
+  return date.toLocaleDateString('en-GB', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+}
+
     return (
         <div
             ref={cardRef}

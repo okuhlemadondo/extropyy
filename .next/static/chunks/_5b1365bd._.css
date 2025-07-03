@@ -1293,12 +1293,6 @@
   }
 
   @media (prefers-color-scheme: dark) {
-    .dark\:bg-black {
-      background-color: var(--color-black);
-    }
-  }
-
-  @media (prefers-color-scheme: dark) {
     .dark\:bg-gray-200 {
       background-color: var(--color-gray-200);
     }
