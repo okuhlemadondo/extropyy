@@ -1,6 +1,5 @@
 ---
 id: "10"
-featured: true
 title: "The Quartet - For The Layman"
 author: "Okuhle Madondo"
 headshot: "/headshots/madondo.png"
