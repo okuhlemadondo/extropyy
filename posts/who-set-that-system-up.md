@@ -11,7 +11,7 @@ excerpt: "The notion that a single group could orchestrate the vast tapestry of 
 ---
 
 
-The question “Who set that system up?” often appears in debates about “the patriarchy,” usually as a rhetorical club—sometimes laced with misandry—meant to imply that men, as a single unified group, deliberately constructed society to oppress women. That framing is misleading and reductive. It assumes complex social systems have a single malicious architect. They do not. Below is a concise rebuttal that replaces that simplistic worldview with historical, biological, and sociological context, and explains why fixating on the question wastes energy better spent on concrete solutions.
+The question “Who set that system up?” often appears in debates about “the patriarchy,” (as well as social media comment sections) usually as a rhetorical club—sometimes laced with misandry—meant to imply that men, as a single unified group, deliberately constructed society to oppress women. That framing is misleading and reductive. It assumes complex social systems have a single malicious architect. They do not. Below is a concise rebuttal that replaces that simplistic worldview with historical, biological, and sociological context, and explains why fixating on the question wastes energy better spent on concrete solutions.
 
 ### The question sets up a straw man
 
